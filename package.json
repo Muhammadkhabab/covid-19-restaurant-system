@@ -1,0 +1,32 @@
+{
+  "name": "covid-19-restaurant-system",
+  "version": "1.0.0",
+  "description": "CS 506 Group Project, Madison Small Restaurant Covid-19 Info System",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server",
+    "server": "nodemon server",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
+  },
+  "author": "Prasoon Sinha",
+  "license": "MIT",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cross-env": "^7.0.3",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-validator": "^6.10.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.11.19"
+  },
+  "devDependencies": {
+    "chai": "^4.3.3",
+    "concurrently": "^6.0.0",
+    "mocha": "^8.3.1",
+    "nodemon": "^2.0.7",
+    "supertest": "^6.1.3"
+  }
+}
