@@ -8,8 +8,8 @@ const auth = require('../../../middleware/auth');
 // Validation.
 const { check } = require('express-validator');
 
-// Authentication controller.
-const authController = require('../controllers/auth');
+// Notification controller.
+const notificationController = require('../controllers/notification');
 
 
 module.exports = router;

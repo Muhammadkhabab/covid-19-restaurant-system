@@ -8,8 +8,8 @@ const auth = require('../../../middleware/auth');
 // Validation.
 const { check } = require('express-validator');
 
-// Authentication controller.
-const authController = require('../controllers/auth');
+// User controller.
+const userController = require('../controllers/user');
 
 
 module.exports = router;
