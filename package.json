@@ -4,7 +4,7 @@
   "description": "CS 506 Group Project, Madison Small Restaurant Covid-19 Info System",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "cross-env NODE_ENV=test mocha ./test --recursive --exit",
     "start": "node server",
     "server": "nodemon server",
     "client": "npm start --prefix client",
