@@ -21,6 +21,9 @@ import NotFound from '../pages/NotFound';
 // Layout components - Entire application
 import NavigationBar from '../layout/NavigationBar';
 
+// Reactstrap Components
+import { Container } from 'reactstrap';
+
 function Routes () {
     return (
     <Fragment>
