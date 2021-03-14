@@ -115,4 +115,9 @@ router.get('/', restaurantController.getAll);
 // @access    Only admins/staffs of restaurant can do this.
 router.get('/me', auth, restaurantController.getMy);
 
+// @route     GET /restaurants/chart/:restaurant_id
+// @desc      Get restaurant chart data
+// @access    OPublic.
+router.get('/chart/:restaurant_id', restaurantController.getChartData);
+
 module.exports = router;

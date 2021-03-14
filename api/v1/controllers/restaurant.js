@@ -1,3 +1,5 @@
+const mongoose = require('mongoose');
+
 // Validation.
 const { validationResult } = require('express-validator');
 
@@ -342,7 +344,7 @@ module.exports = {
 
     try {
       const user = await User.findById(req.user.id);
-      if (!user.is_admin || !user.is_staff || !user.restaurant_id) {
+      if ((!user.is_admin && !user.is_staff) || !user.restaurant_id) {
         return res
           .status(404)
           .json({ errors: [{ msg: 'Restaurant not found!' }] });
@@ -372,65 +374,92 @@ module.exports = {
       });
     }
   },
-};
 
-const agg = [
-  {
-    $match: {
-      aggregated: false,
-    },
+  getChartData: async (req, res, _next) => {
+    try {
+      const agg = [
+        {
+          $match: {
+            aggregated: false,
+            restaurant_id: mongoose.Types.ObjectId(req.params.restaurant_id),
+          },
+        },
+        {
+          $project: {
+            // rid: '$restaurant_id',
+            year: {
+              $year: '$created_at',
+            },
+            month: {
+              $month: '$created_at',
+            },
+            day: {
+              $dayOfMonth: '$created_at',
+            },
+            hour: {
+              $hour: '$created_at',
+            },
+            nc: '$current_customers',
+            ne: '$current_employees',
+            nt: '$current_free_tables',
+          },
+        },
+        {
+          $group: {
+            _id: {
+              // rid: '$rid',
+              year: '$year',
+              month: '$month',
+              day: '$day',
+              hour: '$hour',
+            },
+            nc: {
+              $avg: '$nc',
+            },
+            ne: {
+              $avg: '$ne',
+            },
+            nt: {
+              $avg: '$nt',
+            },
+          },
+        },
+        {
+          $project: {
+            _id: 0,
+            year: '$_id.year',
+            month: '$_id.month',
+            day: '$_id.day',
+            hour: '$_id.hour',
+            num_customers: {
+              $round: ['$nc', 0],
+            },
+            num_employees: {
+              $round: ['$ne', 0],
+            },
+            num_tables: {
+              $round: ['$nt', 0],
+            },
+          },
+        },
+      ];
+      const data = await Record.aggregate(agg);
+      const formatted_data = data.map((e) => {
+        const { year, month, day, hour } = e;
+        return {
+          ...e,
+          timestamp: new Date(Date.UTC(year, month - 1, day, hour)),
+        };
+      });
+      console.log(data);
+      return res.status(200).json(formatted_data);
+    } catch (err) {
+      console.error(err.message);
+      return res.status(500).json({
+        errors: [
+          { msg: 'Unexpected server error happened. Please try again later!' },
+        ],
+      });
+    }
   },
-  {
-    $project: {
-      rid: '$restaurant_id',
-      year: {
-        $year: '$created_at',
-      },
-      month: {
-        $month: '$created_at',
-      },
-      day: {
-        $dayOfMonth: '$created_at',
-      },
-      hour: {
-        $hour: '$created_at',
-      },
-      nc: '$current_customers',
-      ne: '$current_employees',
-      nt: '$current_free_tables',
-    },
-  },
-  {
-    $group: {
-      _id: {
-        rid: '$rid',
-        year: '$year',
-        month: '$month',
-        day: '$day',
-        hour: '$hour',
-      },
-      nc: {
-        $avg: '$nc',
-      },
-      ne: {
-        $avg: '$ne',
-      },
-      nt: {
-        $avg: '$nt',
-      },
-    },
-  },
-  {
-    $project: {
-      nc: {
-        $round: ['$nc', 0],
-      },
-      ne: {
-        $round: ['$ne', 0],
-      },
-      nt: {
-        $round: ['$nt', 0],
-      },
-    },
-  },
-];
+};
