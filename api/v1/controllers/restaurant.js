@@ -342,18 +342,25 @@ module.exports = {
 
     try {
       const user = await User.findById(req.user.id);
-      if (!user.is_admin || !user.restaurant_id) {
+      if (!user.is_admin || !user.is_staff || !user.restaurant_id) {
         return res
           .status(404)
           .json({ errors: [{ msg: 'Restaurant not found!' }] });
       }
       const restaurant = await Restaurant.findById(user.restaurant_id);
 
-      if (current_customers) restaurant.current_customers = current_customers;
-      if (current_employees) restaurant.current_employees = current_employees;
-      if (current_free_tables)
-        restaurant.current_free_tables = current_free_tables;
+      restaurant.current_customers = current_customers;
+      restaurant.current_employees = current_employees;
+      restaurant.current_free_tables = current_free_tables;
 
+      const record = await new Record({
+        current_customers,
+        current_employees,
+        current_free_tables,
+      });
+      record.restaurant_id = restaurant._id;
+
+      await record.save();
       await restaurant.save();
       return res.status(200).json(restaurant);
     } catch (err) {
@@ -366,3 +373,64 @@ module.exports = {
     }
   },
 };
+
+const agg = [
+  {
+    $match: {
+      aggregated: false,
+    },
+  },
+  {
+    $project: {
+      rid: '$restaurant_id',
+      year: {
+        $year: '$created_at',
+      },
+      month: {
+        $month: '$created_at',
+      },
+      day: {
+        $dayOfMonth: '$created_at',
+      },
+      hour: {
+        $hour: '$created_at',
+      },
+      nc: '$current_customers',
+      ne: '$current_employees',
+      nt: '$current_free_tables',
+    },
+  },
+  {
+    $group: {
+      _id: {
+        rid: '$rid',
+        year: '$year',
+        month: '$month',
+        day: '$day',
+        hour: '$hour',
+      },
+      nc: {
+        $avg: '$nc',
+      },
+      ne: {
+        $avg: '$ne',
+      },
+      nt: {
+        $avg: '$nt',
+      },
+    },
+  },
+  {
+    $project: {
+      nc: {
+        $round: ['$nc', 0],
+      },
+      ne: {
+        $round: ['$ne', 0],
+      },
+      nt: {
+        $round: ['$nt', 0],
+      },
+    },
+  },
+];
