@@ -21,15 +21,20 @@ module.exports = {
         }
     
         // Destructuring data from request body.
-        const { email, password } = req.body;
+        const { credential, password } = req.body;
     
         try {
           // Check if user exists (check if email exists).
-        let user = await User.findOne({ email: email });
+
+        // Check if user exists (check if email/username exists).
+        let user = await User.findOne({ email: credential });
         if (!user) {
-        return res.status(401).json({
+        user = await User.findOne({ username: credential });
+        if (!user) {
+            return res.status(401).json({
             errors: [{ msg: 'Invalid credentials! Please try again!' }],
-        });
+            });
+        }
         }
 
         // Check if password matches.
