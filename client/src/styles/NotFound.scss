@@ -1,0 +1,24 @@
+@import 'Variables';
+
+#notFoundPages {
+  margin-top: 25vh;
+  h1 {
+    $c1: #16c5ed;
+    $c2: #16c5ee;
+    $c3: #16c5ef;
+    $c4: #16c5ff;
+
+    color: white;
+    text-shadow: $c1 1px 1px, $c1 2px 2px, $c1 3px 3px, $c2 4px 4px, $c2 5px 5px,
+      $c2 6px 6px, $c2 7px 7px, $c3 8px 8px, $c4 9px 9px, $c4 10px 10px,
+      $c4 11px 11px;
+  }
+  .btn-primary {
+    background: $brand-primary-color;
+    border-color: $brand-primary-color;
+    &:hover {
+      background: $brand-primary-darker-color;
+      border-color: $brand-primary-darker-color;
+    }
+  }
+}
