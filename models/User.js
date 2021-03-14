@@ -18,7 +18,7 @@ const UserSchema = new mongoose.Schema({
     required: true,
   },
   phone_number: {
-    type: Number,
+    type: String,
     required: true,
   },
   email: {
@@ -40,7 +40,7 @@ const UserSchema = new mongoose.Schema({
   },
   birth_date: {
     type: Date,
-    required: true,
+    // required: true,
   },
   restaurant_id: {
     type: mongoose.Schema.Types.ObjectId,

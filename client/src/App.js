@@ -16,7 +16,7 @@ import setAuthToken from './utils/setAuthToken';
 import Routes from './components/routing/Routes';
 import Landing from './components/pages/Landing';
 
-function App () {
+function App() {
   useEffect(() => {
     store.dispatch(loadUser());
   }, []);
@@ -45,6 +45,6 @@ function App () {
       </Router>
     </Provider>
   );
-}; 
+};
 
 export default App;
