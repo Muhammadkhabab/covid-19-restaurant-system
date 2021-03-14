@@ -2,7 +2,6 @@
 import React, { Fragment } from 'react';
 import { Route, Switch } from 'react-router-dom';
 
-import PrivateRoute from '../routing/PrivateRoute';
 // Authentication components
 import RegisterRestaurant from '../auth/RegisterRestaurant';
 import RegisterCustomer from '../auth/RegisterCustomer';

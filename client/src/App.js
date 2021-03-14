@@ -10,7 +10,6 @@ import { ToastContainer } from 'react-toastify';
 import { Provider } from 'react-redux';
 import store from './store';
 import { loadUser } from './actions/auth';
-import setAuthToken from './utils/setAuthToken';
 
 // Custom components.
 import Routes from './components/routing/Routes';
