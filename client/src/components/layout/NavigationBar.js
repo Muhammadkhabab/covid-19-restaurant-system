@@ -15,62 +15,62 @@ import {
 import '../../styles/NavigationBar.scss';
 
 const NavigationBar = ({
-    icon,
-    title,
-    auth: { isAuthenticated, loading, user },
-    logout,
+  icon,
+  title,
+  auth: { isAuthenticated, loading, user },
+  logout,
 }) => {
-    const restaurantGuestLinks = (
-        <Fragment>
-          <NavItem>
-            <Link to='/register/restaurant' className='nav-link'>
-              Register Restaurant
+  const restaurantGuestLinks = (
+    <Fragment>
+      <NavItem>
+        <Link to='/register/restaurant' className='nav-link'>
+          Register Restaurant
             </Link>
-          </NavItem>
-          <NavItem>
-            <Link to='/login' className='nav-link'>
-              Login
+      </NavItem>
+      <NavItem>
+        <Link to='/login' className='nav-link'>
+          Login
             </Link>
-          </NavItem>
-        </Fragment>
-    );
+      </NavItem>
+    </Fragment>
+  );
 
-    const [isOpen, setIsOpen] = useState(false);
-    const toggle = () => setIsOpen(!isOpen);
+  const [isOpen, setIsOpen] = useState(false);
+  const toggle = () => setIsOpen(!isOpen);
 
-    return (
-        <Navbar dark expand='md' id='navbar'>
-          <Container>
-            <NavbarBrand tag={Link} to={'/'}>
-              <i className={`${icon} mr-1`} /> {title}
-            </NavbarBrand>
-            <NavbarToggler onClick={toggle} />
-            <Collapse isOpen={isOpen} navbar>
-              <Nav className='ml-auto' navbar>
-                {!loading && (
-                  <Fragment>{restaurantGuestLinks}</Fragment>
-                )}
-              </Nav>
-            </Collapse>
-          </Container>
-        </Navbar>
-    );
+  return (
+    <Navbar dark expand='md' id='navbar'>
+      <Container>
+        <NavbarBrand tag={Link} to={'/'}>
+          <i className={`${icon} mr-1`} /> {title}
+        </NavbarBrand>
+        <NavbarToggler onClick={toggle} />
+        <Collapse isOpen={isOpen} navbar>
+          <Nav className='ml-auto' navbar>
+            {!loading && (
+              <Fragment>{restaurantGuestLinks}</Fragment>
+            )}
+          </Nav>
+        </Collapse>
+      </Container>
+    </Navbar>
+  );
 };
 
 NavigationBar.defaultProps = {
-    title: 'Covid-19 Info System',
-    icon: 'fas fa-utensils',
+  title: 'Covid-19 Info System',
+  icon: 'fas fa-utensils',
 };
 
 NavigationBar.propTypes = {
-    title: PropTypes.string.isRequired,
-    icon: PropTypes.string.isRequired,
-    logout: PropTypes.func.isRequired,
-    auth: PropTypes.object.isRequired,
+  title: PropTypes.string.isRequired,
+  icon: PropTypes.string.isRequired,
+  logout: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-    auth: state.auth,
-  });
-  
-  export default connect(mapStateToProps, { logout })(NavigationBar);
+  auth: state.auth,
+});
+
+export default connect(mapStateToProps, { logout })(NavigationBar);
