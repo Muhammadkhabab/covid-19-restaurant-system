@@ -53,6 +53,36 @@ router.post(
   restaurantController.create
 );
 
+// @route     PUT /restaurants
+// @desc      Update restaurant info
+// @access    Public
+router.put(
+  '/',
+  [
+    auth,
+    [
+      check('restaurant_name').notEmpty(),
+      check('address').notEmpty(),
+      check('restaurant_email').notEmpty(),
+      check('restaurant_phone_number').notEmpty(),
+      check('website_url').optional().isURL(),
+      check('dine_in').notEmpty().isIn([0, 1]),
+      check('dine_outside').notEmpty().isIn([0, 1]),
+      check('pickup').notEmpty().isIn([0, 1]),
+      check('curbside_pickup').notEmpty().isIn([0, 1]),
+      check('delivery').notEmpty().isIn([0, 1]),
+      check('policy_notes').optional(),
+      check('employee_capacity').notEmpty().isNumeric(),
+      check('customer_capacity').notEmpty().isNumeric(),
+      check('number_tables').notEmpty().isNumeric(),
+      check('square_footage').isNumeric(),
+      check('customer_per_table').isNumeric(),
+      check('tables_distance').isNumeric(),
+    ],
+  ],
+  restaurantController.create
+);
+
 // @route     DELETE /restaurants
 // @desc      Delete restaurant
 // @access    Only admin of restaurant can do this.
