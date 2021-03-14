@@ -34,7 +34,7 @@ function Routes () {
           <Route exact path='/register/restaurant' component={RegisterRestaurant} />
           <Route exact path='/register/customer' component={RegisterCustomer} />
           <Route exact path='/login' component={Login} />
-          <PrivateRoute exact path='/dashboard' component={Dashboard} />
+          <Route exact path='/dashboard' component={Dashboard} />
           <Route exact path='/restaurants' component={Restaurants} />
           <Route exact path='/restaurant/:restaurant_id' component={Restaurant} />
           <Route exact path='/advancedsearch' component={AdvancedSearch} />

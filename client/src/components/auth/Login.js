@@ -1,17 +1,19 @@
 import React, { useState } from 'react';
 import { Link, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { login } from '../../actions/auth';
 import PropTypes from 'prop-types';
 import { Row, Col, Form, FormGroup, Input } from 'reactstrap';
 import '../../styles/Form.scss';
 
-const Login = () => {
+const Login = ({ login, isAuthenticated }) => {
 
   const [user, setUser] = useState({
-    email: '',
+    credential: '',
     password: ''
   });
 
-  const { email, password } = user;
+  const { credential, password } = user;
   
   const onChange = (event) => {
     setUser({ ...user, [event.target.name]: event.target.value });
@@ -19,8 +21,12 @@ const Login = () => {
   
   const onSubmit = (event) => {
     event.preventDefault();
-    console.log(user);
+    login(user);
   };
+
+  if (isAuthenticated) {
+    return <Redirect to='/dashboard' />;
+  }
 
   return (
     <div>
@@ -36,10 +42,9 @@ const Login = () => {
             <h3 className='text-center text-info mb-4'>Account Login</h3>
             <FormGroup>
               <Input
-                type='email'
-                name='email'
-                value={email}
-                placeholder='Please enter a valid email'
+                name='credential'
+                value={credential}
+                placeholder='Please enter a valid credential'
                 onChange={onChange}
                 autoComplete='new-off'
                 required
@@ -74,6 +79,13 @@ const Login = () => {
   );
 };
 
-Login.propTypes = {};
+Login.propTypes = {
+};
 
-export default Login;
+const mapStateToProps = (state) => ({
+  isAuthenticated: state.auth.isAuthenticated
+});
+
+const mapDispatchToProps = { login };
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
