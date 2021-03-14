@@ -1,53 +1,50 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { Link, Redirect } from 'react-router-dom';
-import { register } from '../../actions/auth';
+import { Redirect } from 'react-router-dom';
+import { registerRestaurant } from '../../actions/restaurant';
 import PropTypes from 'prop-types';
 import { Row, Col, Form, FormGroup, Input, Label, Card, CardTitle, Button, } from 'reactstrap';
-import { toast } from 'react-toastify';
 import '../../styles/Form.scss';
 
-const Register =({ register, isAuthenticated }) => {
+const RegisterRestaurant = ({ registerRestaurant, auth: { isAuthenticated } }) => {
 
 	// Set restaurant data
-	const [restaurant, setRestaurant] = useState ({
-		name: '',
+	const [restaurant, setRestaurant] = useState({
+		restaurant_name: '',
 		address: '',
-		url: '',
+		website_url: '',
 		restaurant_email: '',
-		restaurant_phone: '',
+		restaurant_phone_number: '',
 		cuisine: '',
-		max_employees: '',
-		max_customers: '',
-		no_tables: '',
-		customers_per_table: '',
-		distance_tables: '',
-		square_foot: '',
-		policies: '',
-		dine_in: false,
-		dine_out: false,
-		pickup: false,
-		curbside: false,
-		delivery: false,
+		employee_capacity: '',
+		customer_capacity: '',
+		number_tables: '',
+		customer_per_table: '',
+		tables_distance: '',
+		square_footage: '',
+		policy_notes: '',
+		dine_in: 0,
+		dine_outside: 0,
+		pickup: 0,
+		curbside_pickup: 0,
+		delivery: 0,
 	});
 
-	const [user, setUser] = useState ({
+	const [user, setUser] = useState({
 		first_name: '',
 		last_name: '',
 		username: '',
 		password: '',
-		user_email: '',
-		user_phone: '',
-		manager: false,
-		staff: false,
+		confirmed_password: '',
+		email: '',
+		phone_number: '',
 	});
 
 	// Destructuring.
-	const { first_name, last_name, username, password, user_email, user_phone, manager, staff } = user;
-
-	const { name, address, url, restaurant_email, restaurant_phone, cuisine, max_employees, max_customers, 
-			no_tables, customers_per_table, distance_tables, square_foot, policies,
-			dine_in, dine_out, pickup, curbside, delivery } = restaurant;
+	const { first_name, last_name, username, password, confirmed_password, email, phone_number } = user;
+	const { restaurant_name, address, website_url, restaurant_email, restaurant_phone_number, cuisine, employee_capacity, customer_capacity,
+		number_tables, customer_per_table, tables_distance, square_footage, policy_notes,
+		dine_in, dine_outside, pickup, curbside_pickup, delivery } = restaurant;
 
 	// Event listener for change in input fields in user field.
 	const onUserChange = (e) => setUser({ ...user, [e.target.name]: e.target.value });
@@ -55,124 +52,122 @@ const Register =({ register, isAuthenticated }) => {
 	// Event listener for change in input fields.
 	const onRestaurantChange = (e) => setRestaurant({ ...restaurant, [e.target.name]: e.target.value });
 
+	// Event listener for change to checkboxes
+	const onCheckboxChange = (e) => setRestaurant({ ...restaurant, [e.target.name]: 1 - e.target.value })
+
 	const onSubmit = (e) => {
 		e.preventDefault();
-		console.log("in here");
+		registerRestaurant(user, restaurant);
 	};
 
-    return (
+	// Redirect if registered.
+	if (isAuthenticated) {
+		return <Redirect to='/abc' />;
+	}
+
+	return (
 		<>
 			<h3 className='text-left text-info mb-4'>Register Your Restaurant!</h3>
-            <Row>
-                <Col sm={{size: 4}}>
-                    <Card body>
-						<CardTitle tag="h4">Account Information</CardTitle>
-                        <Row>
-                            <Col>
-                                <Form onSubmit={onSubmit}>
-                                    <FormGroup>
-                                        <Label>First Name</Label>
-                                        <Input
-                                            type='text'
-                                            name='first_name'
+			<Form onSubmit={onSubmit}>
+				<Row>
+					<Col sm={{ size: 4 }}>
+						<Card body>
+							<CardTitle tag='h4'>Account Information</CardTitle>
+							<Row>
+								<Col>
+									<FormGroup>
+										<Label>First Name</Label>
+										<Input
+											type='text'
+											name='first_name'
 											value={first_name}
 											onChange={onUserChange}
-                                            required
-                                        />
-                                    </FormGroup>
-                                    <FormGroup>
-                                        <Label>Last Name</Label>
-                                        <Input
-                                            type='text'
-                                            name='last_name'
+										// required
+										/>
+									</FormGroup>
+									<FormGroup>
+										<Label>Last Name</Label>
+										<Input
+											type='text'
+											name='last_name'
 											value={last_name}
 											onChange={onUserChange}
-                                            required
-                                        />
-                                    </FormGroup>
-                                    <FormGroup>
-                                        <Label>Restaurant Username</Label>
-                                        <Input
-                                            type='text'
-                                            name='username'
+										// required
+										/>
+									</FormGroup>
+									<FormGroup>
+										<Label>Restaurant Username</Label>
+										<Input
+											type='text'
+											name='username'
 											value={username}
 											onChange={onUserChange}
-                                            required
-                                        />
-                                    </FormGroup>
-                                    <FormGroup>
-                                        <Label>Restaurant Password</Label>
-                                        <Input
-                                            type='text'
-                                            name='password'
+										// required
+										/>
+									</FormGroup>
+									<FormGroup>
+										<Label>Restaurant Password</Label>
+										<Input
+											type='password'
+											name='password'
 											value={password}
 											onChange={onUserChange}
-                                            required
-                                        />
-                                    </FormGroup>
-                                    <FormGroup>
-                                        <Label>Email</Label>
-                                        <Input
-                                            type='text'
-                                            name='user_email'
-											value={user_email}
+										// required
+										/>
+									</FormGroup>
+									<FormGroup>
+										<Label>Confirm Password</Label>
+										<Input
+											type='password'
+											name='confirmed_password'
+											value={confirmed_password}
 											onChange={onUserChange}
-                                            required
-                                        />
-                                    </FormGroup>
-                                    <FormGroup>
-                                        <Label>Phone Number</Label>
-                                        <Input
-                                            type='text'
-                                            name='user_phone'
-											value={user_phone}
+										// required
+										/>
+									</FormGroup>
+									<FormGroup>
+										<Label>Email</Label>
+										<Input
+											type='email'
+											name='email'
+											value={email}
 											onChange={onUserChange}
-                                            required
-                                        />
-                                    </FormGroup>
-									<Row>
-										<Col>
-											<FormGroup check>
-												<Label check>
-													<Input type="checkbox" name='mananger' value={manager} onChange={onUserChange}/>{' '}
-													Manager?
-												</Label>
-											</FormGroup>
-										</Col>
-										<Col>
-											<FormGroup check>
-												<Label check>
-													<Input type="checkbox" name='staff' value={staff} onChange={onUserChange} />{' '}
-													Staff?
-												</Label>
-											</FormGroup>
-										</Col>		
-									</Row>
-                                </Form>
-                            </Col>
-                        </Row>
-                    </Card>
-                </Col>
-                <Col sm={{size: 8, offset: 0.5}}>
-                    <Card body>
-						<CardTitle tag="h4">Restaurant Information</CardTitle>
-                        <Row>
-                            <Col>
-                                <Form onSubmit={onSubmit}>
-                                    <FormGroup>
-                                        <Label>Restaurant Name</Label>
-                                        <Input
-                                            type='text'
-                                            name='name'
-											value={name}
+										// required
+										/>
+									</FormGroup>
+									<FormGroup>
+										<Label>Phone Number</Label>
+										<Input
+											type='tel'
+											pattern='[0-9]{3}-[0-9]{3}-[0-9]{4}'
+											name='phone_number'
+											value={phone_number}
+											placeholder='xxx-xxx-xxxx'
+											onChange={onUserChange}
+										// required
+										/>
+									</FormGroup>
+								</Col>
+							</Row>
+						</Card>
+					</Col>
+					<Col sm={{ size: 8, offset: 0.5 }}>
+						<Card body>
+							<CardTitle tag='h4'>Restaurant Information</CardTitle>
+							<Row>
+								<Col>
+									<FormGroup>
+										<Label>Restaurant Name</Label>
+										<Input
+											type='text'
+											name='restaurant_name'
+											value={restaurant_name}
 											onChange={onRestaurantChange}
-                                            required
-                                        />
-                                    </FormGroup>
-								</Form>
-							</Col>
-							<Col>
-								<Form onSubmit={onSubmit}>
+										// required
+										/>
+									</FormGroup>
+								</Col>
+								<Col>
 									<FormGroup>
 										<Label>Restaurant Address</Label>
 										<Input
@@ -180,61 +175,56 @@ const Register =({ register, isAuthenticated }) => {
 											name='address'
 											value={address}
 											onChange={onRestaurantChange}
-											required
+										// required
 										/>
 									</FormGroup>
-								</Form>
-							</Col>
-                        </Row>
-						<Row>
-							<Col>
-								<Form onSubmit={onSubmit}>
+								</Col>
+							</Row>
+							<Row>
+								<Col>
 									<FormGroup>
 										<Label>Website URL</Label>
-                                        <Input
-                                            type='text'
-                                            name='url'
-											value={url}
+										<Input
+											type='url'
+											name='website_url'
+											value={website_url}
 											onChange={onRestaurantChange}
-                                        />
+										/>
 									</FormGroup>
-								</Form>
-							</Col>
-							<Col>
-								<Form onSubmit={onSubmit}>
+								</Col>
+								<Col>
 									<FormGroup>
 										<Label>Restaurant Email</Label>
-                                        <Input
-                                            type='text'
-                                            name='restaurant_email'
+										<Input
+											type='email'
+											name='restaurant_email'
 											value={restaurant_email}
 											onChange={onRestaurantChange}
-                                            required
-                                        />
+										// required
+										/>
 									</FormGroup>
-								</Form>
-							</Col>
-							<Col>
-								<Form onSubmit={onSubmit}>
+								</Col>
+								<Col>
 									<FormGroup>
 										<Label>Restaurant Phone Number</Label>
-                                        <Input
-                                            type='text'
-                                            name='restaurant_phone'
-											value={restaurant_phone}
+										<Input
+											type='tel'
+											pattern='[0-9]{3}-[0-9]{3}-[0-9]{4}'
+											name='restaurant_phone_number'
+											value={restaurant_phone_number}
+											placeholder='xxx-xxx-xxxx'
 											onChange={onRestaurantChange}
-                                            required
-                                        />
+										// required
+										/>
 									</FormGroup>
-								</Form>
-							</Col>
-						</Row>
-						<Row>
-							<Col>
-								<Form onSubmit={onSubmit}>
+								</Col>
+							</Row>
+							<Row>
+								<Col>
 									<FormGroup>
 										<Label>Restaurant Cuisine</Label>
-										<Input type="select" name='cuisine' value={cuisine} onChange={onRestaurantChange}>
+										<Input type='select' name='cuisine' onChange={onRestaurantChange}>
+											<option disabled selected> Select a Cuisine</option>
 											<option>Italian</option>
 											<option>Indian</option>
 											<option>Chinese</option>
@@ -242,185 +232,165 @@ const Register =({ register, isAuthenticated }) => {
 											<option>Mexican</option>
 										</Input>
 									</FormGroup>
-								</Form>
-							</Col>
-							<Col>
-								<Form onSubmit={onSubmit}>
+								</Col>
+								<Col>
 									<FormGroup>
 										<Label>Max Employees</Label>
 										<Input
-                                            type='text'
-                                            name='max_employees'
-											value={max_employees}
+											type='text'
+											name='employee_capacity'
+											value={employee_capacity}
 											onChange={onRestaurantChange}
-                                            required
-                                        />
+										// required
+										/>
 									</FormGroup>
-								</Form>
-							</Col>
-							<Col>
-								<Form onSubmit={onSubmit}>
+								</Col>
+								<Col>
 									<FormGroup>
 										<Label>Max Customers</Label>
 										<Input
-                                            type='text'
-                                            name='max_customers'
-											value={max_customers}
+											type='text'
+											name='customer_capacity'
+											value={customer_capacity}
 											onChange={onRestaurantChange}
-                                            required
-                                        />
+										// required
+										/>
 									</FormGroup>
-								</Form>
-							</Col>
-						</Row>
-						<Row>
-							<Col>
-								<Form onSubmit={onSubmit}>
+								</Col>
+							</Row>
+							<Row>
+								<Col>
 									<FormGroup>
 										<Label># of Tables</Label>
 										<Input
-                                            type='text'
-                                            name='no_tables'
-											value={no_tables}
+											type='text'
+											name='number_tables'
+											value={number_tables}
 											onChange={onRestaurantChange}
-                                            required
-                                        />
+										// required
+										/>
 									</FormGroup>
-								</Form>
-							</Col>
-							<Col>
-								<Form onSubmit={onSubmit}>
+								</Col>
+								<Col>
 									<FormGroup>
 										<Label>Customers per Tables</Label>
 										<Input
-                                            type='text'
-                                            name='customers_per_table'
-											value={customers_per_table}
+											type='text'
+											name='customer_per_table'
+											value={customer_per_table}
 											onChange={onRestaurantChange}
-                                            required
-                                        />
+										// required
+										/>
 									</FormGroup>
-								</Form>
-							</Col>
-						</Row>
-						<Row>
-							<Col>
-								<Form onSubmit={onSubmit}>
+								</Col>
+							</Row>
+							<Row>
+								<Col>
 									<FormGroup>
 										<Label>Distance Between Tables (ft)</Label>
 										<Input
-                                            type='text'
-                                            name='distance_tables'
-											value={distance_tables}
+											type='text'
+											name='tables_distance'
+											value={tables_distance}
 											onChange={onRestaurantChange}
-                                            required
-                                        />
+										// required
+										/>
 									</FormGroup>
-								</Form>
-							</Col>
-							<Col>
-								<Form onSubmit={onSubmit}>
+								</Col>
+								<Col>
 									<FormGroup>
 										<Label>Common Room Square Footage</Label>
 										<Input
-                                            type='text'
-                                            name='square_foot'
-											value={square_foot}
+											type='text'
+											name='square_footage'
+											value={square_footage}
 											onChange={onRestaurantChange}
-                                            required
-                                        />
+										// required
+										/>
 									</FormGroup>
-								</Form>
-							</Col>
-						</Row>
-						<Row>
-							<Col>
-								<Form onSubmit={onSubmit}>
+								</Col>
+							</Row>
+							<Row>
+								<Col>
 									<FormGroup>
-										<Label for="exampleText">Restaurant Policies</Label>
-										<Input type="textarea" name="policies" value={policies} onChange={onRestaurantChange}/>
+										<Label>Restaurant Policies</Label>
+										<Input type='textarea' name='policy_notes' value={policy_notes} onChange={onRestaurantChange} />
 									</FormGroup>
-								</Form>
-							</Col>
-						</Row>
-						<Row>
-							<Col>
-								<Form onSubmit={onSubmit}>
+								</Col>
+							</Row>
+							<Row>
+								<Col>
 									<FormGroup check>
 										<Label check>
-											<Input type="checkbox" name='dine_in' value={dine_in} onChange={onRestaurantChange}/>{' '}
+											<Input type='checkbox' name='dine_in' value={dine_in} onChange={onCheckboxChange} />{' '}
 											Dine-In?
 										</Label>
 									</FormGroup>
-								</Form>
-							</Col>
-							<Col>
-								<Form onSubmit={onSubmit}>
+								</Col>
+								<Col>
 									<FormGroup check>
 										<Label check>
-											<Input type="checkbox" name='dine_out' value={dine_out} onChange={onRestaurantChange}/>{' '}
+											<Input type='checkbox' name='dine_outside' value={dine_outside} onChange={onCheckboxChange} />{' '}
 											Dine-Out?
 										</Label>
 									</FormGroup>
-								</Form>
-							</Col>
-							<Col>
-								<Form onSubmit={onSubmit}>
+								</Col>
+								<Col>
 									<FormGroup check>
 										<Label check>
-											<Input type="checkbox" name='pickup' value={pickup} onChange={onRestaurantChange}/>{' '}
+											<Input type='checkbox' name='pickup' value={pickup} onChange={onCheckboxChange} />{' '}
 											Pickup?
 										</Label>
 									</FormGroup>
-								</Form>
-							</Col>
-							<Col>
-								<Form onSubmit={onSubmit}>
+								</Col>
+								<Col>
 									<FormGroup check>
 										<Label check>
-											<Input type="checkbox" name='curbside' value={curbside} onChange={onRestaurantChange}/>{' '}
+											<Input type='checkbox' name='curbside_pickup' value={curbside_pickup} onChange={onCheckboxChange} />{' '}
 											Curbside?
 										</Label>
 									</FormGroup>
-								</Form>
-							</Col>
-							<Col>
-								<Form onSubmit={onSubmit}>
+								</Col>
+								<Col>
 									<FormGroup check>
 										<Label check>
-											<Input type="checkbox" name='delivery' value={delivery} onChange={onRestaurantChange}/>{' '}
+											<Input type='checkbox' name='delivery' value={delivery} onChange={onCheckboxChange} />{' '}
 											Delivery?
 										</Label>
 									</FormGroup>
-								</Form>
-							</Col>
-						</Row>
-                    </Card>
-                </Col>
-            </Row>
-			<Row>
-				<Col>
-					<Button 
-						color="primary"
-						className="float-right"
-						type="submit" 
-						value='Register'
-					>
-						Register
+								</Col>
+							</Row>
+						</Card>
+					</Col>
+				</Row>
+				<Row>
+					<Col>
+						<Button
+							color='primary'
+							className='float-right'
+							type='submit'
+							value='Register'
+						>
+							Register
 					</Button>
-				</Col>
-			</Row>
+					</Col>
+				</Row>
+			</Form>
 		</>
-    );
+	);
 };
 
-Register.propTypes = {
-	register: PropTypes.func.isRequired,
-	isAuthenticated: PropTypes.bool,
-  };
-  
-  const mapStateToProps = (state) => ({
-	isAuthenticated: state.auth.isAuthenticated,
-  });
+RegisterRestaurant.propTypes = {
+	registerRestaurant: PropTypes.func.isRequired,
+	auth: PropTypes.object.isRequired,
+};
 
-export default connect(mapStateToProps, { register })(Register); 
+const mapStateToProps = (state) => ({
+	auth: state.auth,
+});
+
+const mapFunctionsToProps = {
+	registerRestaurant,
+};
+
+export default connect(mapStateToProps, mapFunctionsToProps)(RegisterRestaurant);

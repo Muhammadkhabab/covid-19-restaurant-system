@@ -64,13 +64,13 @@ export const register = (userObj) => async (dispatch) => {
     // Call reducer to register user.
     dispatch({
       type: REGISTER_SUCCESS,
-      payload: res.data,
+      payload: res.data.token,
     });
 
     // Call reducer to load user.
     dispatch(loadUser());
     toast.success(
-      'You successfully created an account! Welcome to Badger Bytes!'
+      'You successfully created an account! Welcome!'
     );
   } catch (err) {
     // Loop through errors and notify user.
