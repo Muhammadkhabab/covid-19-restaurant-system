@@ -73,5 +73,10 @@ const RestaurantSchema = new mongoose.Schema({
   current_free_tables: {
     type: Number,
   },
+  reviewed: {
+    type: Boolean,
+    default: false,
+  },
 });
+
 module.exports = Restaurant = mongoose.model('restaurant', RestaurantSchema);
