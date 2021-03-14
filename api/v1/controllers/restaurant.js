@@ -49,7 +49,7 @@ module.exports = {
       square_footage,
       customer_per_table,
       tables_distance,
-    } = res.body;
+    } = req.body;
 
     try {
       // Check if user exists (check if email or username exists).
@@ -185,7 +185,7 @@ module.exports = {
       square_footage,
       customer_per_table,
       tables_distance,
-    } = res.body;
+    } = req.body;
 
     try {
       const errors = [];

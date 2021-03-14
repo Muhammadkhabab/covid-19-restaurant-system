@@ -80,7 +80,7 @@ router.put(
       check('tables_distance').isNumeric(),
     ],
   ],
-  restaurantController.create
+  restaurantController.update
 );
 
 // @route     DELETE /restaurants
