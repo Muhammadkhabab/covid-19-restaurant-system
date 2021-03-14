@@ -88,4 +88,14 @@ router.put(
 // @access    Only admin of restaurant can do this.
 router.delete('/', auth, restaurantController.delete);
 
+// @route     GET /restaurants
+// @desc      Get all restaurants
+// @access    Public.
+router.get('/', restaurantController.getAll);
+
+// @route     GET /restaurants/me
+// @desc      Get my restaurant
+// @access    Only admins/staffs of restaurant can do this.
+router.get('/me', auth, restaurantController.getMy);
+
 module.exports = router;
