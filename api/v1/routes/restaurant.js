@@ -23,8 +23,6 @@ router.post(
     check('username').notEmpty(),
     check('email', 'Please enter a valid email!').isEmail(),
     check('phone_number').notEmpty(),
-    //Birthdate is a Date() object with YYYY/MM/DD format
-    // check('birth_date').notEmpty().isDate(),
     check('password')
       .isLength({ min: 6, max: 20 })
       .withMessage('Password must be between 6 and 20 characters long!')

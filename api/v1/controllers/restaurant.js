@@ -30,7 +30,6 @@ module.exports = {
       username,
       email,
       phone_number,
-      birth_date,
       password,
       confirmed_password,
 
@@ -82,10 +81,10 @@ module.exports = {
         email,
         password,
         phone_number,
-        birth_date,
       });
 
       user.is_admin = true;
+      user.is_customer = false;
 
       // Encrypt password.
       const salt = await bcrypt.genSalt(15);
