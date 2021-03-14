@@ -83,6 +83,8 @@ module.exports = {
         birth_date,
       });
 
+      user.is_admin = true;
+
       // Encrypt password.
       const salt = await bcrypt.genSalt(15);
       user.password = await bcrypt.hash(password, salt);
@@ -143,8 +145,10 @@ module.exports = {
       restaurant.curbside_pickup = curbside_pickup == 1;
       restaurant.delivery = delivery == 1;
 
-      await user.save();
       await restaurant.save();
+      user.restaurant_id = restaurant._id;
+
+      await user.save();
       return res.status(200).json({ token, restaurant });
     } catch (err) {
       console.error(err.message);
@@ -182,6 +186,11 @@ module.exports = {
     }
 
     try {
+      const user = await User.findById(req.user.id);
+      const restaurant_id = user.restaurant_id;
+      await Restaurant.findByIdAndDelete(restaurant_id);
+
+      return res.status(200).json({ msg: 'Restaurant deleted successfully!' });
     } catch (err) {
       console.error(err.message);
       return res.status(500).json({

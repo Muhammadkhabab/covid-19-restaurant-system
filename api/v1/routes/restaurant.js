@@ -53,4 +53,9 @@ router.post(
   restaurantController.create
 );
 
+// @route     DELETE /restaurants
+// @desc      Delete restaurant
+// @access    Only admin of restaurant can do this.
+router.delete('/', auth, restaurantController.delete);
+
 module.exports = router;
