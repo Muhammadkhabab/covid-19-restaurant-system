@@ -239,7 +239,7 @@ module.exports = {
       restaurant.delivery = delivery == 1;
 
       await restaurant.save();
-      return res.status(200).json({ restaurant });
+      return res.status(200).json(restaurant);
     } catch (err) {
       console.error(err.message);
       return res.status(500).json({
@@ -317,6 +317,45 @@ module.exports = {
         const myRestaurant = await Restaurant.findById(restaurantId);
         return res.status(200).json(myRestaurant);
       }
+    } catch (err) {
+      console.error(err.message);
+      return res.status(500).json({
+        errors: [
+          { msg: 'Unexpected server error happened. Please try again later!' },
+        ],
+      });
+    }
+  },
+
+  updateStats: async (req, res, _next) => {
+    // Check for errors.
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
+    const {
+      current_customers,
+      current_employees,
+      current_free_tables,
+    } = req.body;
+
+    try {
+      const user = await User.findById(req.user.id);
+      if (!user.is_admin || !user.restaurant_id) {
+        return res
+          .status(404)
+          .json({ errors: [{ msg: 'Restaurant not found!' }] });
+      }
+      const restaurant = await Restaurant.findById(user.restaurant_id);
+
+      if (current_customers) restaurant.current_customers = current_customers;
+      if (current_employees) restaurant.current_employees = current_employees;
+      if (current_free_tables)
+        restaurant.current_free_tables = current_free_tables;
+
+      await restaurant.save();
+      return res.status(200).json(restaurant);
     } catch (err) {
       console.error(err.message);
       return res.status(500).json({

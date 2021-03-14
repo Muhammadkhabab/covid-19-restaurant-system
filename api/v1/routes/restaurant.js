@@ -55,7 +55,7 @@ router.post(
 
 // @route     PUT /restaurants
 // @desc      Update restaurant info
-// @access    Public
+// @access    Only admins of restaurant can do this.
 router.put(
   '/',
   [
@@ -81,6 +81,23 @@ router.put(
     ],
   ],
   restaurantController.update
+);
+
+// @route     PUT /restaurants/stats
+// @desc      Update restaurant current number of
+//            customers, employees, and free tables.
+// @access    Only admins/staffs of restaurant can do this.
+router.put(
+  '/stats',
+  [
+    auth,
+    [
+      check('current_customers').notEmpty().isNumeric(),
+      check('current_employees').notEmpty().isNumeric(),
+      check('current_free_tables').notEmpty().isNumeric(),
+    ],
+  ],
+  restaurantController.updateStats
 );
 
 // @route     DELETE /restaurants
