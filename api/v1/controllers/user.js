@@ -51,7 +51,6 @@ module.exports = {
       confirmed_password,
       phone_number,
       birth_date,
-      staff_key,
     } = req.body;
 
     try {
@@ -79,7 +78,7 @@ module.exports = {
       }
 
       // Create new user.
-      user = new User({
+      const user = new User({
         first_name,
         last_name,
         username,
@@ -88,11 +87,6 @@ module.exports = {
         phone_number,
         birth_date,
       });
-
-      // Check if valid staff key.
-      if (staff_key === process.env.STAFF_KEY) {
-        user.staff = true;
-      }
 
       // Encrypt password.
       const salt = await bcrypt.genSalt(15);
@@ -219,7 +213,7 @@ module.exports = {
 
       delete user._doc.password;
 
-      return res.status(200).json({ user });
+      return res.status(200).json(user);
     } catch (err) {
       console.error(err.message);
       return res.status(500).json({
