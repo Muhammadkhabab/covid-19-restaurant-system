@@ -6,6 +6,21 @@ import '../../styles/Form.scss';
 
 const Login = () => {
 
+  const [user, setUser] = useState({
+    email: '',
+    password: ''
+  });
+
+  const { email, password } = user;
+  
+  const onChange = (event) => {
+    setUser({ ...user, [event.target.name]: event.target.value });
+  };
+  
+  const onSubmit = (event) => {
+    event.preventDefault();
+    console.log(user);
+  };
 
   return (
     <div>
@@ -16,16 +31,16 @@ const Login = () => {
           lg={{ size: 4, offset: 4 }}
         >
           <Form 
-            // onSubmit={onSubmit} 
+            onSubmit={onSubmit} 
             className='authenticate-form'>
             <h3 className='text-center text-info mb-4'>Account Login</h3>
             <FormGroup>
               <Input
                 type='email'
                 name='email'
-                // value={email}
+                value={email}
                 placeholder='Please enter a valid email'
-                // onChange={onChange}
+                onChange={onChange}
                 autoComplete='new-off'
                 required
               />
@@ -34,9 +49,9 @@ const Login = () => {
               <Input
                 type='password'
                 name='password'
-                // value={password}
+                value={password}
                 placeholder='Please enter a secure password'
-                // onChange={onChange}
+                onChange={onChange}
                 autoComplete='new-password'
                 required
               />
