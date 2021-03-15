@@ -1,27 +1,24 @@
 import React, { useState } from 'react';
-import { Redirect } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { login } from '../../actions/auth';
 import PropTypes from 'prop-types';
 import { Row, Col, Form, FormGroup, Input } from 'reactstrap';
 import '../../styles/Form.scss';
+import { ROUTE_REGISTER_CUSTOMER } from '../../constants/routes';
 
-const Login = ({
-  auth: { isAuthenticated, user, loading },
-  login 
-}) => {
-
+const Login = ({ auth: { isAuthenticated, user, loading }, login }) => {
   const [input, setInput] = useState({
     credential: '',
-    password: ''
+    password: '',
   });
 
   const { credential, password } = input;
-  
+
   const onChange = (event) => {
     setInput({ ...input, [event.target.name]: event.target.value });
   };
-  
+
   const onSubmit = (event) => {
     event.preventDefault();
     login(input);
@@ -29,10 +26,10 @@ const Login = ({
 
   if (isAuthenticated && !loading) {
     // Check if user is resaurant or customer
-    if (user != null && user.is_customer) {
-      return <Redirect to='/Restaurants' />;
+    if (user != null && (user.is_admin || user.is_staff)) {
+      return <Redirect to='/dashboard' />;
     } else {
-      return <Redirect to='/Dashboard' />;
+      return <Redirect to='/restaurants' />;
     }
   }
 
@@ -44,9 +41,7 @@ const Login = ({
           md={{ size: 6, offset: 3 }}
           lg={{ size: 4, offset: 4 }}
         >
-          <Form 
-            onSubmit={onSubmit} 
-            className='authenticate-form'>
+          <Form onSubmit={onSubmit} className='authenticate-form'>
             <h3 className='text-center text-info mb-4'>Account Login</h3>
             <FormGroup>
               <Input
@@ -81,6 +76,12 @@ const Login = ({
           md={{ size: 6, offset: 3 }}
           lg={{ size: 4, offset: 4 }}
         >
+          <div className='other-account-action'>
+            <p className='text-secondary'>New to Safe Dining?</p>
+            <Link to={ROUTE_REGISTER_CUSTOMER} className='text-info ml-2'>
+              Sign up
+            </Link>
+          </div>
         </Col>
       </Row>
     </div>
@@ -89,11 +90,11 @@ const Login = ({
 
 Login.propTypes = {
   auth: PropTypes.object.isRequired,
-  login: PropTypes.func.isRequired
+  login: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  auth: state.auth
+  auth: state.auth,
 });
 
 const mapDispatchToProps = { login };
