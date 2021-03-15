@@ -1,0 +1,40 @@
+@import 'Variables';
+
+#landing-page {
+	height: 100vh;
+	background: url('https://bloximages.chicago2.vip.townnews.com/madison.com/content/tncms/assets/v3/editorial/1/25/12582008-cea6-51ea-8500-12ad63260b42/5c005a90ba10f.image.jpg?resize=990%2C1331')
+		no-repeat center center;
+	background-size: cover;
+	text-align: center;
+	color: #eee;
+
+	.overlay {
+		background: rgba(0, 0, 0, 0.3);
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+	}
+
+	.content {
+		background: rgba(0, 0, 0, 0.6);
+		margin: 40vh auto;
+		padding: 25px;
+	}
+
+	.btn {
+		width: 200px;
+		margin-bottom: 0.5em;
+	}
+
+	#restaurant-info {
+		width: 300px;
+		line-height: 300%;
+	}
+
+	h1 {
+		font-weight: bold;
+		font-size: 50px;
+	}
+}
