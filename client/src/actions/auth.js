@@ -22,9 +22,12 @@ export const loadUser = () => async (dispatch) => {
     setAuthToken(localStorage.token);
   }
 
+  console.log("Loading User");
+
   try {
     // Send request to API endpoints.
     const res = await axios.get(`/${API}/users`);
+    console.log(res);
 
     // Call reducer to load user.
     dispatch({

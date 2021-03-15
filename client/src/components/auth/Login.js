@@ -6,26 +6,34 @@ import PropTypes from 'prop-types';
 import { Row, Col, Form, FormGroup, Input } from 'reactstrap';
 import '../../styles/Form.scss';
 
-const Login = ({ login, isAuthenticated }) => {
+const Login = ({
+  auth: { isAuthenticated, user, loading },
+  login 
+}) => {
 
-  const [user, setUser] = useState({
+  const [input, setInput] = useState({
     credential: '',
     password: ''
   });
 
-  const { credential, password } = user;
+  const { credential, password } = input;
   
   const onChange = (event) => {
-    setUser({ ...user, [event.target.name]: event.target.value });
+    setInput({ ...input, [event.target.name]: event.target.value });
   };
   
   const onSubmit = (event) => {
     event.preventDefault();
-    login(user);
+    login(input);
   };
 
-  if (isAuthenticated) {
-    return <Redirect to='/dashboard' />;
+  if (isAuthenticated && !loading) {
+    // Check if user is resaurant or customer
+    if (user != null && (user.is_admin || user.is_staff || user.is_developer)) {
+      return <Redirect to='/Dashboard' />;
+    } else {
+      return <Redirect to='/Restaurants' />;
+    }
   }
 
   return (
@@ -80,12 +88,12 @@ const Login = ({ login, isAuthenticated }) => {
 };
 
 Login.propTypes = {
-  login: PropTypes.func.isRequired,
-  isAuthenticated: PropTypes.bool,
+  auth: PropTypes.object.isRequired,
+  login: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => ({
-  isAuthenticated: state.auth.isAuthenticated
+  auth: state.auth
 });
 
 const mapDispatchToProps = { login };
