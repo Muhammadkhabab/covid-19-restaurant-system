@@ -16,7 +16,6 @@ export const registerRestaurant = (userObj, restaurantObj) => async (dispatch) =
 
     // Merge userObj, restaurantObj into one object 
     const data = { ...userObj, ...restaurantObj }
-    console.log(data);
     // User data.
     const body = JSON.stringify(data);
 
@@ -58,3 +57,32 @@ export const registerRestaurant = (userObj, restaurantObj) => async (dispatch) =
         });
     }
 };
+
+export const getMyRestaurant = () => async (dispatch) => {
+    try {
+        // Send request to API endpoint.
+        const res = await axios.get(`/${API}/restaurants/me`);
+
+        // Call reducer to register restaurant.
+        dispatch({
+            type: RESTAURANT_RETRIEVED,
+            payload: res.data,
+        });
+
+        // Call reducer to register restaurant.
+        dispatch({
+            type: SET_RESTAURANT,
+            payload: res.data,
+        });
+    } catch (err) {
+        // Loop through errors and notify user.
+        const errors = err.response.data.errors;
+        if (errors) {
+            errors.forEach((error) => {
+                toast.error(error.msg);
+                toast.error(error.param);
+                console.log(error);
+            });
+        }
+    }
+}
