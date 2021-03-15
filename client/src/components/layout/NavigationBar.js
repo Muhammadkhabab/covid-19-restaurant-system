@@ -25,12 +25,17 @@ const NavigationBar = ({
       <NavItem>
         <Link to='/register/restaurant' className='nav-link'>
           Register Restaurant
-            </Link>
+        </Link>
       </NavItem>
       <NavItem>
-        <Link to='/login' className='nav-link'>
-          Login
-            </Link>
+        {isAuthenticated ? (
+          <Link to='#!' className='nav-link' onClick={logout}>
+            <i className='fas fa-sign-out-alt mr-1' />
+            Logout
+          </Link>
+        ) : (
+          <Link to='/login' className='nav-link'>Login</Link>
+        )}
       </NavItem>
     </Fragment>
   );

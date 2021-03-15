@@ -2,6 +2,9 @@
 import React, { Fragment } from 'react';
 import { Route, Switch } from 'react-router-dom';
 
+// Routing components.
+import PrivateRoute from '../routing/PrivateRoute';
+
 // Authentication components
 import RegisterRestaurant from '../auth/RegisterRestaurant';
 import RegisterCustomer from '../auth/RegisterCustomer';
@@ -24,8 +27,8 @@ import NavigationBar from '../layout/NavigationBar';
 // Reactstrap Components
 import { Container } from 'reactstrap';
 
-function Routes () {
-    return (
+function Routes() {
+  return (
     <Fragment>
       <NavigationBar />
       <Container className='my-5'>
@@ -33,7 +36,7 @@ function Routes () {
           <Route exact path='/register/restaurant' component={RegisterRestaurant} />
           <Route exact path='/register/customer' component={RegisterCustomer} />
           <Route exact path='/login' component={Login} />
-          <Route exact path='/dashboard' component={Dashboard} />
+          <PrivateRoute exact path='/dashboard' component={Dashboard} />
           <Route exact path='/restaurants' component={Restaurants} />
           <Route exact path='/restaurant/:restaurant_id' component={Restaurant} />
           <Route exact path='/advancedsearch' component={AdvancedSearch} />
@@ -41,7 +44,7 @@ function Routes () {
         </Switch>
       </Container>
     </Fragment>
-    );
+  );
 };
 
 export default Routes;

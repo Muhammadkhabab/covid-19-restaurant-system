@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { REGISTER_RESTAURANT, REGISTER_SUCCESS, REGISTER_FAIL } from './types';
+import { REGISTER_RESTAURANT, REGISTER_SUCCESS, REGISTER_FAIL, SET_RESTAURANT } from './types';
 import { toast } from 'react-toastify';
 import { loadUser } from './auth';
 
@@ -62,12 +62,6 @@ export const getMyRestaurant = () => async (dispatch) => {
     try {
         // Send request to API endpoint.
         const res = await axios.get(`/${API}/restaurants/me`);
-
-        // Call reducer to register restaurant.
-        dispatch({
-            type: RESTAURANT_RETRIEVED,
-            payload: res.data,
-        });
 
         // Call reducer to register restaurant.
         dispatch({
