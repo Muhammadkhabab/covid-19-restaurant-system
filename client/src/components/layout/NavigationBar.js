@@ -29,7 +29,10 @@ const NavigationBar = ({
       </NavItem>
       <NavItem>
         {isAuthenticated ? (
-          <Link to='/account' className='nav-link'>Account</Link>
+          <Link to='#!' className='nav-link' onClick={logout}>
+            <i className='fas fa-sign-out-alt mr-1' />
+            Logout
+          </Link>
         ) : (
           <Link to='/login' className='nav-link'>Login</Link>
         )}
