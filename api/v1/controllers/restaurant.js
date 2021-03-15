@@ -24,56 +24,6 @@ if (!errors.isEmpty()) {
     return res.status(400).json({ errors: errors.array() });
 }
 
-const {
-    first_name,
-    last_name,
-    username,
-    email,
-    phone_number,
-    birth_date,
-    password,
-    confirmed_password,
-
-    restaurant_name,
-    address,
-    restaurant_email,
-    restaurant_phone_number,
-    website_url,
-    dine_in,
-    dine_outside,
-    pickup,
-    curbside_pickup,
-    delivery,
-    policy_notes,
-    employee_capacity,
-    customer_capacity,
-    number_tables,
-    square_footage,
-    customer_per_table,
-    tables_distance,
-} = req.body;
-
-try {
-    // Check if user exists (check if email or username exists).
-    const sameEmail = await User.findOne({ email });
-    const errors = [];
-    if (sameEmail) {
-    errors.push({
-        msg: 'Email was already taken. Please enter another email!',
-    });
-    }
-    const sameUsername = await User.findOne({ username });
-    if (sameUsername) {
-    errors.push({
-        msg: 'Username was already taken. Please enter another username!',
-    });
-    }
-    if (password !== confirmed_password) {
-    errors.push({
-        msg: 'Passwords do not match!',
-    });
-    }
-
     const {
       first_name,
       last_name,
@@ -209,7 +159,7 @@ try {
     ],
     });
 }
-}},
+},
 
 updateStats: async (req, res, _next) => {
 // Check for errors.
