@@ -83,6 +83,23 @@ router.put(
   restaurantController.update
 );
 
+// / @route     PUT /restaurants/stats
+// @desc      Update restaurant current number of
+//            customers, employees, and free tables.
+// @access    Only admins/staffs of restaurant can do this.
+router.put(
+  '/stats',
+  [
+    auth,
+    [
+      check('current_customers').notEmpty().isNumeric(),
+      check('current_employees').notEmpty().isNumeric(),
+      check('current_free_tables').notEmpty().isNumeric(),
+    ],
+  ],
+  restaurantController.updateStats
+);
+
 // @route     DELETE /restaurants
 // @desc      Delete restaurant
 // @access    Only admin of restaurant can do this.
@@ -97,5 +114,25 @@ router.get('/', restaurantController.getAll);
 // @desc      Get my restaurant
 // @access    Only admins/staffs of restaurant can do this.
 router.get('/me', auth, restaurantController.getMy);
+
+// @route     GET /restaurants/filter
+// @desc      Filter criterias
+// @access    public
+// TODO: update cuisine filter
+router.get('/filter',[
+  check('search').optional().isString(),
+  check('cuisine').optional().isArray(),
+  check('dine_in').optional().isIn([0, 1]),
+  check('dine_outside').optional().isIn([0, 1]),
+  check('pickup').optional().isIn([0, 1]),
+  check('curbside_pickup').optional().isIn([0, 1]),
+  check('delivery').optional().isIn([0, 1]),
+  check('tables_distance').optional().isNumeric(),
+  check('user_distance').optional().isNumeric(),
+  check('current_percent_capacity').optional().isNumeric(),
+  check('total_customers').optional().isNumeric(),
+], restaurantController.filter);
+
+
 
 module.exports = router;

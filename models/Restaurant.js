@@ -73,6 +73,9 @@ const RestaurantSchema = new mongoose.Schema({
   current_free_tables: {
     type: Number,
   },
+  current_percent_capacity:{
+    type: Number,
+  },
   reviewed: {
     type: Boolean,
     default: false,
