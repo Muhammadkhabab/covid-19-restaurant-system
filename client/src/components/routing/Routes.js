@@ -24,24 +24,32 @@ import NavigationBar from '../layout/NavigationBar';
 // Reactstrap Components
 import { Container } from 'reactstrap';
 
-function Routes () {
-    return (
+function Routes() {
+  return (
     <Fragment>
       <NavigationBar />
-      <Container className='my-5'>
+      <Container className='my-4'>
         <Switch>
-          <Route exact path='/register/restaurant' component={RegisterRestaurant} />
+          <Route
+            exact
+            path='/register/restaurant'
+            component={RegisterRestaurant}
+          />
           <Route exact path='/register/customer' component={RegisterCustomer} />
           <Route exact path='/login' component={Login} />
           <Route exact path='/dashboard' component={Dashboard} />
           <Route exact path='/restaurants' component={Restaurants} />
-          <Route exact path='/restaurant/:restaurant_id' component={Restaurant} />
+          <Route
+            exact
+            path='/restaurant/:restaurant_id'
+            component={Restaurant}
+          />
           <Route exact path='/advancedsearch' component={AdvancedSearch} />
           <Route component={NotFound} />
         </Switch>
       </Container>
     </Fragment>
-    );
-};
+  );
+}
 
 export default Routes;
