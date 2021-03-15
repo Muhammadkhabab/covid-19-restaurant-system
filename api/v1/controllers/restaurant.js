@@ -1,3 +1,5 @@
+const mongoose = require('mongoose');
+
 // Validation.
 const { validationResult } = require('express-validator');
 
@@ -72,131 +74,90 @@ try {
     });
     }
 
-    // Create new user.
-    const user = new User({
-    first_name,
-    last_name,
-    username,
-    email,
-    password,
-    phone_number,
-    birth_date,
-    });
+    const {
+      first_name,
+      last_name,
+      username,
+      email,
+      phone_number,
+      password,
+      confirmed_password,
 
-    user.is_admin = true;
+      restaurant_name,
+      address,
+      restaurant_email,
+      restaurant_phone_number,
+      website_url,
+      dine_in,
+      dine_outside,
+      pickup,
+      curbside_pickup,
+      delivery,
+      policy_notes,
+      employee_capacity,
+      customer_capacity,
+      number_tables,
+      square_footage,
+      customer_per_table,
+      tables_distance,
+    } = req.body;
 
-    // Encrypt password.
-    const salt = await bcrypt.genSalt(15);
-    user.password = await bcrypt.hash(password, salt);
+    try {
+      // Check if user exists (check if email or username exists).
+      const sameEmail = await User.findOne({ email });
+      const errors = [];
+      if (sameEmail) {
+        errors.push({
+          msg: 'Email was already taken. Please enter another email!',
+        });
+      }
+      const sameUsername = await User.findOne({ username });
+      if (sameUsername) {
+        errors.push({
+          msg: 'Username was already taken. Please enter another username!',
+        });
+      }
+      if (password !== confirmed_password) {
+        errors.push({
+          msg: 'Passwords do not match!',
+        });
+      }
 
-    // Return jsonwebtoken.
-    const payload = {
-    user: {
-        id: user.id,
-    },
-    };
+      // Create new user.
+      const user = new User({
+        first_name,
+        last_name,
+        username,
+        email,
+        password,
+        phone_number,
+      });
 
-    let token;
+      user.is_admin = true;
+      user.is_customer = false;
 
-    jwt.sign(
-    payload,
-    process.env.JWT_PRIVATE_KEY,
-    { expiresIn: 86400 },
-    (err, resultToken) => {
-        if (err) throw err;
-        token = resultToken;
-    }
-    );
+      // Encrypt password.
+      const salt = await bcrypt.genSalt(15);
+      user.password = await bcrypt.hash(password, salt);
 
-    const sameNameAddress = await Restaurant.findOne({
-    restaurant_name,
-    address,
-    });
-    if (sameNameAddress) {
-    errors.push({
-        msg:
-        'There exists a restaurant with the same name at this address. Please enter another name or address.',
-    });
-    }
+      // Return jsonwebtoken.
+      const payload = {
+        user: {
+          id: user.id,
+        },
+      };
 
-    if (errors.length > 0) {
-    return res.status(400).json({ errors });
-    }
+      let token;
 
-    const restaurant = new Restaurant({
-    restaurant_name,
-    address,
-    restaurant_email,
-    restaurant_phone_number,
-    employee_capacity,
-    customer_capacity,
-    number_tables,
-    });
-
-    if (website_url) restaurant.website_url = website_url;
-    if (policy_notes) restaurant.policy_notes = policy_notes;
-    if (square_footage) restaurant.square_footage = square_footage;
-    if (customer_per_table)
-    restaurant.customer_per_table = customer_per_table;
-    if (tables_distance) restaurant.tables_distance = tables_distance;
-    restaurant.dine_in = dine_in == 1;
-    restaurant.dine_outside = dine_outside == 1;
-    restaurant.pickup = pickup == 1;
-    restaurant.curbside_pickup = curbside_pickup == 1;
-    restaurant.delivery = delivery == 1;
-
-    await restaurant.save();
-    user.restaurant_id = restaurant._id;
-
-    await user.save();
-    return res.status(200).json({ token, restaurant });
-} catch (err) {
-    console.error(err.message);
-    return res.status(500).json({
-    errors: [
-        { msg: 'Unexpected server error happened. Please try again later!' },
-    ],
-    });
-}
-},
-
-update: async (req, res, _next) => {
-// Check for errors.
-const errors = validationResult(req);
-if (!errors.isEmpty()) {
-    return res.status(400).json({ errors: errors.array() });
-}
-
-const {
-    restaurant_name,
-    address,
-    restaurant_email,
-    restaurant_phone_number,
-    website_url,
-    dine_in,
-    dine_outside,
-    pickup,
-    curbside_pickup,
-    delivery,
-    policy_notes,
-    employee_capacity,
-    customer_capacity,
-    number_tables,
-    square_footage,
-    customer_per_table,
-    tables_distance,
-} = req.body;
-
-try {
-    const errors = [];
-
-    const user = await User.findById(req.user.id);
-    if (!user.is_admin || !user.restaurant_id) {
-    return res
-        .status(404)
-        .json({ errors: [{ msg: 'Restaurant not found!' }] });
-    }
-    const restaurant = await Restaurant.findById(user.restaurant_id);
+      jwt.sign(
+        payload,
+        process.env.JWT_PRIVATE_KEY,
+        { expiresIn: 86400 },
+        (err, resultToken) => {
+          if (err) throw err;
+          token = resultToken;
+        }
+      );
 
     if (
     restaurant.restaurant_name != restaurant_name ||
@@ -248,7 +209,8 @@ try {
     ],
     });
 }
-},
+}},
+
 updateStats: async (req, res, _next) => {
 // Check for errors.
 const errors = validationResult(req);
@@ -473,5 +435,139 @@ filter: async (req, res, _next) => {
     ],
     });
     }
-    },
+  },
+
+  updateStats: async (req, res, _next) => {
+    // Check for errors.
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
+    const {
+      current_customers,
+      current_employees,
+      current_free_tables,
+    } = req.body;
+
+    try {
+      const user = await User.findById(req.user.id);
+      if ((!user.is_admin && !user.is_staff) || !user.restaurant_id) {
+        return res
+          .status(404)
+          .json({ errors: [{ msg: 'Restaurant not found!' }] });
+      }
+      const restaurant = await Restaurant.findById(user.restaurant_id);
+
+      restaurant.current_customers = current_customers;
+      restaurant.current_employees = current_employees;
+      restaurant.current_free_tables = current_free_tables;
+
+      const record = await new Record({
+        current_customers,
+        current_employees,
+        current_free_tables,
+      });
+      record.restaurant_id = restaurant._id;
+
+      await record.save();
+      await restaurant.save();
+      return res.status(200).json(restaurant);
+    } catch (err) {
+      console.error(err.message);
+      return res.status(500).json({
+        errors: [
+          { msg: 'Unexpected server error happened. Please try again later!' },
+        ],
+      });
+    }
+  },
+
+  getChartData: async (req, res, _next) => {
+    try {
+      const agg = [
+        {
+          $match: {
+            aggregated: false,
+            restaurant_id: mongoose.Types.ObjectId(req.params.restaurant_id),
+          },
+        },
+        {
+          $project: {
+            // rid: '$restaurant_id',
+            year: {
+              $year: '$created_at',
+            },
+            month: {
+              $month: '$created_at',
+            },
+            day: {
+              $dayOfMonth: '$created_at',
+            },
+            hour: {
+              $hour: '$created_at',
+            },
+            nc: '$current_customers',
+            ne: '$current_employees',
+            nt: '$current_free_tables',
+          },
+        },
+        {
+          $group: {
+            _id: {
+              // rid: '$rid',
+              year: '$year',
+              month: '$month',
+              day: '$day',
+              hour: '$hour',
+            },
+            nc: {
+              $avg: '$nc',
+            },
+            ne: {
+              $avg: '$ne',
+            },
+            nt: {
+              $avg: '$nt',
+            },
+          },
+        },
+        {
+          $project: {
+            _id: 0,
+            year: '$_id.year',
+            month: '$_id.month',
+            day: '$_id.day',
+            hour: '$_id.hour',
+            num_customers: {
+              $round: ['$nc', 0],
+            },
+            num_employees: {
+              $round: ['$ne', 0],
+            },
+            num_tables: {
+              $round: ['$nt', 0],
+            },
+          },
+        },
+      ];
+      const data = await Record.aggregate(agg);
+      const formatted_data = data.map((e) => {
+        const { year, month, day, hour } = e;
+        return {
+          ...e,
+          timestamp: new Date(Date.UTC(year, month - 1, day, hour)),
+        };
+      });
+      console.log(data);
+      return res.status(200).json(formatted_data);
+    } catch (err) {
+      console.error(err.message);
+      return res.status(500).json({
+        errors: [
+          { msg: 'Unexpected server error happened. Please try again later!' },
+        ],
+      });
+    }
+  },
 };
