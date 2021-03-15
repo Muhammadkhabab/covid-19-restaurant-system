@@ -24,7 +24,7 @@ export const loadUser = () => async (dispatch) => {
 
   try {
     // Send request to API endpoints.
-    const res = await axios.get(`/${API}/auth`);
+    const res = await axios.get(`/${API}/users`);
 
     // Call reducer to load user.
     dispatch({
@@ -87,7 +87,7 @@ export const register = (userObj) => async (dispatch) => {
 };
 
 // Login user.
-export const login = ({ email, password }) => async (dispatch) => {
+export const login = ({ credential, password }) => async (dispatch) => {
   // Request headers.
   const config = {
     headers: {
@@ -96,7 +96,7 @@ export const login = ({ email, password }) => async (dispatch) => {
   };
 
   // User data.
-  const body = JSON.stringify({ email, password });
+  const body = JSON.stringify({ credential, password });
 
   try {
     // Send request to API endpoint.
