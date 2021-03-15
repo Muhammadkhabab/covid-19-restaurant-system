@@ -29,10 +29,10 @@ const Login = ({
 
   if (isAuthenticated && !loading) {
     // Check if user is resaurant or customer
-    if (user != null && (user.is_admin || user.is_staff || user.is_developer)) {
-      return <Redirect to='/Dashboard' />;
-    } else {
+    if (user != null && user.is_customer) {
       return <Redirect to='/Restaurants' />;
+    } else {
+      return <Redirect to='/Dashboard' />;
     }
   }
 
