@@ -23,8 +23,6 @@ router.post(
     check('username').notEmpty(),
     check('email', 'Please enter a valid email!').isEmail(),
     check('phone_number').notEmpty(),
-    //Birthdate is a Date() object with YYYY/MM/DD format
-    // check('birth_date').notEmpty().isDate(),
     check('password')
       .isLength({ min: 6, max: 20 })
       .withMessage('Password must be between 6 and 20 characters long!')
@@ -55,7 +53,7 @@ router.post(
 
 // @route     PUT /restaurants
 // @desc      Update restaurant info
-// @access    Public
+// @access    Only admins of restaurant can do this.
 router.put(
   '/',
   [
@@ -83,6 +81,23 @@ router.put(
   restaurantController.update
 );
 
+// @route     PUT /restaurants/stats
+// @desc      Update restaurant current number of
+//            customers, employees, and free tables.
+// @access    Only admins/staffs of restaurant can do this.
+router.put(
+  '/stats',
+  [
+    auth,
+    [
+      check('current_customers').notEmpty().isNumeric(),
+      check('current_employees').notEmpty().isNumeric(),
+      check('current_free_tables').notEmpty().isNumeric(),
+    ],
+  ],
+  restaurantController.updateStats
+);
+
 // @route     DELETE /restaurants
 // @desc      Delete restaurant
 // @access    Only admin of restaurant can do this.
@@ -97,5 +112,10 @@ router.get('/', restaurantController.getAll);
 // @desc      Get my restaurant
 // @access    Only admins/staffs of restaurant can do this.
 router.get('/me', auth, restaurantController.getMy);
+
+// @route     GET /restaurants/chart/:restaurant_id
+// @desc      Get restaurant chart data
+// @access    OPublic.
+router.get('/chart/:restaurant_id', restaurantController.getChartData);
 
 module.exports = router;

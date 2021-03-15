@@ -38,9 +38,9 @@ const UserSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
-  birth_date: {
-    type: Date,
-    // required: true,
+  is_customer: {
+    type: Boolean,
+    default: true,
   },
   restaurant_id: {
     type: mongoose.Schema.Types.ObjectId,
