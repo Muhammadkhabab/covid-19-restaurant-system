@@ -13,6 +13,7 @@ import {
   Collapse,
 } from 'reactstrap';
 import '../../styles/NavigationBar.scss';
+import { ROUTE_LOGIN, ROUTE_REGISTER_RESTAURANT } from '../../constants/routes';
 
 const NavigationBar = ({
   icon,
@@ -23,7 +24,7 @@ const NavigationBar = ({
   const restaurantGuestLinks = (
     <Fragment>
       <NavItem>
-        <Link to='/register/restaurant' className='nav-link'>
+        <Link to={ROUTE_REGISTER_RESTAURANT} className='nav-link'>
           Register Restaurant
         </Link>
       </NavItem>
@@ -34,7 +35,9 @@ const NavigationBar = ({
             Logout
           </Link>
         ) : (
-          <Link to='/login' className='nav-link'>Login</Link>
+          <Link to={ROUTE_LOGIN} className='nav-link'>
+            Login
+          </Link>
         )}
       </NavItem>
     </Fragment>
@@ -52,9 +55,7 @@ const NavigationBar = ({
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           <Nav className='ml-auto' navbar>
-            {!loading && (
-              <Fragment>{restaurantGuestLinks}</Fragment>
-            )}
+            {!loading && <Fragment>{restaurantGuestLinks}</Fragment>}
           </Nav>
         </Collapse>
       </Container>

@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import { Row, Col, Form, FormGroup, Input } from 'reactstrap';
 import { toast } from 'react-toastify';
 import '../../styles/Form.scss';
+import { ROUTE_LOGIN, ROUTE_REGISTER_RESTAURANT } from '../../constants/routes';
 
 const Register = ({ register, isAuthenticated }) => {
   // Set user data.
@@ -160,13 +161,13 @@ const Register = ({ register, isAuthenticated }) => {
         >
           <div className='other-account-action'>
             <p className='text-secondary'>Already have an account?</p>
-            <Link to='/login' className='text-info ml-2'>
+            <Link to={ROUTE_LOGIN} className='text-info ml-2'>
               Sign in
             </Link>
           </div>
           <div className='other-account-action'>
             <p className='text-secondary'>Own a restaurant?</p>
-            <Link to='/register/restaurant' className='text-info ml-2'>
+            <Link to={ROUTE_REGISTER_RESTAURANT} className='text-info ml-2'>
               Register your business
             </Link>
           </div>

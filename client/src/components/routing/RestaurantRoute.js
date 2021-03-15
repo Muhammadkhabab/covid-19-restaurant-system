@@ -2,12 +2,12 @@ import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { ROUTE_LOGIN } from '../../constants/routes';
+import { ROUTE_LOGIN, ROUTE_DASHBOARD_USER } from '../../constants/routes';
 import Spinner from '../layout/Spinner';
 
-const PrivateRoute = ({
+const RestaurantRoute = ({
   component: Component,
-  auth: { isAuthenticated, loading },
+  auth: { isAuthenticated, user, loading },
   ...rest
 }) => (
   <Route
@@ -17,14 +17,16 @@ const PrivateRoute = ({
         <Spinner />
       ) : !isAuthenticated ? (
         <Redirect to={ROUTE_LOGIN} />
-      ) : (
+      ) : user.is_admin || user.is_staff ? (
         <Component {...props} />
+      ) : (
+        <Redirect to={ROUTE_DASHBOARD_USER} />
       )
     }
   />
 );
 
-PrivateRoute.propTypes = {
+RestaurantRoute.propTypes = {
   auth: PropTypes.object.isRequired,
 };
 
@@ -32,4 +34,4 @@ const mapStateToProps = (state) => ({
   auth: state.auth,
 });
 
-export default connect(mapStateToProps)(PrivateRoute);
+export default connect(mapStateToProps)(RestaurantRoute);

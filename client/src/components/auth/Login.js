@@ -5,6 +5,7 @@ import { login } from '../../actions/auth';
 import PropTypes from 'prop-types';
 import { Row, Col, Form, FormGroup, Input } from 'reactstrap';
 import '../../styles/Form.scss';
+import { ROUTE_REGISTER_CUSTOMER } from '../../constants/routes';
 
 const Login = ({ auth: { isAuthenticated, user, loading }, login }) => {
   const [input, setInput] = useState({
@@ -77,7 +78,7 @@ const Login = ({ auth: { isAuthenticated, user, loading }, login }) => {
         >
           <div className='other-account-action'>
             <p className='text-secondary'>New to Safe Dining?</p>
-            <Link to='/register/customer' className='text-info ml-2'>
+            <Link to={ROUTE_REGISTER_CUSTOMER} className='text-info ml-2'>
               Sign up
             </Link>
           </div>
