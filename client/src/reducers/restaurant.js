@@ -1,5 +1,6 @@
 import {
-	REGISTER_RESTAURANT
+	REGISTER_RESTAURANT,
+	SET_RESTAURANT
 } from '../actions/types';
 
 // Get token, set isAuthenticated and user to null, set loading to true.
@@ -15,6 +16,8 @@ export default function auth_red(state = initialState, action) {
 
 	switch (type) {
 		case REGISTER_RESTAURANT:
+			return { ...state, restaurant: payload, loadingRestaurant: false }
+		case SET_RESTAURANT:
 			return { ...state, restaurant: payload, loadingRestaurant: false }
 		default:
 			// Do nothing.

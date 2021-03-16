@@ -15,7 +15,6 @@ import DashboardCustomer from '../dashboard/DashboardCustomer';
 import Restaurants from '../restaurants/Restaurants';
 import Restaurant from '../restaurants/Restaurant';
 import EditRestaurant from '../restaurants/EditRestaurant';
-import AdvancedSearch from '../restaurants/AdvancedSearch';
 
 // Page components - Entire application
 import NotFound from '../pages/NotFound';

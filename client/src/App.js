@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 
 // React.
@@ -44,6 +43,6 @@ function App() {
       </Router>
     </Provider>
   );
-};
+}
 
 export default App;

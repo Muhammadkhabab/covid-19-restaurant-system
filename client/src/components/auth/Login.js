@@ -5,7 +5,11 @@ import { login } from '../../actions/auth';
 import PropTypes from 'prop-types';
 import { Row, Col, Form, FormGroup, Input } from 'reactstrap';
 import '../../styles/Form.scss';
-import { ROUTE_REGISTER_CUSTOMER } from '../../constants/routes';
+import {
+  ROUTE_REGISTER_CUSTOMER,
+  ROUTE_DASHBOARD_RESTAURANT,
+  ROUTE_RESTAURANTS,
+} from '../../constants/routes';
 
 const Login = ({ auth: { isAuthenticated, user, loading }, login }) => {
   const [input, setInput] = useState({
@@ -27,9 +31,9 @@ const Login = ({ auth: { isAuthenticated, user, loading }, login }) => {
   if (isAuthenticated && !loading) {
     // Check if user is resaurant or customer
     if (user != null && (user.is_admin || user.is_staff)) {
-      return <Redirect to='/dashboard' />;
+      return <Redirect to={ROUTE_DASHBOARD_RESTAURANT} />;
     } else {
-      return <Redirect to='/restaurants' />;
+      return <Redirect to={ROUTE_RESTAURANTS} />;
     }
   }
 
