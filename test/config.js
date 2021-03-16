@@ -1,11 +1,11 @@
 const mongoose = require('mongoose');
 const models = require('./models/index');
-const routes = require('./api/v1/index');
+// const routes = require('./api/v1/index');
 
 before((done) => {
   const localDB = 'mongodb://localhost/safedining_testdb';
-  const remoteDB = process.env.MONGO_URI_DEV;
-  mongoose.connect(remoteDB, {
+  const remoteDB = process.env.MONGO_URI_TEST;
+  mongoose.connect(localDB, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true,
@@ -30,5 +30,5 @@ after(() => {
 
 describe('----- TESTING -----', () => {
   models();
-  routes();
+  // routes();
 });
