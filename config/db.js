@@ -11,7 +11,14 @@ if (process.env.NODE_ENV === 'production') {
   db = process.env.MONGO_URI_TEST;
 } else {
   console.log('Development environment...');
-  db = process.env.MONGO_URI_DEV;
+  if (
+    process.env.INDV_MONGO_URI_DEV &&
+    process.env.USE_INDIVIDUAL_DB === 'yes'
+  ) {
+    db = process.env.INDV_MONGO_URI_DEV;
+  } else {
+    db = process.env.MONGO_URI_DEV;
+  }
 }
 
 //Connecting to the Mongo Database
