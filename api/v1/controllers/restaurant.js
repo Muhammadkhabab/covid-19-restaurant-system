@@ -358,6 +358,7 @@ filter: async (req, res, _next) => {
     delivery,
     tables_distance,
     user_distance,
+    current_free_tables,
     current_percent_capacity,
     total_customers,} = req.query;
 
@@ -389,11 +390,16 @@ filter: async (req, res, _next) => {
     if(tables_distance){
       filterArray["tables_distance"]= {"$gte":tables_distance}
     }
+    if(current_free_tables){
+      filterArray["current_free_tables"]= {"$gte":current_free_tables}
+    }
+
+    
     //LATER ITERATION
     //TODO : Get the distance between the restaurant and the user
     //If the user is within the users_distance value, return the restaurant
     if(user_distance){
-        
+
     }
 
     if(current_percent_capacity){
@@ -405,7 +411,13 @@ filter: async (req, res, _next) => {
     }
     
     //filtered restaurant object
-    const filtered_restaurant = await Restaurant.find(filterArray)
+    //Sort : 1 is ascending, -1 is descending
+    const sortingCriteria = {
+      current_percent_capacity:1,
+      current_free_tables:-1,
+      tables_distance:-1}
+
+    const filtered_restaurant = await Restaurant.find(filterArray).sort(sortingCriteria)
     //numbers of filtered restaurant
     const num_restaurants = Object.keys(filtered_restaurant).length;
 
