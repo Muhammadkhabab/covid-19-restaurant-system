@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const models = require('./models/index');
-// const routes = require('./api/v1/index');
+const routes = require('./api/v1/index');
 
 before((done) => {
   const localDB = 'mongodb://localhost/safedining_testdb';
@@ -30,5 +30,5 @@ after(() => {
 
 describe('----- TESTING -----', () => {
   models();
-  // routes();
+  routes();
 });
