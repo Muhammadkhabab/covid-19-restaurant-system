@@ -50,7 +50,6 @@ module.exports = {
       password,
       confirmed_password,
       phone_number,
-      birth_date,
     } = req.body;
 
     try {
@@ -85,7 +84,6 @@ module.exports = {
         email,
         password,
         phone_number,
-        birth_date,
       });
 
       // Encrypt password.
@@ -119,7 +117,7 @@ module.exports = {
     }
   },
 
-  //Update user information except birthdate and staffkey
+  //Update user information
   update: async (req, res, _next) => {
     // Check for errors.
     const errors = validationResult(req);

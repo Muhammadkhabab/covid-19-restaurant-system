@@ -1,3 +1,5 @@
+@import 'Variables';
+
 .authenticate-form {
   background: white;
   border: 1px solid #d8dee2;
@@ -10,10 +12,23 @@
   background: white;
   border: 1px solid #d8dee2;
   border-radius: 5px;
-  margin-top: 20px;
+  margin-top: 15px;
   padding: 15px 15px 0 15px;
 }
 
 .other-account-action p {
   display: inline-block;
+}
+
+.form-group.with-tooltip {
+  position: relative;
+
+  #password-info-tooltip {
+    position: absolute;
+    top: 9px;
+    right: 5px;
+    z-index: 1000;
+    font-size: 21px;
+    color: $brand-primary-color;
+  }
 }
