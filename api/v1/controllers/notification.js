@@ -18,9 +18,8 @@ module.exports = {
       contact,
       lat,
       long,
-      date_requested,
-      start_time,
-      end_time,
+      start_date_requested,
+      end_date_requested,
       max_distance,
       cuisine,
       dine_in,
@@ -37,14 +36,8 @@ module.exports = {
     try {
       const errors = [];
 
-      if (start_time >= end_time) {
+      if (start_date_requested >= end_date_requested) {
         errors.push({ msg: 'Enter an end time later than the start time!' });
-      }
-      if (start_time > 24) {
-        errors.push({ msg: 'Enter a start time from 0-24!' });
-      }
-      if (end_time > 24) {
-        errors.push({ msg: 'Enter an end time from 0-24!' });
       }
       if (!dine_in && !dine_out && !pickup && !curbside && !delivery) {
         errors.push({ msg: 'Enter at least one option for dining experience!' });
@@ -59,9 +52,8 @@ module.exports = {
         contact,
         lat,
         long,
-        date_requested,
-        start_time,
-        end_time,
+        start_date_requested,
+        end_date_requested,
         max_distance,
         cuisine,
         dine_in,

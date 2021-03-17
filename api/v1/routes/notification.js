@@ -31,9 +31,8 @@ router.post(
     check('contact').notEmpty(),
     check('lat').optional().isNumeric(),
     check('long').optional().isNumeric(),
-    check('date_requested').notEmpty().isDate(),
-    check('start_time').notEmpty().isNumeric(),
-    check('end_time').notEmpty().isNumeric(),
+    check('start_date_requested').notEmpty().isISO8601(),
+    check('end_date_requested').notEmpty().isISO8601(),
     check('max_distance').optional().isNumeric(),
     check('cuisine')
       .optional()

@@ -17,16 +17,12 @@ const NotificationSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-  date_requested: {
+  start_date_requested: {
     type: Date,
     required: true,
   },
-  start_time: {
-    type: Number,
-    required: true,
-  },
-  end_time: {
-    type: Number,
+  end_date_requested: {
+    type: Date,
     required: true,
   },
   max_distance: {
