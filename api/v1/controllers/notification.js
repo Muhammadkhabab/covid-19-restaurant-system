@@ -108,5 +108,30 @@ module.exports = {
       });
     }
   },
+
+  delete: async (req, res, _next) => {
+
+    try {
+      const errors = [];
+      const notification = await Notification.findById(req.params.nid);
+      if (notification.user.id != req.user.id) {
+        errors.push({ msg: 'User not authorized to delete this notification!' });
+      }
+      if (errors.length > 0) {
+        return res.status(400).json({ errors });
+      }
+
+      await Notification.findByIdAndDelete(req.params.nid);
+
+      return res.status(200).json({ msg: 'Notification deleted successfully!' });
+    } catch (err) {
+      console.error(err.message);
+      return res.status(500).json({
+        errors: [
+          { msg: 'Unexpected server error happened. Please try again later!' },
+        ],
+      });
+    }
+  },
   
 };

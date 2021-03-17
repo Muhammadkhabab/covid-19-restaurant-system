@@ -11,6 +11,15 @@ const { check } = require('express-validator');
 // Notification controller.
 const notificationController = require('../controllers/notification');
 
+// @route     DEL /notifications/id
+// @desc      Delete a notification
+// @access    Private
+router.delete(
+  '/:nid',
+  auth,
+  notificationController.delete
+);
+
 // @route     POST /notifications
 // @desc      Sign up for a notification
 // @access    Private
