@@ -1,0 +1,103 @@
+@import 'Variables';
+
+#restaurant-profile {
+  .jumbotron {
+    padding-top: 40px;
+    padding-bottom: 40px;
+    margin: 0;
+  }
+
+  .row.header-wrapper {
+    align-items: flex-start;
+
+    .logo-wrapper {
+      border: 6px solid $brand-primary-color;
+      border-radius: 50%;
+      padding: 10px;
+      width: fit-content;
+
+      img {
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+      }
+    }
+
+    .header {
+      color: $brand-primary-color;
+      font-size: 70px;
+      padding-bottom: 0;
+      text-decoration: underline;
+      text-underline-position: under;
+    }
+
+    .info-text {
+      font-size: 21px;
+    }
+
+    .badges {
+      font-size: 24px;
+
+      .badge {
+        margin-right: 5px;
+        border: 3px solid $brand-primary-color;
+
+        &:hover {
+          color: white;
+          background-color: black;
+          border: 3px solid black;
+        }
+
+        .fas.fa-check-square {
+          color: #59b45c;
+        }
+
+        .fas.fa-times-circle {
+          color: #ec2c2c;
+        }
+      }
+    }
+  }
+
+  .left-panel {
+    border-right: 5px solid $brand-primary-color;
+    padding: 15px 30px 15px 40px;
+  }
+
+  .map-wrapper {
+    border: 3px solid black;
+    height: 400px;
+    border-radius: 5px;
+    margin-top: 20px;
+  }
+
+  .detailed-info {
+    height: 100%;
+    min-height: 50vh;
+    border-left: 5px solid $brand-primary-color;
+    padding: 15px 45px 15px 30px;
+  }
+
+  .msg-text {
+    background: #eaeaea;
+    padding: 30px;
+    padding-top: 35px;
+    border-radius: 25px;
+    position: relative;
+    margin-top: 25px;
+
+    h1 {
+      position: absolute;
+      top: -24px;
+      left: 28px;
+      text-transform: uppercase;
+      font-size: 25px;
+      font-weight: bold;
+      border-bottom: 5px solid black;
+    }
+
+    p {
+      margin-bottom: 0;
+    }
+  }
+}

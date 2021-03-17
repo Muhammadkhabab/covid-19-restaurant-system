@@ -3,10 +3,14 @@ import { connect } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
 import { register } from '../../actions/auth';
 import PropTypes from 'prop-types';
-import { Row, Col, Form, FormGroup, Input } from 'reactstrap';
+import { Row, Col, Form, FormGroup, Input, Container } from 'reactstrap';
 import { toast } from 'react-toastify';
 import '../../styles/Form.scss';
-import { ROUTE_LOGIN, ROUTE_REGISTER_RESTAURANT } from '../../constants/routes';
+import {
+  ROUTE_LOGIN,
+  ROUTE_REGISTER_RESTAURANT,
+  ROUTE_DASHBOARD_USER,
+} from '../../constants/routes';
 
 const Register = ({ register, isAuthenticated }) => {
   // Set user data.
@@ -51,11 +55,11 @@ const Register = ({ register, isAuthenticated }) => {
 
   // Redirect if registered.
   if (isAuthenticated) {
-    return <Redirect to='/abc' />;
+    return <Redirect to={ROUTE_DASHBOARD_USER} />;
   }
 
   return (
-    <div>
+    <Container className='my-4'>
       <Row>
         <Col
           xs={{ size: 8, offset: 2 }}
@@ -173,7 +177,7 @@ const Register = ({ register, isAuthenticated }) => {
           </div>
         </Col>
       </Row>
-    </div>
+    </Container>
   );
 };
 

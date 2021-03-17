@@ -11,3 +11,4 @@ export const LOGOUT = 'LOGOUT';
 
 // Restaurants
 export const REGISTER_RESTAURANT = "REGISTER_RESTAURANT";
+export const SET_RESTAURANT = "SET_RESTAURANT";
