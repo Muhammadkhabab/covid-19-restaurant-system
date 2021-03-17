@@ -44,4 +44,9 @@ router.post(
   notificationController.subscribe
 );
 
+// @route     GET /notifications
+// @desc      Get my notifications
+// @access    Private
+router.get('/', auth, notificationController.get);
+
 module.exports = router;

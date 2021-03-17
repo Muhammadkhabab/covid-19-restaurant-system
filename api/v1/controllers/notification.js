@@ -92,5 +92,21 @@ module.exports = {
       });
     }
   },
+
+  get: async (req, res, _next) => {
+    try {
+      const user = await User.findById(req.user.id);
+      const notifications = await Notification.find({ user: user })
+      return res.status(200).json(notifications);
+
+    } catch (err) {
+      console.error(err.message);
+      return res.status(500).json({
+        errors: [
+          { msg: 'Unexpected server error happened. Please try again later!' },
+        ],
+      });
+    }
+  },
   
 };
