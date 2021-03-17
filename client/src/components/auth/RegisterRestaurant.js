@@ -3,10 +3,16 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { registerRestaurant } from '../../actions/restaurant';
 import PropTypes from 'prop-types';
-import { Row, Col, Form, FormGroup, Input, Label, Card, CardTitle, Button, } from 'reactstrap';
+import { Row, Col, Form, FormGroup, Input, Label, Card, CardTitle, Button, Container} from 'reactstrap';
 import '../../styles/Form.scss';
+import {
+  ROUTE_LOGIN,
+  ROUTE_REGISTER_RESTAURANT,
+	ROUTE_DASHBOARD_USER,
+	ROUTE_DASHBOARD_RESTAURANT
+} from '../../constants/routes';
 
-const RegisterRestaurant = ({ registerRestaurant, auth: { isAuthenticated } }) => {
+const RegisterRestaurant = ({ registerRestaurant, auth: { isAuthenticated, user } }) => {
 
 	// Set restaurant data
 	const [restaurant, setRestaurant] = useState({
@@ -30,7 +36,7 @@ const RegisterRestaurant = ({ registerRestaurant, auth: { isAuthenticated } }) =
 		delivery: 0,
 	});
 
-	const [user, setUser] = useState({
+	const [userObj, setUser] = useState({
 		first_name: '',
 		last_name: '',
 		username: '',
@@ -41,13 +47,13 @@ const RegisterRestaurant = ({ registerRestaurant, auth: { isAuthenticated } }) =
 	});
 
 	// Destructuring.
-	const { first_name, last_name, username, password, confirmed_password, email, phone_number } = user;
+	const { first_name, last_name, username, password, confirmed_password, email, phone_number } = userObj;
 	const { restaurant_name, address, website_url, restaurant_email, restaurant_phone_number, cuisine, employee_capacity, customer_capacity,
 		number_tables, customer_per_table, tables_distance, square_footage, policy_notes,
 		dine_in, dine_outside, pickup, curbside_pickup, delivery } = restaurant;
 
 	// Event listener for change in input fields in user field.
-	const onUserChange = (e) => setUser({ ...user, [e.target.name]: e.target.value });
+	const onUserChange = (e) => setUser({ ...userObj, [e.target.name]: e.target.value });
 
 	// Event listener for change in input fields.
 	const onRestaurantChange = (e) => setRestaurant({ ...restaurant, [e.target.name]: e.target.value });
@@ -57,16 +63,20 @@ const RegisterRestaurant = ({ registerRestaurant, auth: { isAuthenticated } }) =
 
 	const onSubmit = (e) => {
 		e.preventDefault();
-		registerRestaurant(user, restaurant);
+		registerRestaurant(userObj, restaurant);
 	};
 
 	// Redirect if registered.
 	if (isAuthenticated) {
-		return <Redirect to='/abc' />;
+		if (user && (user.is_admin || user.is_staff)) {
+			return <Redirect to={ROUTE_DASHBOARD_RESTAURANT} />;
+		} else {
+			return <Redirect to={ROUTE_DASHBOARD_USER} />;
+		}
 	}
 
 	return (
-		<>
+		<Container className='my-4'>
 			<h3 className='text-left text-info mb-4'>Register Your Restaurant!</h3>
 			<Form onSubmit={onSubmit}>
 				<Row>
@@ -376,7 +386,7 @@ const RegisterRestaurant = ({ registerRestaurant, auth: { isAuthenticated } }) =
 					</Col>
 				</Row>
 			</Form>
-		</>
+		</Container>
 	);
 };
 

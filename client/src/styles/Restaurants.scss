@@ -1,0 +1,56 @@
+@import 'Variables';
+
+#restaurant-profile {
+  .header-wrapper {
+    display: flex;
+    align-items: flex-start;
+
+    .logo-wrapper {
+      border: 6px solid $brand-primary-color;
+      border-radius: 50%;
+      padding: 10px;
+      margin-right: 50px;
+
+      img {
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+      }
+    }
+
+    .header {
+      color: $brand-primary-color;
+      font-size: 70px;
+      padding-bottom: 0;
+      text-decoration: underline;
+      text-underline-position: under;
+    }
+
+    .info-text {
+      font-size: 21px;
+    }
+
+    .badges {
+      font-size: 24px;
+
+      .badge {
+        margin-right: 5px;
+        border: 3px solid $brand-primary-color;
+
+        &:hover {
+          color: white;
+          background-color: black;
+          border: 3px solid black;
+        }
+
+        .fas.fa-check-square {
+          color: #59b45c;
+        }
+
+        .fas.fa-times-circle {
+          color: #ec2c2c;
+        }
+      }
+    }
+  }
+}

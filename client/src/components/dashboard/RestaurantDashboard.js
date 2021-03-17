@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, Fragment } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { getMyRestaurant } from '../../actions/restaurant';
 import Spinner from '../layout/Spinner';
-
+import RestaurantProfile from './RestaurantProfile';
 import { Card, CardTitle, Button } from 'reactstrap';
 
 import '../../styles/Dashboard.scss';
@@ -28,17 +28,15 @@ const RestaurantDashboard = ({
     restaurant === null ? (
     <Spinner />
   ) : (
-    <>
-      <div className='admin-welcome mb-5'>
+    <Fragment>
+      {/* <div className='admin-welcome mb-5'>
         <h1 className='text-danger m-0'>
           Welcome {user.first_name} {user.last_name}
         </h1>
         <Button color='danger'>Update Restaurant Information</Button>
-      </div>
-      <Card>
-        <CardTitle tag='h3'>{restaurant.restaurant_name}</CardTitle>
-      </Card>
-    </>
+      </div> */}
+      <RestaurantProfile restObj={restaurant} />
+    </Fragment>
   );
 };
 

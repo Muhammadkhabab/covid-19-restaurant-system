@@ -6,11 +6,12 @@ import {
   ROUTE_REGISTER_CUSTOMER,
   ROUTE_REGISTER_RESTAURANT,
   ROUTE_RESTAURANTS,
+  ROUTE_DASHBOARD_USER,
 } from '../../constants/routes';
 
 const Landing = ({ isAuthenticated }) => {
   if (isAuthenticated) {
-    return <Redirect to='/menu/' />;
+    return <Redirect to={ROUTE_DASHBOARD_USER} />;
   }
 
   return (
@@ -20,7 +21,7 @@ const Landing = ({ isAuthenticated }) => {
           <h1>Madison Covid-19 Restaurant System</h1>
           <p>
             <i>
-              Find up to date information about Covid-19 protocols and
+              Find up-to-date information about Covid-19 protocols and
               procedures at participating restaurants in Madison, Wisconsin.
             </i>
           </p>
