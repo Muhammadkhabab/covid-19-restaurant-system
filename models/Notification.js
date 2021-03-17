@@ -1,7 +1,81 @@
 const mongoose = require('mongoose');
 
 const NotificationSchema = new mongoose.Schema({
-    
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'user',
+    required: true,
+  },
+  is_text: {
+    type: Boolean,
+  },
+  is_email: {
+    type: Boolean,
+  },
+  lat: {
+    type: Number,
+    required: true,
+  },
+  long: {
+    type: Number,
+    required: true,
+  },
+  date_requested: {
+    type: Date,
+    required: true,
+  },
+  start_time: {
+    type: Number,
+    required: true,
+  },
+  end_time: {
+    type: Number,
+    required: true,
+  },
+  max_distance: {
+    type: Number,
+    default: 1000,
+  },
+  cuisine: {
+    type: String,
+    default: 'All',
+  },
+  dine_in: {
+    type: Boolean,
+    default: false,
+  },
+  dine_out: {
+    type: Boolean,
+    default: false,
+  },
+  pickup: {
+    type: Boolean,
+    default: false,
+  },
+  curbside: {
+    type: Boolean,
+    default: false,
+  },
+  delivery: {
+    type: Boolean,
+    default: false,
+  },
+  max_empl: {
+    type: Number,
+    default: 1000,
+  },
+  max_cust: {
+    type: Number,
+    default: 1000,
+  },
+  max_cust_per_table: {
+    type: Number,
+    default: 1000,
+  },
+  min_table_distance: {
+    type: Number,
+    default: 0,
+  },
 });
 
 module.exports = Notification = mongoose.model('notification', NotificationSchema);
