@@ -22,14 +22,13 @@ router.delete(
 
 // @route     POST /notifications
 // @desc      Sign up for a notification
-// @access    Private
+// @access    Public
 router.post(
   '/',
-  auth,
   [
     // Data validations.
-    check('is_text').optional().isBoolean(),
-    check('is_email').optional().isBoolean(),
+    check('is_contact_email').notEmpty().isBoolean(),
+    check('contact').notEmpty(),
     check('lat').optional().isNumeric(),
     check('long').optional().isNumeric(),
     check('date_requested').notEmpty().isDate(),

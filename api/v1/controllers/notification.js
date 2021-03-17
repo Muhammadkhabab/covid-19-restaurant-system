@@ -14,8 +14,8 @@ module.exports = {
 
     // Destructuring data from request body.
     const {
-      is_text,
-      is_email,
+      is_contact_email,
+      contact,
       lat,
       long,
       date_requested,
@@ -35,12 +35,8 @@ module.exports = {
     } = req.body;
 
     try {
-      const user = await User.findById(req.user.id);
       const errors = [];
 
-      if (!is_text && !is_email) {
-        errors.push({ msg: 'Sign up for either text or email notifications!' });
-      }
       if (start_time >= end_time) {
         errors.push({ msg: 'Enter an end time later than the start time!' });
       }
@@ -59,9 +55,8 @@ module.exports = {
 
       // Create new notification.
       const notification = new Notification({
-        user,
-        is_text,
-        is_email,
+        is_contact_email,
+        contact,
         lat,
         long,
         date_requested,
@@ -96,8 +91,9 @@ module.exports = {
   get: async (req, res, _next) => {
     try {
       const user = await User.findById(req.user.id);
-      const notifications = await Notification.find({ user: user })
-      return res.status(200).json(notifications);
+      const email_notifications = await Notification.find({ contact: user.email })
+      const phone_notifications = await Notification.find({ contact: user.phone_number })
+      return res.status(200).json(email_notifications.concat(phone_notifications));
 
     } catch (err) {
       console.error(err.message);
@@ -113,8 +109,11 @@ module.exports = {
 
     try {
       const errors = [];
+      const user = await User.findById(req.user.id);
       const notification = await Notification.findById(req.params.nid);
-      if (notification.user.id != req.user.id) {
+      if ((notification.contact != user.phone_number) && (notification.contact != user.email)) {
+        errors.push({ msg:  notification.contact });
+        errors.push({ msg:  user.phone_number });
         errors.push({ msg: 'User not authorized to delete this notification!' });
       }
       if (errors.length > 0) {

@@ -1,16 +1,13 @@
 const mongoose = require('mongoose');
 
 const NotificationSchema = new mongoose.Schema({
-  user: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'user',
+  is_contact_email: {
+    type: Boolean,
     required: true,
   },
-  is_text: {
-    type: Boolean,
-  },
-  is_email: {
-    type: Boolean,
+  contact: {
+    type: String,
+    required: true,
   },
   lat: {
     type: Number,
