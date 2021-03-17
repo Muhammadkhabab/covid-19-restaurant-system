@@ -8,14 +8,13 @@ import RegisterCustomer from '../auth/RegisterCustomer';
 import Login from '../auth/Login';
 
 // Restaurant Interface Components
-import DashboardRestaurant from '../dashboard/DashboardRestaurant';
+import RestaurantDashboard from '../dashboard/RestaurantDashboard';
 import DashboardCustomer from '../dashboard/DashboardCustomer';
 
 // Customer Interface Components
 import Restaurants from '../restaurants/Restaurants';
 import Restaurant from '../restaurants/Restaurant';
 import EditRestaurant from '../restaurants/EditRestaurant';
-import AdvancedSearch from '../restaurants/AdvancedSearch';
 
 // Page components - Entire application
 import NotFound from '../pages/NotFound';
@@ -47,49 +46,49 @@ function Routes() {
   return (
     <Fragment>
       <NavigationBar />
-      <Container className='my-4'>
-        <Switch>
-          {/* Public authentication routes */}
-          <Route
-            exact
-            path={ROUTE_REGISTER_RESTAURANT}
-            component={RegisterRestaurant}
-          />
-          <Route
-            exact
-            path={ROUTE_REGISTER_CUSTOMER}
-            component={RegisterCustomer}
-          />
-          <Route exact path={ROUTE_LOGIN} component={Login} />
+      {/* <Container className='my-4'> */}
+      <Switch>
+        {/* Public authentication routes */}
+        <Route
+          exact
+          path={ROUTE_REGISTER_RESTAURANT}
+          component={RegisterRestaurant}
+        />
+        <Route
+          exact
+          path={ROUTE_REGISTER_CUSTOMER}
+          component={RegisterCustomer}
+        />
+        <Route exact path={ROUTE_LOGIN} component={Login} />
 
-          {/* Public application routes */}
-          <Route exact path={ROUTE_RESTAURANTS} component={Restaurants} />
-          <Route exact path={ROUTE_RESTAURANT_PROFILE} component={Restaurant} />
+        {/* Authenticated routes */}
+        <PrivateRoute
+          exact
+          path={ROUTE_DASHBOARD_USER}
+          component={DashboardCustomer}
+        />
 
-          {/* Authenticated routes */}
-          <PrivateRoute
-            exact
-            path={ROUTE_DASHBOARD_USER}
-            component={DashboardCustomer}
-          />
+        {/* Admin/staff routes */}
+        <PrivateRoute
+          exact
+          path={ROUTE_DASHBOARD_RESTAURANT}
+          component={RestaurantDashboard}
+        />
 
-          {/* Admin/staff routes */}
-          <RestaurantRoute
-            exact
-            path={ROUTE_DASHBOARD_RESTAURANT}
-            component={DashboardRestaurant}
-          />
+        {/* Admin routes */}
+        <PrivateRoute
+          exact
+          path={ROUTE_EDIT_RESTAURANT}
+          component={EditRestaurant}
+        />
 
-          {/* Admin routes */}
-          <AdminRoute
-            exact
-            path={ROUTE_EDIT_RESTAURANT}
-            component={EditRestaurant}
-          />
+        {/* Public application routes */}
+        <Route exact path={ROUTE_RESTAURANTS} component={Restaurants} />
+        <Route exact path={ROUTE_RESTAURANT_PROFILE} component={Restaurant} />
 
-          <Route component={NotFound} />
-        </Switch>
-      </Container>
+        <Route component={NotFound} />
+      </Switch>
+      {/* </Container> */}
     </Fragment>
   );
 }

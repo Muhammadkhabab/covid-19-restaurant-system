@@ -1,6 +1,3 @@
-import logo from './logo.svg';
-import './App.css';
-
 // React.
 import React, { Fragment, useEffect } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
@@ -44,6 +41,6 @@ function App() {
       </Router>
     </Provider>
   );
-};
+}
 
 export default App;
