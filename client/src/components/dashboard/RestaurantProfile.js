@@ -1,6 +1,8 @@
 import React from 'react';
 import { Jumbotron, Container, Badge, Row, Col } from 'reactstrap';
+import { Link } from 'react-router-dom';
 import '../../styles/Restaurants.scss';
+import { ROUTE_EDIT_RESTAURANT } from '../../constants/routes';
 
 const RestaurantProfile = ({
   restObj: {
@@ -17,6 +19,7 @@ const RestaurantProfile = ({
     restaurant_email,
     restaurant_phone_number,
   },
+  user,
 }) => {
   return (
     <div id='restaurant-profile'>
@@ -33,52 +36,59 @@ const RestaurantProfile = ({
             </Col>
             <Col xs='12' lg='9'>
               <div className='basic-info'>
-                <h1 className='header'>{restaurant_name}</h1>
+                <h1 className='header'>
+                  {restaurant_name}
+                  {user && user.is_admin && (
+                    <Link to={ROUTE_EDIT_RESTAURANT}>
+                      <i className='ml-5 fas fa-edit'></i>
+                    </Link>
+                  )}
+                </h1>
                 <p className='info-text'>{address}</p>
                 <div className='badges'>
                   {dine_in ? (
                     <Badge color='light'>
-                      Dine in <i class='fas fa-check-square'></i>
+                      Dine in <i className='fas fa-check-square'></i>
                     </Badge>
                   ) : (
                     <Badge color='light'>
-                      Dine in <i class='fas fa-times-circle'></i>
+                      Dine in <i className='fas fa-times-circle'></i>
                     </Badge>
                   )}
                   {dine_outside ? (
                     <Badge color='light'>
-                      Dine outside <i class='fas fa-check-square'></i>
+                      Dine outside <i className='fas fa-check-square'></i>
                     </Badge>
                   ) : (
                     <Badge color='light'>
-                      Dine outside <i class='fas fa-times-circle'></i>
+                      Dine outside <i className='fas fa-times-circle'></i>
                     </Badge>
                   )}
                   {pickup ? (
                     <Badge color='light'>
-                      Pickup <i class='fas fa-check-square'></i>
+                      Pickup <i className='fas fa-check-square'></i>
                     </Badge>
                   ) : (
                     <Badge color='light'>
-                      Pickup <i class='fas fa-times-circle'></i>
+                      Pickup <i className='fas fa-times-circle'></i>
                     </Badge>
                   )}
                   {curbside_pickup ? (
                     <Badge color='light'>
-                      Curbside pickup <i class='fas fa-check-square'></i>
+                      Curbside pickup <i className='fas fa-check-square'></i>
                     </Badge>
                   ) : (
                     <Badge color='light'>
-                      Curbside pickup <i class='fas fa-times-circle'></i>
+                      Curbside pickup <i className='fas fa-times-circle'></i>
                     </Badge>
                   )}
                   {delivery ? (
                     <Badge color='light'>
-                      Delivery <i class='fas fa-check-square'></i>
+                      Delivery <i className='fas fa-check-square'></i>
                     </Badge>
                   ) : (
                     <Badge color='light'>
-                      Delivery <i class='fas fa-times-circle'></i>
+                      Delivery <i className='fas fa-times-circle'></i>
                     </Badge>
                   )}
                 </div>

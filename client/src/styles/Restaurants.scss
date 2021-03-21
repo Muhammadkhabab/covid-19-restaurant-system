@@ -29,6 +29,13 @@
       padding-bottom: 0;
       text-decoration: underline;
       text-underline-position: under;
+
+      .fas {
+        font-size: 40px;
+        &:hover {
+          cursor: pointer;
+        }
+      }
     }
 
     .info-text {

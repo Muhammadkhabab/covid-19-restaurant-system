@@ -37,6 +37,7 @@ if (!errors.isEmpty()) {
       address,
       restaurant_email,
       restaurant_phone_number,
+      cuisine,
       website_url,
       dine_in,
       dine_outside,
@@ -137,6 +138,7 @@ if (!errors.isEmpty()) {
     restaurant.customer_capacity = customer_capacity;
     restaurant.number_tables = number_tables;
 
+    if (cuisine) restaurant.cuisine = cuisine;
     if (website_url) restaurant.website_url = website_url;
     if (policy_notes) restaurant.policy_notes = policy_notes;
     if (square_footage) restaurant.square_footage = square_footage;
@@ -173,6 +175,7 @@ update: async (req, res, _next) => {
     address,
     restaurant_email,
     restaurant_phone_number,
+    cuisine,
     website_url,
     dine_in,
     dine_outside,
@@ -227,6 +230,7 @@ update: async (req, res, _next) => {
     restaurant.customer_capacity = customer_capacity;
     restaurant.number_tables = number_tables;
 
+    if (cuisine) restaurant.cuisine = cuisine;
     if (website_url) restaurant.website_url = website_url;
     if (policy_notes) restaurant.policy_notes = policy_notes;
     if (square_footage) restaurant.square_footage = square_footage;
@@ -367,10 +371,10 @@ filter: async (req, res, _next) => {
   try {
     //If criteria exists, add to the conditions
     if(search){
-      filterArray["restaurant_name"] = {"$regex":search,"$options":"i"}
+      filterArray["restaurant_name"] = {"$regex": search,"$options":"i"}
     }
     if(cuisine){
-      filterArray["cuisine"]= cuisine
+      // filterArray["cuisine"]= {"$regex": search,"$options":"i"}
     }
     if(dine_in){
       filterArray["dine_in"] = dine_in

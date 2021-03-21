@@ -35,7 +35,7 @@ const RestaurantDashboard = ({
         </h1>
         <Button color='danger'>Update Restaurant Information</Button>
       </div> */}
-      <RestaurantProfile restObj={restaurant} />
+      <RestaurantProfile restObj={restaurant} user={user} />
     </Fragment>
   );
 };

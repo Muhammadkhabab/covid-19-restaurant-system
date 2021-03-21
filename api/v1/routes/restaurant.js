@@ -34,6 +34,7 @@ router.post(
     check('address').notEmpty(),
     check('restaurant_email').notEmpty(),
     check('restaurant_phone_number').notEmpty(),
+    check('cuisine').optional().isString(),
     check('website_url').optional().isURL(),
     check('dine_in').notEmpty().isIn([0, 1]),
     check('dine_outside').notEmpty().isIn([0, 1]),
@@ -63,6 +64,7 @@ router.put(
       check('address').notEmpty(),
       check('restaurant_email').notEmpty(),
       check('restaurant_phone_number').notEmpty(),
+      check('cuisine').optional().isString(),
       check('website_url').optional().isURL(),
       check('dine_in').notEmpty().isIn([0, 1]),
       check('dine_outside').notEmpty().isIn([0, 1]),
@@ -119,7 +121,7 @@ router.get('/me', auth, restaurantController.getMy);
 // TODO: update cuisine filter
 router.get('/filter',[
   check('search').optional().isString(),
-  check('cuisine').optional().isArray(),
+  check('cuisine').optional().isString(),
   check('dine_in').optional().isIn([0, 1]),
   check('dine_outside').optional().isIn([0, 1]),
   check('pickup').optional().isIn([0, 1]),
