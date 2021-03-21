@@ -34,29 +34,6 @@
     .info-text {
       font-size: 21px;
     }
-
-    .badges {
-      font-size: 24px;
-
-      .badge {
-        margin-right: 5px;
-        border: 3px solid $brand-primary-color;
-
-        &:hover {
-          color: white;
-          background-color: black;
-          border: 3px solid black;
-        }
-
-        .fas.fa-check-square {
-          color: #59b45c;
-        }
-
-        .fas.fa-times-circle {
-          color: #ec2c2c;
-        }
-      }
-    }
   }
 
   .left-panel {
@@ -98,6 +75,29 @@
 
     p {
       margin-bottom: 0;
+    }
+  }
+}
+
+.badges {
+  font-size: 24px;
+
+  .badge {
+    margin-right: 5px;
+    border: 3px solid $brand-primary-color;
+
+    &:hover {
+      color: white;
+      background-color: black;
+      border: 3px solid black;
+    }
+
+    .fas.fa-check-square {
+      color: #59b45c;
+    }
+
+    .fas.fa-times-circle {
+      color: #ec2c2c;
     }
   }
 }

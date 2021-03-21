@@ -1,6 +1,7 @@
 import React from 'react';
-import { Jumbotron, Container, Badge, Row, Col } from 'reactstrap';
+import { Jumbotron, Container, Row, Col } from 'reactstrap';
 import '../../styles/Restaurants.scss';
+import PolicyBadges from '../restaurants/PolicyBadges.js'
 
 const RestaurantProfile = ({
   restObj: {
@@ -18,6 +19,7 @@ const RestaurantProfile = ({
     restaurant_phone_number,
   },
 }) => {
+  const policies = { dine_in, dine_outside, pickup, curbside_pickup, delivery }
   return (
     <div id='restaurant-profile'>
       <Jumbotron>
@@ -33,55 +35,9 @@ const RestaurantProfile = ({
             </Col>
             <Col xs='12' lg='9'>
               <div className='basic-info'>
-                <h1 className='header'>{restaurant_name}</h1>
+                <h2 className='header'>{restaurant_name}</h2>
                 <p className='info-text'>{address}</p>
-                <div className='badges'>
-                  {dine_in ? (
-                    <Badge color='light'>
-                      Dine in <i class='fas fa-check-square'></i>
-                    </Badge>
-                  ) : (
-                    <Badge color='light'>
-                      Dine in <i class='fas fa-times-circle'></i>
-                    </Badge>
-                  )}
-                  {dine_outside ? (
-                    <Badge color='light'>
-                      Dine outside <i class='fas fa-check-square'></i>
-                    </Badge>
-                  ) : (
-                    <Badge color='light'>
-                      Dine outside <i class='fas fa-times-circle'></i>
-                    </Badge>
-                  )}
-                  {pickup ? (
-                    <Badge color='light'>
-                      Pickup <i class='fas fa-check-square'></i>
-                    </Badge>
-                  ) : (
-                    <Badge color='light'>
-                      Pickup <i class='fas fa-times-circle'></i>
-                    </Badge>
-                  )}
-                  {curbside_pickup ? (
-                    <Badge color='light'>
-                      Curbside pickup <i class='fas fa-check-square'></i>
-                    </Badge>
-                  ) : (
-                    <Badge color='light'>
-                      Curbside pickup <i class='fas fa-times-circle'></i>
-                    </Badge>
-                  )}
-                  {delivery ? (
-                    <Badge color='light'>
-                      Delivery <i class='fas fa-check-square'></i>
-                    </Badge>
-                  ) : (
-                    <Badge color='light'>
-                      Delivery <i class='fas fa-times-circle'></i>
-                    </Badge>
-                  )}
-                </div>
+                <PolicyBadges {...policies} />
               </div>
             </Col>
           </Row>
