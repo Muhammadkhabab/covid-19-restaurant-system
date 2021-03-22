@@ -3,6 +3,7 @@ import { Jumbotron, Container, Badge, Row, Col } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import '../../styles/Restaurants.scss';
 import { ROUTE_EDIT_RESTAURANT } from '../../constants/routes';
+import Charts from '../charts/Charts';
 
 const RestaurantProfile = ({
   restObj: {
@@ -113,6 +114,7 @@ const RestaurantProfile = ({
         </Col>
         <Col xs='12' lg='4'>
           <h1>Graph</h1>
+          <Charts />
         </Col>
         <Col xs='12' lg='4'>
           <div className='detailed-info'>
