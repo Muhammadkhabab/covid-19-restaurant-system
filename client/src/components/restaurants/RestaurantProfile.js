@@ -114,7 +114,7 @@ const RestaurantProfile = ({
         </Col>
         <Col xs='12' lg='4'>
           <h1>Graph</h1>
-          <Charts />
+          <Charts rid={_id} />
         </Col>
         <Col xs='12' lg='4'>
           <div className='detailed-info'>

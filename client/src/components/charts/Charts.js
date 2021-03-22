@@ -1,34 +1,26 @@
-import React from 'react';
-import data from './FakeData';
+import React, { useEffect, useState } from 'react';
 import { Line } from 'react-chartjs-2';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import Spinner from '../layout/Spinner';
+import { getRestaurantData } from '../../actions/restaurant';
 
-const Charts = () => {
-  const options = {
-    scales: {
-      xAxes: [
-        {
-          ticks: {
-            autoSkip: true,
-            maxTicksLimit: 7,
-            // callback: function (label) {
-            //   const hour = label.split(' ')[1];
-            //   if (hour === 12) {
-            //     // return label.split(' ')[0];
-            //     return label;
-            //   } else {
-            //     return '';
-            //   }
-            // },
-          },
-        },
-      ],
-    },
-  };
+const Charts = ({ rid, getRestaurantData, restaurantObj: { chartData } }) => {
+  useEffect(() => {
+    if (rid) {
+      getRestaurantData(rid);
+    }
+
+    // eslint-disable-next-line
+  }, [rid]);
+
+  const [resData, setResData] = useState(chartData ? chartData : []);
+
   const dataObj1 = {
     datasets: [
       {
         label: 'Number of customers',
-        data: data.map((e) => e.num_customers),
+        data: resData && resData.map((e) => e.num_customers),
         borderColor: 'red',
         backgroundColor: '#ff000022',
         pointBackgroundColor: '#fff',
@@ -37,7 +29,7 @@ const Charts = () => {
       },
       {
         label: 'Number of employees',
-        data: data.map((e) => e.num_employees),
+        data: resData && resData.map((e) => e.num_employees),
         borderColor: 'blue',
         backgroundColor: '#0000ff33',
         pointBackgroundColor: '#fff',
@@ -45,13 +37,13 @@ const Charts = () => {
         pointHoverBackgroundColor: '#0000ff88',
       },
     ],
-    labels: data.map((e) => `${e.month}/${e.day}`),
+    labels: resData && resData.map((e) => `${e.month}/${e.day}`),
   };
   const dataObj2 = {
     datasets: [
       {
         label: 'Number of free tables',
-        data: data.map((e) => e.num_tables),
+        data: resData && resData.map((e) => e.num_tables),
         borderColor: 'green',
         backgroundColor: '#00ff0022',
         pointBackgroundColor: '#fff',
@@ -59,16 +51,50 @@ const Charts = () => {
         pointHoverBackgroundColor: '#00ff0088',
       },
     ],
-    labels: data.map((e) => `${e.month}/${e.day}`),
+    labels: resData && resData.map((e) => `${e.month}/${e.day}`),
   };
-  return (
+
+  useEffect(() => {
+    setResData(chartData);
+
+    // eslint-disable-next-line
+  }, [chartData]);
+
+  const options = {
+    scales: {
+      xAxes: [
+        {
+          ticks: {
+            autoSkip: true,
+            maxTicksLimit: 7,
+          },
+        },
+      ],
+    },
+  };
+
+  return !rid || !chartData ? (
+    <Spinner />
+  ) : (
     <div>
       <h1>Something</h1>
-      <p>{data[0].year}</p>
       <Line data={dataObj1} options={options} />
       <Line data={dataObj2} options={options} />
     </div>
   );
 };
 
-export default Charts;
+Charts.propTypes = {
+  restaurantObj: PropTypes.object.isRequired,
+  getRestaurantData: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  restaurantObj: state.restaurant,
+});
+
+const mapFunctionsToProps = {
+  getRestaurantData,
+};
+
+export default connect(mapStateToProps, mapFunctionsToProps)(Charts);
