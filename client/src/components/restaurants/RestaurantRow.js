@@ -34,24 +34,28 @@ const RestaurantRow = ({
             </div>
           </Col>
           <Col md="10">
-            <Row>
-              <Col>
-                <div className='restaurant-name'>
-                  <h1>{restaurant_name}</h1>
-                </div>
-              </Col>
-              <Col>
-                <PolicyBadges {...policies} />
-              </Col>
-            </Row>
-            <Row>
-              <Col>
-                <div className='address'>
-                  <p>{address}</p>
-                </div>
-              </Col>
-              <Col><p>Current Capacity: 4/12</p></Col>
-            </Row>
+            <div className='top-row'>
+              <Row>
+                <Col>
+                  <div className='restaurant-name'>
+                    <h1>{restaurant_name}</h1>
+                  </div>
+                </Col>
+                <Col>
+                  <PolicyBadges {...policies} />
+                </Col>
+              </Row>
+            </div>
+            <div className='bottom-row'>
+              <Row>
+                <Col>
+                  <div className='address'>
+                    <p>{address}</p>
+                  </div>
+                </Col>
+                <Col><p>Current Capacity: 4/12</p></Col>
+              </Row>
+            </div>
           </Col>
         </Row>
       </Container>
