@@ -34,6 +34,9 @@ const generateRecord = async (rid, doffset = null, hoffset = null) => {
 
 module.exports = {
   generateRecords: async (num, rid) => {
+    if (num <= 0) {
+      return;
+    }
     return new Promise(async (resolve) => {
       console.log('Generating fake records...');
       for (let i = 0; i < num; i++) {
@@ -45,6 +48,9 @@ module.exports = {
   },
 
   generateDaysRecords: async (day, rid) => {
+    if (day <= 0) {
+      return;
+    }
     return new Promise(async (resolve) => {
       console.log('Generating fake records...');
       for (let d = day; d >= 1; d--) {

@@ -38,6 +38,9 @@ const generateRestaurant = async () => {
 
 module.exports = {
   generateRestaurants: async (num) => {
+    if (num <= 0) {
+      return;
+    }
     return new Promise(async (resolve) => {
       console.log('Generating fake restaurants...');
       for (let i = 0; i < num; i++) {
