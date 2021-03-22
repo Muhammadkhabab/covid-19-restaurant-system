@@ -4,6 +4,7 @@ import {
   REGISTER_SUCCESS,
   REGISTER_FAIL,
   SET_RESTAURANT,
+  EDIT_RESTAURANT,
 } from './types';
 import { toast } from 'react-toastify';
 import { loadUser } from './auth';
@@ -60,6 +61,41 @@ export const registerRestaurant = (userObj, restaurantObj) => async (
     dispatch({
       type: REGISTER_FAIL,
     });
+  }
+};
+
+// Edit restaurant.
+export const editRestaurant = (restaurantObj) => async (dispatch) => {
+  // Request headers.
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  };
+
+  // User data.
+  const body = JSON.stringify(restaurantObj);
+
+  try {
+    // Send request to API endpoint.
+    const res = await axios.put(`/${API}/restaurants`, body, config);
+
+    // Call reducer to register restaurant.
+    dispatch({
+      type: EDIT_RESTAURANT,
+      payload: res.data,
+    });
+    toast.success('You successfully updated restaurant information! Welcome!');
+  } catch (err) {
+    // Loop through errors and notify user.
+    const errors = err.response.data.errors;
+    if (errors) {
+      errors.forEach((error) => {
+        toast.error(error.msg);
+        toast.error(error.param);
+        console.log(error);
+      });
+    }
   }
 };
 
