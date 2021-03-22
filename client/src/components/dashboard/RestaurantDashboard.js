@@ -27,15 +27,7 @@ const RestaurantDashboard = ({
     restaurant === null ? (
     <Spinner />
   ) : (
-    <Fragment>
-      {/* <div className='admin-welcome mb-5'>
-        <h1 className='text-danger m-0'>
-          Welcome {user.first_name} {user.last_name}
-        </h1>
-        <Button color='danger'>Update Restaurant Information</Button>
-      </div> */}
-      <RestaurantProfile restObj={restaurant} user={user} />
-    </Fragment>
+    <RestaurantProfile restObj={restaurant} user={user} />
   );
 };
 

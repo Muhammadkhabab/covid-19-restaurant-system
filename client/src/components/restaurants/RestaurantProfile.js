@@ -23,6 +23,28 @@ const RestaurantProfile = ({
   },
   user,
 }) => {
+  const booleanVals = [
+    {
+      val: dine_in,
+      str: 'Dine in',
+    },
+    {
+      val: dine_outside,
+      str: 'Dine outside',
+    },
+    {
+      val: pickup,
+      str: 'Pickup',
+    },
+    {
+      val: curbside_pickup,
+      str: 'Curbside pickup',
+    },
+    {
+      val: delivery,
+      str: 'Delivery',
+    },
+  ];
   return (
     <div id='restaurant-profile'>
       <Jumbotron>
@@ -48,50 +70,16 @@ const RestaurantProfile = ({
                 </h1>
                 <p className='info-text'>{address}</p>
                 <div className='badges'>
-                  {dine_in ? (
-                    <Badge color='light'>
-                      Dine in <i className='fas fa-check-square'></i>
-                    </Badge>
-                  ) : (
-                    <Badge color='light'>
-                      Dine in <i className='fas fa-times-circle'></i>
-                    </Badge>
-                  )}
-                  {dine_outside ? (
-                    <Badge color='light'>
-                      Dine outside <i className='fas fa-check-square'></i>
-                    </Badge>
-                  ) : (
-                    <Badge color='light'>
-                      Dine outside <i className='fas fa-times-circle'></i>
-                    </Badge>
-                  )}
-                  {pickup ? (
-                    <Badge color='light'>
-                      Pickup <i className='fas fa-check-square'></i>
-                    </Badge>
-                  ) : (
-                    <Badge color='light'>
-                      Pickup <i className='fas fa-times-circle'></i>
-                    </Badge>
-                  )}
-                  {curbside_pickup ? (
-                    <Badge color='light'>
-                      Curbside pickup <i className='fas fa-check-square'></i>
-                    </Badge>
-                  ) : (
-                    <Badge color='light'>
-                      Curbside pickup <i className='fas fa-times-circle'></i>
-                    </Badge>
-                  )}
-                  {delivery ? (
-                    <Badge color='light'>
-                      Delivery <i className='fas fa-check-square'></i>
-                    </Badge>
-                  ) : (
-                    <Badge color='light'>
-                      Delivery <i className='fas fa-times-circle'></i>
-                    </Badge>
+                  {booleanVals.map((v, k) =>
+                    v.val ? (
+                      <Badge color='light' key={k}>
+                        {v.str} <i className='fas fa-check-square'></i>
+                      </Badge>
+                    ) : (
+                      <Badge color='light' key={k}>
+                        {v.str} <i className='fas fa-times-circle'></i>
+                      </Badge>
+                    )
                   )}
                 </div>
               </div>
@@ -113,11 +101,16 @@ const RestaurantProfile = ({
           </div>
         </Col>
         <Col xs='12' lg='4'>
-          <h1>Graph</h1>
-          <Charts rid={_id} />
+          <div className='middle-panel'>
+            <div className='msg-text mb-4'>
+              <h1>Data</h1>
+              <p>Visualization of restaurant data over the past 7 days</p>
+            </div>
+            <Charts rid={_id} />
+          </div>
         </Col>
         <Col xs='12' lg='4'>
-          <div className='detailed-info'>
+          <div className='right-panel'>
             <div className='msg-text'>
               <h1>Policy</h1>
               <p>{policy_notes}</p>

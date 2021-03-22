@@ -76,9 +76,12 @@ const Charts = ({ rid, getRestaurantData, restaurantObj: { chartData } }) => {
   return !rid || !chartData ? (
     <Spinner />
   ) : (
-    <div>
-      <h1>Something</h1>
+    <div id='charts-area'>
+      <h5 className='text-center'>
+        Number of customers & employees over the past 7 days
+      </h5>
       <Line data={dataObj1} options={options} />
+      <h5 className='text-center'>Number of free table over the past 7 days</h5>
       <Line data={dataObj2} options={options} />
     </div>
   );
