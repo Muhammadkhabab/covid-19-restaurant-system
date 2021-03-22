@@ -3,7 +3,7 @@ import { Container, Row, Col } from 'reactstrap';
 import PolicyBadges from './PolicyBadges.js'
 import '../../styles/RestaurantTable.scss';
 
-/* Dis */
+/* Single row in the restaurant table with basic restaurant information */
 const RestaurantRow = ({
   restObj: {
     restaurant_name,
