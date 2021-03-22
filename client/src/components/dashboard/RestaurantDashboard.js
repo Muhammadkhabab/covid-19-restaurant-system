@@ -3,8 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { getMyRestaurant } from '../../actions/restaurant';
 import Spinner from '../layout/Spinner';
-import RestaurantProfile from './RestaurantProfile';
-import { Card, CardTitle, Button } from 'reactstrap';
+import RestaurantProfile from '../restaurants/RestaurantProfile';
 
 import '../../styles/Dashboard.scss';
 
@@ -28,15 +27,7 @@ const RestaurantDashboard = ({
     restaurant === null ? (
     <Spinner />
   ) : (
-    <Fragment>
-      {/* <div className='admin-welcome mb-5'>
-        <h1 className='text-danger m-0'>
-          Welcome {user.first_name} {user.last_name}
-        </h1>
-        <Button color='danger'>Update Restaurant Information</Button>
-      </div> */}
-      <RestaurantProfile restObj={restaurant} />
-    </Fragment>
+    <RestaurantProfile restObj={restaurant} user={user} />
   );
 };
 

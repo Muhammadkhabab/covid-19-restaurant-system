@@ -4,7 +4,9 @@ import {
   REGISTER_SUCCESS,
   REGISTER_FAIL,
   SET_RESTAURANT,
-} from './types';
+  EDIT_RESTAURANT,
+  GET_RESTAURANT_DATA,
+} from '../constants/actions';
 import { toast } from 'react-toastify';
 import { loadUser } from './auth';
 
@@ -63,6 +65,64 @@ export const registerRestaurant = (userObj, restaurantObj) => async (
   }
 };
 
+// Edit restaurant.
+export const editRestaurant = (restaurantObj) => async (dispatch) => {
+  // Request headers.
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  };
+
+  // User data.
+  const body = JSON.stringify(restaurantObj);
+
+  try {
+    // Send request to API endpoint.
+    const res = await axios.put(`/${API}/restaurants`, body, config);
+
+    // Call reducer to register restaurant.
+    dispatch({
+      type: EDIT_RESTAURANT,
+      payload: res.data,
+    });
+    toast.success('You successfully updated restaurant information! Welcome!');
+  } catch (err) {
+    // Loop through errors and notify user.
+    const errors = err.response.data.errors;
+    if (errors) {
+      errors.forEach((error) => {
+        toast.error(error.msg);
+        toast.error(error.param);
+        console.log(error);
+      });
+    }
+  }
+};
+
+export const getRestaurantById = (id) => async (dispatch) => {
+  try {
+    // Send request to API endpoint.
+    const res = await axios.get(`/${API}/restaurants/${id}`);
+
+    // Call reducer to register restaurant.
+    dispatch({
+      type: SET_RESTAURANT,
+      payload: res.data,
+    });
+  } catch (err) {
+    // Loop through errors and notify user.
+    const errors = err.response.data.errors;
+    if (errors) {
+      errors.forEach((error) => {
+        toast.error(error.msg);
+        toast.error(error.param);
+        console.log(error);
+      });
+    }
+  }
+};
+
 export const getMyRestaurant = () => async (dispatch) => {
   try {
     // Send request to API endpoint.
@@ -71,6 +131,29 @@ export const getMyRestaurant = () => async (dispatch) => {
     // Call reducer to register restaurant.
     dispatch({
       type: SET_RESTAURANT,
+      payload: res.data,
+    });
+  } catch (err) {
+    // Loop through errors and notify user.
+    const errors = err.response.data.errors;
+    if (errors) {
+      errors.forEach((error) => {
+        toast.error(error.msg);
+        toast.error(error.param);
+        console.log(error);
+      });
+    }
+  }
+};
+
+export const getRestaurantData = (rid) => async (dispatch) => {
+  try {
+    // Send request to API endpoint.
+    const res = await axios.get(`/${API}/restaurants/chart/${rid}`);
+
+    // Call reducer to register restaurant.
+    dispatch({
+      type: GET_RESTAURANT_DATA,
       payload: res.data,
     });
   } catch (err) {

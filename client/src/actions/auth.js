@@ -9,7 +9,7 @@ import {
   UPDATE_FAIL,
   AUTH_ERROR,
   LOGOUT,
-} from './types';
+} from '../constants/actions';
 import setAuthToken from '../utils/setAuthToken';
 import { toast } from 'react-toastify';
 
@@ -69,9 +69,7 @@ export const register = (userObj) => async (dispatch) => {
 
     // Call reducer to load user.
     dispatch(loadUser());
-    toast.success(
-      'You successfully created an account! Welcome!'
-    );
+    toast.success('You successfully created an account! Welcome!');
   } catch (err) {
     // Loop through errors and notify user.
     const errors = err.response.data.errors;

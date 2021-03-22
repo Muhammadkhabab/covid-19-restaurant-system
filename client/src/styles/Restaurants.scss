@@ -29,6 +29,13 @@
       padding-bottom: 0;
       text-decoration: underline;
       text-underline-position: under;
+
+      .fas {
+        font-size: 40px;
+        &:hover {
+          cursor: pointer;
+        }
+      }
     }
 
     .info-text {
@@ -64,6 +71,10 @@
     padding: 15px 30px 15px 40px;
   }
 
+  .middle-panel {
+    padding: 15px 0;
+  }
+
   .map-wrapper {
     border: 3px solid black;
     height: 400px;
@@ -71,7 +82,7 @@
     margin-top: 20px;
   }
 
-  .detailed-info {
+  .right-panel {
     height: 100%;
     min-height: 50vh;
     border-left: 5px solid $brand-primary-color;

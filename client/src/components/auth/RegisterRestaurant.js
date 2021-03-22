@@ -4,7 +4,7 @@ import { Redirect } from 'react-router-dom';
 import { registerRestaurant } from '../../actions/restaurant';
 import PropTypes from 'prop-types';
 import { Row, Col, Form, FormGroup, Input, Label, Card, CardTitle, Button, Container} from 'reactstrap';
-import '../../styles/Form.scss';
+// import '../../styles/Form.scss';
 import {
   ROUTE_LOGIN,
   ROUTE_REGISTER_RESTAURANT,

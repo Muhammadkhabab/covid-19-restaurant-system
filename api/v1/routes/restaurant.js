@@ -32,8 +32,10 @@ router.post(
 
     check('restaurant_name').notEmpty(),
     check('address').notEmpty(),
+    check('avatar').optional().isString(),
     check('restaurant_email').notEmpty(),
     check('restaurant_phone_number').notEmpty(),
+    check('cuisine').optional().isString(),
     check('website_url').optional().isURL(),
     check('dine_in').notEmpty().isIn([0, 1]),
     check('dine_outside').notEmpty().isIn([0, 1]),
@@ -61,8 +63,10 @@ router.put(
     [
       check('restaurant_name').notEmpty(),
       check('address').notEmpty(),
+      check('avatar').optional().isString(),
       check('restaurant_email').notEmpty(),
       check('restaurant_phone_number').notEmpty(),
+      check('cuisine').optional().isString(),
       check('website_url').optional().isURL(),
       check('dine_in').notEmpty().isIn([0, 1]),
       check('dine_outside').notEmpty().isIn([0, 1]),
@@ -117,24 +121,32 @@ router.get('/me', auth, restaurantController.getMy);
 // @desc      Filter criterias
 // @access    public
 // TODO: update cuisine filter
-router.get('/filter',[
-  check('search').optional().isString(),
-  check('cuisine').optional().isArray(),
-  check('dine_in').optional().isIn([0, 1]),
-  check('dine_outside').optional().isIn([0, 1]),
-  check('pickup').optional().isIn([0, 1]),
-  check('curbside_pickup').optional().isIn([0, 1]),
-  check('delivery').optional().isIn([0, 1]),
-  check('tables_distance').optional().isNumeric(),
-  check('user_distance').optional().isNumeric(),
-  check('current_percent_capacity').optional().isNumeric(),
-  check('total_customers').optional().isNumeric(),
-], restaurantController.filter);
-
+router.get(
+  '/filter',
+  [
+    check('search').optional().isString(),
+    check('cuisine').optional().isString(),
+    check('dine_in').optional().isIn([0, 1]),
+    check('dine_outside').optional().isIn([0, 1]),
+    check('pickup').optional().isIn([0, 1]),
+    check('curbside_pickup').optional().isIn([0, 1]),
+    check('delivery').optional().isIn([0, 1]),
+    check('tables_distance').optional().isNumeric(),
+    check('user_distance').optional().isNumeric(),
+    check('current_percent_capacity').optional().isNumeric(),
+    check('total_customers').optional().isNumeric(),
+  ],
+  restaurantController.filter
+);
 
 // @route     GET /restaurants/chart/:restaurant_id
 // @desc      Get restaurant chart data
 // @access    OPublic.
 router.get('/chart/:restaurant_id', restaurantController.getChartData);
+
+// @route     GET /restaurants/:restaurant_id
+// @desc      Get restaurant by id
+// @access    Public
+router.get('/:restaurant_id', restaurantController.getById);
 
 module.exports = router;
