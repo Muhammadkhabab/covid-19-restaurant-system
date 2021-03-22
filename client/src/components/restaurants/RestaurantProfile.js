@@ -4,10 +4,12 @@ import { Link } from 'react-router-dom';
 import '../../styles/Restaurants.scss';
 import { ROUTE_EDIT_RESTAURANT } from '../../constants/routes';
 import Charts from '../charts/Charts';
+import Placeholder from '../../assets/images/res_placeholder.png';
 
 const RestaurantProfile = ({
   restObj: {
     restaurant_name,
+    avatar,
     address,
     dine_in,
     dine_outside,
@@ -53,7 +55,7 @@ const RestaurantProfile = ({
             <Col xs='12' lg='3'>
               <div className='logo-wrapper'>
                 <img
-                  src='https://images.squarespace-cdn.com/content/v1/578d4c7a8419c227c750b539/1572971173664-VMLWSYNF0B1T0WT99MT5/ke17ZwdGBToddI8pDm48kDldiTmRHKJ5v0YqxgeTKYoUqsxRUqqbr1mOJYKfIPR7LoDQ9mXPOjoJoqy81S2I8N_N4V1vUb5AoIIIbLZhVYxCRW4BPu10St3TBAUQYVKcILJf9YR3LP5aM5G6UY-AAu_ngb_bs84XNd2m-CICIhr-FNO5NkILC6XZG9VcRQgL/Milk+Tea_smaller+v2.jpg'
+                  src={avatar ? avatar : Placeholder}
                   alt='Restaurant logo'
                 />
               </div>

@@ -8,6 +8,9 @@ const RestaurantSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  avatar: {
+    type: String,
+  },
   website_url: {
     type: String,
   },

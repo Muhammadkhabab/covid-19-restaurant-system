@@ -56,6 +56,7 @@ module.exports = {
       confirmed_password,
 
       restaurant_name,
+      avatar,
       address,
       restaurant_email,
       restaurant_phone_number,
@@ -160,6 +161,7 @@ module.exports = {
       restaurant.customer_capacity = customer_capacity;
       restaurant.number_tables = number_tables;
 
+      if (avatar) restaurant.avatar = avatar;
       if (cuisine) restaurant.cuisine = cuisine;
       if (website_url) restaurant.website_url = website_url;
       if (policy_notes) restaurant.policy_notes = policy_notes;
@@ -194,6 +196,7 @@ module.exports = {
 
     const {
       restaurant_name,
+      avatar,
       address,
       restaurant_email,
       restaurant_phone_number,
@@ -252,6 +255,7 @@ module.exports = {
       restaurant.customer_capacity = customer_capacity;
       restaurant.number_tables = number_tables;
 
+      if (avatar) restaurant.avatar = avatar;
       if (cuisine) restaurant.cuisine = cuisine;
       if (website_url) restaurant.website_url = website_url;
       if (policy_notes) restaurant.policy_notes = policy_notes;

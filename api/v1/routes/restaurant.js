@@ -32,6 +32,7 @@ router.post(
 
     check('restaurant_name').notEmpty(),
     check('address').notEmpty(),
+    check('avatar').optional().isString(),
     check('restaurant_email').notEmpty(),
     check('restaurant_phone_number').notEmpty(),
     check('cuisine').optional().isString(),
@@ -62,6 +63,7 @@ router.put(
     [
       check('restaurant_name').notEmpty(),
       check('address').notEmpty(),
+      check('avatar').optional().isString(),
       check('restaurant_email').notEmpty(),
       check('restaurant_phone_number').notEmpty(),
       check('cuisine').optional().isString(),
