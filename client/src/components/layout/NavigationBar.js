@@ -19,6 +19,7 @@ import {
   ROUTE_DASHBOARD_RESTAURANT,
   ROUTE_DASHBOARD_USER,
   ROUTE_RESTAURANTS,
+  ROUTE_ACCOUNT,
 } from '../../constants/routes';
 
 const NavigationBar = ({
@@ -30,8 +31,14 @@ const NavigationBar = ({
   const privateLinks = (
     <Fragment>
       <NavItem>
+        <Link to={ROUTE_ACCOUNT} className='nav-link'>
+          <i className='fas fa-user mr-1' />
+          Account
+        </Link>
+      </NavItem>
+      <NavItem>
         <Link to={ROUTE_RESTAURANTS} className='nav-link'>
-          <i className='fas fa-store mr-1'></i>
+          <i className='fas fa-store mr-1' />
           Restaurants
         </Link>
       </NavItem>
@@ -63,7 +70,7 @@ const NavigationBar = ({
     <Fragment>
       <NavItem>
         <Link to={ROUTE_RESTAURANTS} className='nav-link'>
-          <i className='fas fa-store mr-1'></i>
+          <i className='fas fa-store mr-1' />
           Restaurants
         </Link>
       </NavItem>

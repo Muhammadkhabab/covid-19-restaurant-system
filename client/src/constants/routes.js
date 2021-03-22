@@ -8,3 +8,5 @@ export const ROUTE_DASHBOARD_RESTAURANT = '/dashboard/restaurant';
 export const ROUTE_RESTAURANTS = '/restaurants';
 export const ROUTE_EDIT_RESTAURANT = '/restaurant/edit';
 export const ROUTE_RESTAURANT_PROFILE = '/restaurants/:restaurant_id';
+
+export const ROUTE_ACCOUNT = '/account';

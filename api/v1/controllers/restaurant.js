@@ -601,7 +601,7 @@ module.exports = {
           timestamp: new Date(Date.UTC(year, month - 1, day, hour)),
         };
       });
-      console.log(data);
+      // console.log(data);
       return res.status(200).json(formatted_data);
     } catch (err) {
       console.error(err.message);
