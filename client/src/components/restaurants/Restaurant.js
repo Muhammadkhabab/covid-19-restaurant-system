@@ -1,9 +1,15 @@
 import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import RestaurantProfile from './RestaurantProfile';
+import { getRestaurantById } from '../../actions/restaurant';
 
-const Restaurant = ({ match, restaurant }) => {
+const Restaurant = ({ match, restaurantObject: { restaurant } }) => {
   useEffect(() => {
-    // getRestaurant(match.params.login);
+    if (!restaurant || restaurant._id !== match.params.restaurant_id) {
+      getRestaurantById(match.params.restaurant_id);
+    }
+
     // eslint-disable-next-line
   }, []);
 
@@ -14,4 +20,17 @@ const Restaurant = ({ match, restaurant }) => {
   );
 };
 
-export default Restaurant;
+Restaurant.propTypes = {
+  restaurantObject: PropTypes.object.isRequired,
+  getRestaurantById: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  restaurantObject: state.restaurant,
+});
+
+const mapFunctionsToProps = {
+  getRestaurantById,
+};
+
+export default connect(mapStateToProps, mapFunctionsToProps)(Restaurant);

@@ -38,7 +38,6 @@ module.exports = {
       });
     }
   },
-  },
 
   create: async (req, res, _next) => {
     // Check for errors.

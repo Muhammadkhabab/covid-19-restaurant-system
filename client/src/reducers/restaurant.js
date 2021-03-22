@@ -2,7 +2,7 @@ import {
   REGISTER_RESTAURANT,
   SET_RESTAURANT,
   EDIT_RESTAURANT,
-} from '../actions/types';
+} from '../constants/actions';
 
 // Get token, set isAuthenticated and user to null, set loading to true.
 const initialState = {

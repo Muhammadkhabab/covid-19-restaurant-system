@@ -5,7 +5,7 @@ import {
   REGISTER_FAIL,
   SET_RESTAURANT,
   EDIT_RESTAURANT,
-} from './types';
+} from '../constants/actions';
 import { toast } from 'react-toastify';
 import { loadUser } from './auth';
 
@@ -86,6 +86,29 @@ export const editRestaurant = (restaurantObj) => async (dispatch) => {
       payload: res.data,
     });
     toast.success('You successfully updated restaurant information! Welcome!');
+  } catch (err) {
+    // Loop through errors and notify user.
+    const errors = err.response.data.errors;
+    if (errors) {
+      errors.forEach((error) => {
+        toast.error(error.msg);
+        toast.error(error.param);
+        console.log(error);
+      });
+    }
+  }
+};
+
+export const getRestaurantById = (id) => async (dispatch) => {
+  try {
+    // Send request to API endpoint.
+    const res = await axios.get(`/${API}/restaurants/${id}`);
+
+    // Call reducer to register restaurant.
+    dispatch({
+      type: SET_RESTAURANT,
+      payload: res.data,
+    });
   } catch (err) {
     // Loop through errors and notify user.
     const errors = err.response.data.errors;
