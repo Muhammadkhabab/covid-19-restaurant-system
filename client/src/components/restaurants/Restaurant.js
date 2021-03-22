@@ -1,9 +1,15 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import RestaurantProfile from './RestaurantProfile';
 
-const Restaurant = () => {
+const Restaurant = ({ match, restaurant }) => {
+  useEffect(() => {
+    // getRestaurant(match.params.login);
+    // eslint-disable-next-line
+  }, []);
+
   return (
     <div>
-      <h1>Restaurant page</h1>
+      <RestaurantProfile restObj={restaurant} />
     </div>
   );
 };

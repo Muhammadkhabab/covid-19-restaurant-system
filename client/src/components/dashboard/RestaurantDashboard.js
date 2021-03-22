@@ -3,8 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { getMyRestaurant } from '../../actions/restaurant';
 import Spinner from '../layout/Spinner';
-import RestaurantProfile from './RestaurantProfile';
-import { Card, CardTitle, Button } from 'reactstrap';
+import RestaurantProfile from '../restaurants/RestaurantProfile';
 
 import '../../styles/Dashboard.scss';
 

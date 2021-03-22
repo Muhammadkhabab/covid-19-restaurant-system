@@ -18,6 +18,7 @@ const RestaurantProfile = ({
     customer_capacity,
     restaurant_email,
     restaurant_phone_number,
+    _id,
   },
   user,
 }) => {
@@ -38,7 +39,7 @@ const RestaurantProfile = ({
               <div className='basic-info'>
                 <h1 className='header'>
                   {restaurant_name}
-                  {user && user.is_admin && (
+                  {user && user.is_admin && user.restaurant_id === _id && (
                     <Link to={ROUTE_EDIT_RESTAURANT}>
                       <i className='ml-5 fas fa-edit'></i>
                     </Link>
