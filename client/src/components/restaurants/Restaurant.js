@@ -3,8 +3,13 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import RestaurantProfile from './RestaurantProfile';
 import { getRestaurantById } from '../../actions/restaurant';
+import Spinner from '../layout/Spinner';
 
-const Restaurant = ({ match, restaurantObject: { restaurant } }) => {
+const Restaurant = ({
+  match,
+  restaurantObject: { restaurant, loadingRestaurant },
+  getRestaurantById,
+}) => {
   useEffect(() => {
     if (!restaurant || restaurant._id !== match.params.restaurant_id) {
       getRestaurantById(match.params.restaurant_id);
@@ -13,7 +18,9 @@ const Restaurant = ({ match, restaurantObject: { restaurant } }) => {
     // eslint-disable-next-line
   }, []);
 
-  return (
+  return loadingRestaurant || !restaurant ? (
+    <Spinner />
+  ) : (
     <div>
       <RestaurantProfile restObj={restaurant} />
     </div>
