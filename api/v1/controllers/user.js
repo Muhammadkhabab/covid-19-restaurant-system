@@ -201,11 +201,11 @@ module.exports = {
         return res.status(400).json({ errors });
       }
 
-      user.first_name = first_name;
-      user.last_name = last_name;
-      user.username = username;
-      user.email = email;
-      user.phone_number = phone_number;
+      if (first_name) user.first_name = first_name;
+      if (last_name) user.last_name = last_name;
+      if (username) user.username = username;
+      if (email) user.email = email;
+      if (phone_number) user.phone_number = phone_number;
 
       await user.save();
 
