@@ -18,17 +18,25 @@ router.post(
   '/',
   [
     // Data validations.
-    check('first_name').notEmpty(),
-    check('last_name').notEmpty(),
-    check('username').notEmpty(),
-    check('email', 'Please enter a valid email!').isEmail(),
-    check('phone_number').notEmpty(),
+    check('first_name').notEmpty().withMessage('Missing first name!'),
+    check('last_name').notEmpty().withMessage('Missing last name!'),
+    check('username').notEmpty().withMessage('Missing username!'),
+    check('email')
+      .notEmpty()
+      .withMessage('Missing email!')
+      .isEmail()
+      .withMessage('Please enter a valid email!'),
+    check('phone_number').notEmpty().withMessage('Missing phone number!'),
     check('password')
+      .notEmpty()
+      .withMessage('Missing password!')
       .isLength({ min: 6, max: 20 })
       .withMessage('Password must be between 6 and 20 characters long!')
       .matches(/\d/)
       .withMessage('Password must contain a number!'),
-    check('confirmed_password').notEmpty(),
+    check('confirmed_password')
+      .notEmpty()
+      .withMessage('Missing confirmed password!'),
   ],
   userController.register
 );
