@@ -8,12 +8,19 @@ if (process.env.NODE_ENV === 'production') {
   db = process.env.MONGO_URI_PROD;
 } else if (process.env.NODE_ENV === 'test') {
   console.log('Test environment...');
-  db = process.env.MONGO_URI_TEST;
+  if (
+    process.env.INDV_MONGO_URI_TEST &&
+    process.env.USE_INDIVIDUAL_TEST_DB === 'yes'
+  ) {
+    db = process.env.INDV_MONGO_URI_TEST;
+  } else {
+    db = process.env.MONGO_URI_TEST;
+  }
 } else {
   console.log('Development environment...');
   if (
     process.env.INDV_MONGO_URI_DEV &&
-    process.env.USE_INDIVIDUAL_DB === 'yes'
+    process.env.USE_INDIVIDUAL_DEV_DB === 'yes'
   ) {
     db = process.env.INDV_MONGO_URI_DEV;
   } else {
