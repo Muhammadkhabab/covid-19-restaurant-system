@@ -15,17 +15,13 @@ const RestaurantRow = ({
     curbside_pickup,
     delivery,
     _id: id,
-    policy_notes,
-    employee_capacity,
-    customer_capacity,
-    restaurant_email,
-    restaurant_phone_number,
   },
 }) => {
   const policies = { dine_in, dine_outside, pickup, curbside_pickup, delivery }
   return (
-    <Link to={`/restaurant/${id}`}>
-      <div className='restaurant-row'>
+
+    <div className='restaurant-row'>
+      <Link to={`/restaurants/${id}`}>
         <Container>
           <Row>
             <Col md="2">
@@ -62,8 +58,8 @@ const RestaurantRow = ({
             </Col>
           </Row>
         </Container>
-      </div>
-    </Link>
+      </Link>
+    </div>
   );
 };
 
