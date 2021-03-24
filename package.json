@@ -10,7 +10,8 @@
     "client": "npm start --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client",
-    "seeds": "node seeds"
+    "seeds": "node seeds",
+    "coverage": "nyc --reporter=html --reporter=text npm run test"
   },
   "author": "Prasoon Sinha",
   "license": "MIT",
@@ -30,6 +31,7 @@
     "mocha": "^8.3.1",
     "moment": "^2.29.1",
     "nodemon": "^2.0.7",
+    "nyc": "^15.1.0",
     "supertest": "^6.1.3",
     "supertest-prefix": "^1.0.2"
   }
