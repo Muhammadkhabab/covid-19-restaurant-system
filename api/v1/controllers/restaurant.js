@@ -121,7 +121,6 @@ module.exports = {
         },
       };
 
-      let token;
 
       jwt.sign(
         payload,
@@ -133,33 +132,30 @@ module.exports = {
         }
       );
 
-      if (
-        restaurant.restaurant_name != restaurant_name ||
-        restaurant.address != address
-      ) {
-        const sameNameAddress = await Restaurant.findOne({
-          restaurant_name,
-          address,
+      const sameNameAddress = await Restaurant.findOne({
+        restaurant_name,
+        address,
+      });
+      if (sameNameAddress) {
+        errors.push({
+          msg:
+            'There exists a restaurant with the same name at this address. Please enter another name or address.',
         });
-        if (sameNameAddress) {
-          errors.push({
-            msg:
-              'There exists a restaurant with the same name at this address. Please enter another name or address.',
-          });
-        }
       }
 
       if (errors.length > 0) {
         return res.status(400).json({ errors });
       }
 
-      restaurant.restaurant_name = restaurant_name;
-      restaurant.restaurant_email = restaurant_email;
-      restaurant.restaurant_phone_number = restaurant_phone_number;
-      restaurant.address = address;
-      restaurant.employee_capacity = employee_capacity;
-      restaurant.customer_capacity = customer_capacity;
-      restaurant.number_tables = number_tables;
+      const restaurant = new Restaurant({
+        restaurant_name,
+        address,
+        restaurant_email,
+        restaurant_phone_number,
+        employee_capacity,
+        customer_capacity,
+        number_tables,
+      });
 
       if (avatar) restaurant.avatar = avatar;
       if (cuisine) restaurant.cuisine = cuisine;
@@ -176,7 +172,10 @@ module.exports = {
       restaurant.delivery = delivery == 1;
 
       await restaurant.save();
-      return res.status(200).json({ restaurant });
+      user.restaurant_id = restaurant._id;
+
+      await user.save();
+      return res.status(200).json({ token, restaurant });
     } catch (err) {
       console.error(err.message);
       return res.status(500).json({
