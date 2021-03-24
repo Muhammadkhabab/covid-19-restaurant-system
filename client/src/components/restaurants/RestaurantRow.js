@@ -16,6 +16,8 @@ const RestaurantRow = ({
     curbside_pickup,
     delivery,
     avatar,
+    current_customers,
+    customer_capacity,
     _id: id,
   },
 }) => {
@@ -54,7 +56,11 @@ const RestaurantRow = ({
                       <p>{address}</p>
                     </div>
                   </Col>
-                  <Col><p>Current Capacity: 4/12</p></Col>
+                  <Col>
+                    <p>Current Capacity:
+                      {current_customers ? current_customers : '?'}/{customer_capacity}
+                    </p>
+                  </Col>
                 </Row>
               </div>
             </Col>
