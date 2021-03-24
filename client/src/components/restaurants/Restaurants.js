@@ -14,6 +14,7 @@ const Restaurants = () => {
   useEffect(() => {
     axios.get(`/${API}/restaurants`).then((res) => {
       setItems(res.data.restaurants);
+      getRestaurantData(res.data.restaurants);
       console.log(res.data);
       setIsLoaded(true);
     }).catch((err) => {
@@ -29,6 +30,10 @@ const Restaurants = () => {
       }
     });
   }, []);
+
+  const getRestaurantData = (restaurants) => {
+    
+  }
 
   const buildTable = (items) => {
     return items.map((item) => {

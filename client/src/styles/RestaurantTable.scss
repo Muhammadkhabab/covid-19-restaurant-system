@@ -6,7 +6,7 @@
   background-color: hsl(195, 100%, 85%);
 
   border: 5px solid $brand-primary-color;
-  width: fit-content;
+  width: 60%;
   padding: 1px;
   margin-top: 10px;
   margin-left: auto;
@@ -32,4 +32,8 @@
   .bottom-row{
     margin-top: 10px;
   }
+}
+
+.restaurant-row:hover {
+  background-color: hsl(195, 100%, 75%);
 }
