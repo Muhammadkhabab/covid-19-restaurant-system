@@ -1,11 +1,15 @@
 import React from 'react';
-import { Jumbotron, Container, Row, Col } from 'reactstrap';
+import { Jumbotron, Container, Badge, Row, Col } from 'reactstrap';
+import { Link } from 'react-router-dom';
 import '../../styles/Restaurants.scss';
-import PolicyBadges from '../restaurants/PolicyBadges.js'
+import { ROUTE_EDIT_RESTAURANT } from '../../constants/routes';
+import Charts from '../charts/Charts';
+import Placeholder from '../../assets/images/res_placeholder.png';
 
 const RestaurantProfile = ({
   restObj: {
     restaurant_name,
+    avatar,
     address,
     dine_in,
     dine_outside,
@@ -17,9 +21,32 @@ const RestaurantProfile = ({
     customer_capacity,
     restaurant_email,
     restaurant_phone_number,
+    _id,
   },
+  user,
 }) => {
-  const policies = { dine_in, dine_outside, pickup, curbside_pickup, delivery }
+  const booleanVals = [
+    {
+      val: dine_in,
+      str: 'Dine in',
+    },
+    {
+      val: dine_outside,
+      str: 'Dine outside',
+    },
+    {
+      val: pickup,
+      str: 'Pickup',
+    },
+    {
+      val: curbside_pickup,
+      str: 'Curbside pickup',
+    },
+    {
+      val: delivery,
+      str: 'Delivery',
+    },
+  ];
   return (
     <div id='restaurant-profile'>
       <Jumbotron>
@@ -28,16 +55,35 @@ const RestaurantProfile = ({
             <Col xs='12' lg='3'>
               <div className='logo-wrapper'>
                 <img
-                  src='https://images.squarespace-cdn.com/content/v1/578d4c7a8419c227c750b539/1572971173664-VMLWSYNF0B1T0WT99MT5/ke17ZwdGBToddI8pDm48kDldiTmRHKJ5v0YqxgeTKYoUqsxRUqqbr1mOJYKfIPR7LoDQ9mXPOjoJoqy81S2I8N_N4V1vUb5AoIIIbLZhVYxCRW4BPu10St3TBAUQYVKcILJf9YR3LP5aM5G6UY-AAu_ngb_bs84XNd2m-CICIhr-FNO5NkILC6XZG9VcRQgL/Milk+Tea_smaller+v2.jpg'
+                  src={avatar ? avatar : Placeholder}
                   alt='Restaurant logo'
                 />
               </div>
             </Col>
             <Col xs='12' lg='9'>
               <div className='basic-info'>
-                <h2 className='header'>{restaurant_name}</h2>
+                <h1 className='header'>
+                  {restaurant_name}
+                  {user && user.is_admin && user.restaurant_id === _id && (
+                    <Link to={ROUTE_EDIT_RESTAURANT}>
+                      <i className='ml-5 fas fa-edit'></i>
+                    </Link>
+                  )}
+                </h1>
                 <p className='info-text'>{address}</p>
-                <PolicyBadges {...policies} />
+                <div className='badges'>
+                  {booleanVals.map((v, k) =>
+                    v.val ? (
+                      <Badge color='light' key={k}>
+                        {v.str} <i className='fas fa-check-square'></i>
+                      </Badge>
+                    ) : (
+                      <Badge color='light' key={k}>
+                        {v.str} <i className='fas fa-times-circle'></i>
+                      </Badge>
+                    )
+                  )}
+                </div>
               </div>
             </Col>
           </Row>
@@ -57,10 +103,16 @@ const RestaurantProfile = ({
           </div>
         </Col>
         <Col xs='12' lg='4'>
-          <h1>Graph</h1>
+          <div className='middle-panel'>
+            <div className='msg-text mb-4'>
+              <h1>Data</h1>
+              <p>Visualization of restaurant data over the past 7 days</p>
+            </div>
+            <Charts rid={_id} />
+          </div>
         </Col>
         <Col xs='12' lg='4'>
-          <div className='detailed-info'>
+          <div className='right-panel'>
             <div className='msg-text'>
               <h1>Policy</h1>
               <p>{policy_notes}</p>

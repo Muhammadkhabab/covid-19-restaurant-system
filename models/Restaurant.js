@@ -8,6 +8,9 @@ const RestaurantSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  avatar: {
+    type: String,
+  },
   website_url: {
     type: String,
   },
@@ -19,7 +22,9 @@ const RestaurantSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  cuisine: [String],
+  cuisine: {
+    type: String,
+  },
   dine_in: {
     type: Boolean,
     required: true,
@@ -73,7 +78,7 @@ const RestaurantSchema = new mongoose.Schema({
   current_free_tables: {
     type: Number,
   },
-  current_percent_capacity:{
+  current_percent_capacity: {
     type: Number,
   },
   reviewed: {
