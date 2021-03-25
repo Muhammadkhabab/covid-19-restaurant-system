@@ -19,11 +19,11 @@ const data0 = {
   restaurant_phone_number: '111-111-1111',
   cuisine: 'vegan',
   website_url: 'awebsite.com',
-  dine_in: 0,
-  dine_outside: 0,
-  pickup: 0,
-  curbside_pickup: 1,
-  delivery: 0,
+  dine_in: false,
+  dine_outside: false,
+  pickup: false,
+  curbside_pickup: true,
+  delivery: false,
   policy_notes: 'keep your mask over your nose!',
   employee_capacity: 10,
   customer_capacity: 10,
@@ -92,11 +92,11 @@ const data3 = {
   restaurant_phone_number: '111-111-1111',
   cuisine: 'vegan',
   website_url: 'awebsite.com',
-  dine_in: 0,
-  dine_outside: 0,
-  pickup: 0,
-  curbside_pickup: 1,
-  delivery: 0,
+  dine_in: false,
+  dine_outside: false,
+  pickup: false,
+  curbside_pickup: true,
+  delivery: false,
   policy_notes: 'keep your mask over your nose!',
   employee_capacity: 10,
   customer_capacity: 10,
@@ -113,14 +113,15 @@ module.exports = update = () => {
 
     before((done) => {
       request(app)
-            .post('/restaurants')
-            .use(prefix)
-            .send(data3)
-            .set('Accept', 'application/json')
-            .expect('Content-Type', /json/)
-            .end((err, res) => {
-              if (err) return done(err);
-            });
+        .post('/restaurants')
+        .use(prefix)
+        .send(data3)
+        .set('Accept', 'application/json')
+        .expect('Content-Type', /json/)
+        .end((err, res) => {
+          if (err) return done(err);
+          done(res.body);
+        });
       request(app)
         .post('/restaurants')
         .use(prefix)
