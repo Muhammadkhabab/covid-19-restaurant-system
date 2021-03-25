@@ -37,22 +37,20 @@ module.exports = create = () => {
     };
 
     before((done) => {
-      mongoose.connection.dropCollection('users', () => {
-        mongoose.connection.dropCollection('restaurants', () => {
-          done();
-        });
-      });
+      mongoose.connection.dropCollection('users');
+      mongoose.connection.dropCollection('restaurants');
+      done();
     });
 
     after((done) => {
-      mongoose.connection.dropCollection('users', () => {
-        mongoose.connection.dropCollection('restaurants', () => {
-          done();
-        });
-      });
+      mongoose.connection.dropCollection('users');
+      mongoose.connection.dropCollection('restaurants');
+      done();
     });
 
     it('1. Should return token for valid input', (done) => {
+      mongoose.connection.dropCollection('users');
+      mongoose.connection.dropCollection('restaurants');
       request(app)
         .post('/restaurants')
         .use(prefix)
@@ -94,6 +92,8 @@ module.exports = create = () => {
         tables_distance: 10,
       };
 
+      mongoose.connection.dropCollection('users');
+      mongoose.connection.dropCollection('restaurants');
       request(app)
         .post('/restaurants')
         .use(prefix)
@@ -274,6 +274,7 @@ module.exports = create = () => {
         customer_per_table: 10,
         tables_distance: 10,
       };
+      
       mongoose.connection.dropCollection('users');
       mongoose.connection.dropCollection('restaurants');
       request(app)
@@ -324,6 +325,8 @@ module.exports = create = () => {
         tables_distance: 10,
       };
 
+      mongoose.connection.dropCollection('users');
+      mongoose.connection.dropCollection('restaurants');
       request(app)
         .post('/restaurants')
         .use(prefix)
@@ -372,6 +375,8 @@ module.exports = create = () => {
         tables_distance: 10,
       };
 
+      mongoose.connection.dropCollection('users');
+      mongoose.connection.dropCollection('restaurants');
       request(app)
         .post('/restaurants')
         .use(prefix)
@@ -427,6 +432,8 @@ module.exports = create = () => {
         tables_distance: 10,
       };
 
+      mongoose.connection.dropCollection('users');
+      mongoose.connection.dropCollection('restaurants');
       request(app)
         .post('/restaurants')
         .use(prefix)
@@ -475,6 +482,8 @@ module.exports = create = () => {
         tables_distance: 10,
       };
 
+      mongoose.connection.dropCollection('users');
+      mongoose.connection.dropCollection('restaurants');
       request(app)
         .post('/restaurants')
         .use(prefix)

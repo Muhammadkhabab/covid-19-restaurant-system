@@ -2,7 +2,7 @@ const create = require('./create');
 const update = require('./update');
 //const updateStats = require('./updateStats');
 //const deleteRestaurantr = require('./deleteRestaurantr');
-//const getAll = require('./getAll');
+const getAll = require('./getAll');
 //const getMy = require('./getMy');
 //const filter = require('./filter');
 //const getChartData = require('./getChartData');
@@ -15,7 +15,7 @@ module.exports = restaurant = () => {
     update();
     //updateStats();
     //deleteRestaurantr();
-    //getAll();
+    getAll();
     //getMy();
     //filter();
     //getChartData();
