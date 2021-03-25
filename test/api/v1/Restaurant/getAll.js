@@ -86,7 +86,6 @@ module.exports = getAll = () => {
             .expect('Content-Type', /json/)
             .end((err, res) => {
               if (err) return done(err);
-              token = res.body.token;
               done();
             });
         });
@@ -104,7 +103,7 @@ module.exports = getAll = () => {
       request(app)
         .get('/restaurants')
         .use(prefix)
-        .set({ Accept: 'application/json', 'x-auth-token': token })
+        .set( {Accept: 'application/json' })
         .expect('Content-Type', /json/)
         .end((err, res) => {
           if (err) return done(err);
