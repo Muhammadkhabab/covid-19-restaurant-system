@@ -112,6 +112,8 @@ module.exports = update = () => {
     const prefix = supertestPrefix('/api/v1');
 
     before((done) => {
+      mongoose.connection.dropCollection('users');
+      mongoose.connection.dropCollection('restaurants');
       request(app)
         .post('/restaurants')
         .use(prefix)
@@ -135,8 +137,10 @@ module.exports = update = () => {
     });
 
     after((done) => {
-      mongoose.connection.dropCollection('restaurants', () => {
-        done();
+      mongoose.connection.dropCollection('users', () => {
+        mongoose.connection.dropCollection('restaurants', () => {
+          done();
+        });
       });
     });
 
