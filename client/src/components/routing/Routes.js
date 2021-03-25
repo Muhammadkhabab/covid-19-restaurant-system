@@ -7,6 +7,9 @@ import RegisterRestaurant from '../auth/RegisterRestaurant';
 import RegisterCustomer from '../auth/RegisterCustomer';
 import Login from '../auth/Login';
 
+// Account component
+import Account from '../account/Account';
+
 // Restaurant Interface Components
 import RestaurantDashboard from '../dashboard/RestaurantDashboard';
 import DashboardCustomer from '../dashboard/DashboardCustomer';
@@ -40,6 +43,7 @@ import {
   ROUTE_EDIT_RESTAURANT,
   ROUTE_DASHBOARD_RESTAURANT,
   ROUTE_DASHBOARD_USER,
+  ROUTE_ACCOUNT,
 } from '../../constants/routes';
 
 function Routes() {
@@ -66,6 +70,12 @@ function Routes() {
           exact
           path={ROUTE_DASHBOARD_USER}
           component={DashboardCustomer}
+        />
+
+        <PrivateRoute
+          exact
+          path={ROUTE_ACCOUNT}
+          component={Account}
         />
 
         {/* Admin/staff routes */}
