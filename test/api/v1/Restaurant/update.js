@@ -56,7 +56,7 @@ const data1 = {
 };
 
 const data4 = {
-  restaurant_name: "Pauls",
+  restaurant_name: 'Pauls',
   address: '3 University Avenue',
   avatar: 'avater.jpg',
   restaurant_email: 'rest_email@gmail.com',
@@ -85,7 +85,7 @@ const data3 = {
   phone_number: '222-222-2222',
   password: 'apassword1',
   confirmed_password: 'apassword1',
-  restaurant_name: "Pauls",
+  restaurant_name: 'Pauls',
   avatar: 'avater.jpg',
   address: '3 University Avenue',
   restaurant_email: 'rest_email@gmail.com',
@@ -113,6 +113,15 @@ module.exports = update = () => {
 
     before((done) => {
       request(app)
+            .post('/restaurants')
+            .use(prefix)
+            .send(data3)
+            .set('Accept', 'application/json')
+            .expect('Content-Type', /json/)
+            .end((err, res) => {
+              if (err) return done(err);
+            });
+      request(app)
         .post('/restaurants')
         .use(prefix)
         .send(data0)
@@ -121,16 +130,7 @@ module.exports = update = () => {
         .end((err, res) => {
           if (err) return done(err);
           token = res.body.token;
-          request(app)
-            .post('/restaurants')
-            .use(prefix)
-            .send(data3)
-            .set('Accept', 'application/json')
-            .expect('Content-Type', /json/)
-            .end((err, res) => {
-              if (err) return done(err);
-              done();
-            });
+          done();
         });
     });
 
