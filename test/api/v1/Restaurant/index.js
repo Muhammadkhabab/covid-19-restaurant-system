@@ -1,4 +1,4 @@
-//const create = require('./create');
+const create = require('./create');
 const update = require('./update');
 //const updateStats = require('./updateStats');
 //const deleteRestaurantr = require('./deleteRestaurantr');
@@ -11,7 +11,7 @@ const update = require('./update');
 
 module.exports = restaurant = () => {
   describe('Restaurant routes', () => {
-    //create();
+    create();
     update();
     //updateStats();
     //deleteRestaurantr();
