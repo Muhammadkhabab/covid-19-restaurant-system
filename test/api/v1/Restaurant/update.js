@@ -120,7 +120,6 @@ module.exports = update = () => {
         .expect('Content-Type', /json/)
         .end((err, res) => {
           if (err) return done(err);
-          done(res.body);
         });
       request(app)
         .post('/restaurants')
