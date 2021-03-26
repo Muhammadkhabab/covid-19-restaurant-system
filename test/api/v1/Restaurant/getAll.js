@@ -64,7 +64,6 @@ const data1 = {
 
 module.exports = getAll = () => {
   describe('GET /restaurants (getAll)', () => {
-    let token;
     const prefix = supertestPrefix('/api/v1');
 
     before((done) => {
