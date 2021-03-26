@@ -7,6 +7,9 @@ import RegisterRestaurant from '../auth/RegisterRestaurant';
 import RegisterCustomer from '../auth/RegisterCustomer';
 import Login from '../auth/Login';
 
+// Account component
+import Account from '../account/Account';
+
 // Restaurant Interface Components
 import RestaurantDashboard from '../dashboard/RestaurantDashboard';
 import DashboardCustomer from '../dashboard/DashboardCustomer';
@@ -27,9 +30,6 @@ import PrivateRoute from '../routing/PrivateRoute';
 import AdminRoute from '../routing/AdminRoute';
 import RestaurantRoute from '../routing/RestaurantRoute';
 
-// Reactstrap Components
-import { Container } from 'reactstrap';
-
 // Route constants
 import {
   ROUTE_LOGIN,
@@ -40,13 +40,13 @@ import {
   ROUTE_EDIT_RESTAURANT,
   ROUTE_DASHBOARD_RESTAURANT,
   ROUTE_DASHBOARD_USER,
+  ROUTE_ACCOUNT,
 } from '../../constants/routes';
 
 function Routes() {
   return (
     <Fragment>
       <NavigationBar />
-      {/* <Container className='my-4'> */}
       <Switch>
         {/* Public authentication routes */}
         <Route
@@ -68,6 +68,8 @@ function Routes() {
           component={DashboardCustomer}
         />
 
+        <PrivateRoute exact path={ROUTE_ACCOUNT} component={Account} />
+
         {/* Admin/staff routes */}
         <PrivateRoute
           exact
@@ -88,7 +90,6 @@ function Routes() {
 
         <Route component={NotFound} />
       </Switch>
-      {/* </Container> */}
     </Fragment>
   );
 }

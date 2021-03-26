@@ -129,24 +129,24 @@ export const login = ({ credential, password }) => async (dispatch) => {
 
 // Update user.
 export const updateUser = (userObj) => async (dispatch) => {
+  // Request headers.
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  };
+
+  // User data.
+  const body = JSON.stringify(userObj);
+
   try {
-    // Request headers.
-    const config = {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    };
-
-    // User data.
-    const body = JSON.stringify(userObj);
-
     // Send request to API endpoint.
     const res = await axios.put(`/${API}/users`, body, config);
 
     // Call reducer to update user.
     dispatch({
       type: UPDATE_SUCCESS,
-      payload: res.data.user,
+      payload: res.data,
     });
 
     toast.success('You successfully updated your information!');
@@ -158,9 +158,9 @@ export const updateUser = (userObj) => async (dispatch) => {
     }
 
     // Call reducer to indicate fail registration.
-    dispatch({
-      type: UPDATE_FAIL,
-    });
+    // dispatch({
+    //   type: UPDATE_FAIL,
+    // });
   }
 };
 
