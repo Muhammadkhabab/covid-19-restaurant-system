@@ -1,53 +1,44 @@
-import axios from 'axios'
-import React, { useEffect, useState } from 'react';
-import { toast } from 'react-toastify';
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import Spinner from '../layout/Spinner';
-import RestaurantRow from './RestaurantRow';
+import RestaurantCard from './RestaurantCard';
+import { getAllRestaurants } from '../../actions/restaurant';
 
-const API = 'api/v1';
-
-const Restaurants = () => {
-
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [items, setItems] = useState([]);
-
+const Restaurants = ({
+  restaurantObject: { restaurants, loadingRestaurant },
+  getAllRestaurants,
+}) => {
   useEffect(() => {
-    axios.get(`/${API}/restaurants`).then((res) => {
-      setItems(res.data.restaurants);
-      getRestaurantData(res.data.restaurants);
-      console.log(res.data);
-      setIsLoaded(true);
-    }).catch((err) => {
-      console.log(err)
-      setIsLoaded(true);
-      const errors = err.response.data.errors;
-      if (errors) {
-        errors.forEach((error) => {
-          toast.error(error.msg);
-          toast.error(error.param);
-          console.log(error);
-        });
-      }
-    });
+    if (!restaurants) {
+      getAllRestaurants();
+    }
+
+    // eslint-disable-next-line
   }, []);
 
-  const getRestaurantData = (restaurants) => {
-    
-  }
-
-  const buildTable = (items) => {
-    return items.map((item) => {
-      return <RestaurantRow restObj={item} />
-    });
-  };
-
-  return isLoaded ? (
-    <div>
-      {buildTable(items)}
-    </div>
-  ) : (
+  return loadingRestaurant ? (
     <Spinner />
+  ) : (
+    <div>
+      {restaurants.map((item) => {
+        return <RestaurantCard restObj={item} />;
+      })}
+    </div>
   );
 };
 
-export default Restaurants;
+Restaurants.propTypes = {
+  restaurantObject: PropTypes.object.isRequired,
+  getAllRestaurants: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  restaurantObject: state.restaurant,
+});
+
+const mapFunctionsToProps = {
+  getAllRestaurants,
+};
+
+export default connect(mapStateToProps, mapFunctionsToProps)(Restaurants);
