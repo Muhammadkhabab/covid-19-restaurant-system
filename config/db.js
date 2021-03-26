@@ -9,7 +9,7 @@ const chooseDB = () => {
   } else if (process.env.NODE_ENV === 'test') {
     if (
       process.env.INDV_MONGO_URI_TEST &&
-      process.env.USE_INDIVIDUAL_TEST_defaultDB === 'yes'
+      process.env.USE_INDIVIDUAL_TEST_DB === 'yes'
     ) {
       console.log('Individual test database...');
       defaultDB = process.env.INDV_MONGO_URI_TEST;
@@ -18,10 +18,9 @@ const chooseDB = () => {
       defaultDB = process.env.MONGO_URI_TEST;
     }
   } else {
-    console.log('Development environment...');
     if (
       process.env.INDV_MONGO_URI_DEV &&
-      process.env.USE_INDIVIDUAL_DEV_defaultDB === 'yes'
+      process.env.USE_INDIVIDUAL_DEV_DB === 'yes'
     ) {
       console.log('Individual development database...');
       defaultDB = process.env.INDV_MONGO_URI_DEV;

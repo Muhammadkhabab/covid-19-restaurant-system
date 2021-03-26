@@ -32,7 +32,7 @@ const generateRestaurant = async () => {
 
   return new Promise(async (resolve) => {
     await restaurant.save();
-    return resolve(id);
+    return resolve(restaurant.id);
   });
 };
 
@@ -41,15 +41,15 @@ module.exports = {
     if (num <= 0) {
       return;
     }
+    const rids = [];
     return new Promise(async (resolve) => {
       console.log('Generating fake restaurants...');
       for (let i = 0; i < num; i++) {
-        console.log(`Restaurant #${i + 1}`);
-        const id = await generateRestaurant();
-        console.log(id);
+        const rid = await generateRestaurant();
+        rids.push(rid);
       }
       console.log(`${num} fake restaurants generated!`);
-      return resolve();
+      return resolve(rids);
     });
   },
 };
