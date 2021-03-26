@@ -13,6 +13,8 @@ const generateRestaurant = async () => {
   const restaurant = new Restaurant({
     restaurant_name: faker.company.companyName(),
     address: faker.address.streetAddress(),
+    avatar:
+      'https://images.squarespace-cdn.com/content/v1/578d4c7a8419c227c750b539/1572971173664-VMLWSYNF0B1T0WT99MT5/ke17ZwdGBToddI8pDm48kDldiTmRHKJ5v0YqxgeTKYoUqsxRUqqbr1mOJYKfIPR7LoDQ9mXPOjoJoqy81S2I8N_N4V1vUb5AoIIIbLZhVYxCRW4BPu10St3TBAUQYVKcILJf9YR3LP5aM5G6UY-AAu_ngb_bs84XNd2m-CICIhr-FNO5NkILC6XZG9VcRQgL/Milk+Tea_smaller+v2.jpg',
     restaurant_email: faker.internet.email(),
     restaurant_phone_number: faker.phone.phoneNumber(),
     website_url: faker.internet.url(),
