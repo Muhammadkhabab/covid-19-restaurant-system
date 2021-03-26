@@ -4,7 +4,7 @@
   "description": "CS 506 Group Project, Madison Small Restaurant Covid-19 Info System",
   "main": "server.js",
   "scripts": {
-    "test": "cross-env NODE_ENV=test mocha ./test --recursive --exit",
+    "test": "cross-env NODE_ENV=test mocha ./test --recursive --exit --timeout 50000",
     "start": "node server",
     "server": "nodemon server",
     "client": "npm start --prefix client",
