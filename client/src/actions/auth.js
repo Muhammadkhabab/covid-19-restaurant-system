@@ -128,16 +128,7 @@ export const login = ({ credential, password }) => async (dispatch) => {
 };
 
 // Update user.
-export const updateUser = ({
-  firstName,
-  lastName,
-  username,
-  email,
-  phoneNumber,
-  oldPassword,
-  newPassword,
-  confirmedNewPassword,
-}) => async (dispatch) => {
+export const updateUser = (userObj) => async (dispatch) => {
   // Request headers.
   const config = {
     headers: {
@@ -146,16 +137,7 @@ export const updateUser = ({
   };
 
   // User data.
-  const body = JSON.stringify({
-    firstName,
-    lastName,
-    username,
-    email,
-    phoneNumber,
-    oldPassword,
-    newPassword,
-    confirmedNewPassword,
-  });
+  const body = JSON.stringify(userObj);
 
   try {
     // Send request to API endpoint.
@@ -176,9 +158,9 @@ export const updateUser = ({
     }
 
     // Call reducer to indicate fail registration.
-    dispatch({
-      type: UPDATE_FAIL,
-    });
+    // dispatch({
+    //   type: UPDATE_FAIL,
+    // });
   }
 };
 

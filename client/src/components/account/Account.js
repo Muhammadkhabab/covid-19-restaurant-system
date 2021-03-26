@@ -6,7 +6,7 @@ import Spinner from '../layout/Spinner';
 import { toast } from 'react-toastify';
 import { updateUser } from '../../actions/auth';
 
-const Account = ({ auth: { loading, user } }) => {
+const Account = ({ auth: { loading, user }, updateUser }) => {
   // Set user data.
   const [data, setData] = useState({
     first_name: '',
@@ -20,7 +20,9 @@ const Account = ({ auth: { loading, user } }) => {
   });
 
   useEffect(() => {
-    setData(user);
+    if (!loading && user !== null) {
+      setData(user);
+    }
   }, [loading, user]);
 
   // Destructuring.
@@ -56,13 +58,19 @@ const Account = ({ auth: { loading, user } }) => {
         new_password,
         confirmed_newpassword,
       });
+      setData({
+        ...data,
+        old_password: '',
+        new_password: '',
+        confirmed_new_password: '',
+      });
     }
   };
 
   // Event listener for change in input fields.
   const onChange = (e) => setData({ ...data, [e.target.name]: e.target.value });
 
-  return loading ? (
+  return loading || user === null ? (
     <Spinner />
   ) : (
     <Container className='my-4'>
@@ -131,7 +139,6 @@ const Account = ({ auth: { loading, user } }) => {
                 value={old_password}
                 placeholder='Please enter your existing password'
                 onChange={onChange}
-                required
               />
             </FormGroup>
             <FormGroup>
@@ -141,7 +148,6 @@ const Account = ({ auth: { loading, user } }) => {
                 value={new_password}
                 placeholder='Please enter a new password'
                 onChange={onChange}
-                required
               />
             </FormGroup>
             <FormGroup>
@@ -151,7 +157,6 @@ const Account = ({ auth: { loading, user } }) => {
                 value={confirmed_newpassword}
                 placeholder='Please confirm your new password'
                 onChange={onChange}
-                required
               />
             </FormGroup>
             <Input
