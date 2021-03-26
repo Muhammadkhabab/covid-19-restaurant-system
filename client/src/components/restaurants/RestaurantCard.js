@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Container, Row, Col } from 'reactstrap';
-import PolicyBadges from './PolicyBadges.js'
-import Placeholder from '../../assets/images/res_placeholder.png';
-import '../../styles/RestaurantTable.scss';
+import { Row, Col } from 'reactstrap';
+import PolicyBadges from '../layout/PolicyBadges.js';
+import Avatar from '../layout/Avatar';
+import '../../styles/RestaurantCard.scss';
 
 /* Single row in the restaurant table with basic restaurant information */
 const RestaurantRow = ({
@@ -21,51 +21,26 @@ const RestaurantRow = ({
     _id: id,
   },
 }) => {
-  const policies = { dine_in, dine_outside, pickup, curbside_pickup, delivery }
+  const policies = { dine_in, dine_outside, pickup, curbside_pickup, delivery };
   return (
-
-    <div className='restaurant-row'>
+    <div className='restaurant-card'>
       <Link to={`/restaurants/${id}`}>
-        <Container>
-          <Row>
-            <Col md="2">
-              <div className='logo-wrapper'>
-                <img
-                  src={avatar ? avatar : Placeholder}
-                  alt='Restaurant logo'
-                />
-              </div>
-            </Col>
-            <Col md="10">
-              <div className='top-row'>
-                <Row>
-                  <Col>
-                    <div className='restaurant-name'>
-                      <h1>{restaurant_name}</h1>
-                    </div>
-                  </Col>
-                  <Col>
-                    <PolicyBadges {...policies} />
-                  </Col>
-                </Row>
-              </div>
-              <div className='bottom-row'>
-                <Row>
-                  <Col>
-                    <div className='address'>
-                      <p>{address}</p>
-                    </div>
-                  </Col>
-                  <Col>
-                    <p>Current Capacity:
-                      {current_customers ? current_customers : '?'}/{customer_capacity}
-                    </p>
-                  </Col>
-                </Row>
-              </div>
-            </Col>
-          </Row>
-        </Container>
+        <Row>
+          <Col md='2'>
+            <Avatar avatar={avatar} />
+          </Col>
+          <Col md='5'>
+            <h1 className='m-0'>{restaurant_name}</h1>
+            <p>{address}</p>
+          </Col>
+          <Col md='5'>
+            <PolicyBadges policies={policies} />
+            <p>
+              Current Capacity: {current_customers ? current_customers : '?'}/
+              {customer_capacity}
+            </p>
+          </Col>
+        </Row>
       </Link>
     </div>
   );

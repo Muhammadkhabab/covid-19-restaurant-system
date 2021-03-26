@@ -1,0 +1,29 @@
+@import 'Variables';
+
+.restaurant-card {
+  background-color: hsl(195, 100%, 90%);
+
+  border: 5px solid $brand-primary-color;
+  border-radius: 10px;
+  padding: 20px 25px;
+  margin: 15px auto;
+
+  &:hover {
+    background-color: hsl(195, 100%, 80%);
+    a {
+      color: #000;
+    }
+  }
+
+  a {
+    color: #000;
+  }
+  a:hover {
+    text-decoration: none;
+  }
+
+  img {
+    width: 125px;
+    height: 125px;
+  }
+}

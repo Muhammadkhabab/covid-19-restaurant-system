@@ -4,7 +4,8 @@ import { Link } from 'react-router-dom';
 import '../../styles/Restaurants.scss';
 import { ROUTE_EDIT_RESTAURANT } from '../../constants/routes';
 import Charts from '../charts/Charts';
-import Placeholder from '../../assets/images/res_placeholder.png';
+import PolicyBadges from '../layout/PolicyBadges';
+import Avatar from '../layout/Avatar';
 
 const RestaurantProfile = ({
   restObj: {
@@ -25,40 +26,14 @@ const RestaurantProfile = ({
   },
   user,
 }) => {
-  const booleanVals = [
-    {
-      val: dine_in,
-      str: 'Dine in',
-    },
-    {
-      val: dine_outside,
-      str: 'Dine outside',
-    },
-    {
-      val: pickup,
-      str: 'Pickup',
-    },
-    {
-      val: curbside_pickup,
-      str: 'Curbside pickup',
-    },
-    {
-      val: delivery,
-      str: 'Delivery',
-    },
-  ];
+  const policies = { dine_in, dine_outside, pickup, curbside_pickup, delivery };
   return (
     <div id='restaurant-profile'>
       <Jumbotron>
         <Container className='my-4'>
           <Row className='header-wrapper'>
             <Col xs='12' lg='3'>
-              <div className='logo-wrapper'>
-                <img
-                  src={avatar ? avatar : Placeholder}
-                  alt='Restaurant logo'
-                />
-              </div>
+              <Avatar avatar={avatar} />
             </Col>
             <Col xs='12' lg='9'>
               <div className='basic-info'>
@@ -71,19 +46,7 @@ const RestaurantProfile = ({
                   )}
                 </h1>
                 <p className='info-text'>{address}</p>
-                <div className='badges'>
-                  {booleanVals.map((v, k) =>
-                    v.val ? (
-                      <Badge color='light' key={k}>
-                        {v.str} <i className='fas fa-check-square'></i>
-                      </Badge>
-                    ) : (
-                      <Badge color='light' key={k}>
-                        {v.str} <i className='fas fa-times-circle'></i>
-                      </Badge>
-                    )
-                  )}
-                </div>
+                <PolicyBadges policies={policies} />
               </div>
             </Col>
           </Row>
