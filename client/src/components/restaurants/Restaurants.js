@@ -5,6 +5,7 @@ import Spinner from '../layout/Spinner';
 import RestaurantCard from './RestaurantCard';
 import { getAllRestaurants } from '../../actions/restaurant';
 import { Container } from 'reactstrap';
+import AdvancedSearch from './AdvancedSearch';
 
 const Restaurants = ({
   restaurantObject: { restaurants, loadingRestaurant },
@@ -21,7 +22,9 @@ const Restaurants = ({
   return loadingRestaurant || restaurants === null ? (
     <Spinner />
   ) : (
-    <Container>
+    <Container className='my-4'>
+      <h1>View all restaurants</h1>
+      <AdvancedSearch restaurants={restaurants} />
       {restaurants.map((r, k) => {
         return <RestaurantCard key={k} restObj={r} />;
       })}
