@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import Spinner from '../layout/Spinner';
 import RestaurantCard from './RestaurantCard';
 import { getAllRestaurants } from '../../actions/restaurant';
+import { Container } from 'reactstrap';
 
 const Restaurants = ({
   restaurantObject: { restaurants, loadingRestaurant },
@@ -17,14 +18,14 @@ const Restaurants = ({
     // eslint-disable-next-line
   }, []);
 
-  return loadingRestaurant ? (
+  return loadingRestaurant || restaurants === null ? (
     <Spinner />
   ) : (
-    <div>
-      {restaurants.map((item) => {
-        return <RestaurantCard restObj={item} />;
+    <Container>
+      {restaurants.map((r, k) => {
+        return <RestaurantCard key={k} restObj={r} />;
       })}
-    </div>
+    </Container>
   );
 };
 

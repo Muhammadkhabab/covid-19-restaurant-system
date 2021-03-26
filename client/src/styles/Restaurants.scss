@@ -10,19 +10,6 @@
   .row.header-wrapper {
     align-items: flex-start;
 
-    .logo-wrapper {
-      border: 6px solid $brand-primary-color;
-      border-radius: 50%;
-      padding: 10px;
-      width: fit-content;
-
-      img {
-        width: 200px;
-        height: 200px;
-        border-radius: 50%;
-      }
-    }
-
     .header {
       color: $brand-primary-color;
       font-size: 70px;
