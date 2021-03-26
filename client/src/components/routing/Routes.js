@@ -30,9 +30,6 @@ import PrivateRoute from '../routing/PrivateRoute';
 import AdminRoute from '../routing/AdminRoute';
 import RestaurantRoute from '../routing/RestaurantRoute';
 
-// Reactstrap Components
-import { Container } from 'reactstrap';
-
 // Route constants
 import {
   ROUTE_LOGIN,
@@ -50,7 +47,6 @@ function Routes() {
   return (
     <Fragment>
       <NavigationBar />
-      {/* <Container className='my-4'> */}
       <Switch>
         {/* Public authentication routes */}
         <Route
@@ -72,11 +68,7 @@ function Routes() {
           component={DashboardCustomer}
         />
 
-        <PrivateRoute
-          exact
-          path={ROUTE_ACCOUNT}
-          component={Account}
-        />
+        <PrivateRoute exact path={ROUTE_ACCOUNT} component={Account} />
 
         {/* Admin/staff routes */}
         <PrivateRoute
@@ -98,7 +90,6 @@ function Routes() {
 
         <Route component={NotFound} />
       </Switch>
-      {/* </Container> */}
     </Fragment>
   );
 }

@@ -139,6 +139,7 @@ const Account = ({ auth: { loading, user }, updateUser }) => {
                 value={old_password}
                 placeholder='Please enter your existing password'
                 onChange={onChange}
+                autoComplete='new-password'
               />
             </FormGroup>
             <FormGroup>
