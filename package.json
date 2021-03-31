@@ -12,7 +12,7 @@
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client",
     "seeds": "node seeds",
     "coverage": "nyc --reporter=html --reporter=text npm run test",
-    "frontend-test": "selenium-side-runner ./test/client-test/*.side"
+    "frontend-test": "selenium-side-runner ./test/client/*.side"
   },
   "author": "Prasoon Sinha",
   "license": "MIT",
