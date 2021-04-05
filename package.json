@@ -26,6 +26,7 @@
     "mongoose": "^5.11.19"
   },
   "devDependencies": {
+    "babel-jest": "^26.6.0",
     "chai": "^4.3.3",
     "chromedriver": "^85.0.1",
     "concurrently": "^6.0.0",
