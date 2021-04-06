@@ -10,6 +10,13 @@ const generateNumber = (lower, upper) => {
 };
 
 const generateRestaurant = async () => {
+  const customer_capacity = generateNumber(20, 100);
+  const employee_capacity = generateNumber(3, 20);
+  const number_tables = generateNumber(5, 30);
+  const current_customers = generateNumber(0, customer_capacity);
+  const current_employees = generateNumber(0, employee_capacity);
+  const current_free_tables = generateNumber(0, number_tables);
+  
   const restaurant = new Restaurant({
     restaurant_name: faker.company.companyName(),
     address: faker.address.streetAddress(),
@@ -24,12 +31,16 @@ const generateRestaurant = async () => {
     curbside_pickup: generateBoolean(),
     delivery: generateBoolean(),
     policy_notes: faker.lorem.sentence(),
-    employee_capacity: generateNumber(10, 25),
-    customer_capacity: generateNumber(20, 100),
-    number_tables: generateNumber(10, 20),
+    employee_capacity: employee_capacity,
+    customer_capacity: customer_capacity,
+    number_tables: number_tables,
     square_footage: generateNumber(300, 2000),
     customer_per_table: generateNumber(3, 10),
     tables_distance: generateNumber(3, 10),
+    current_customers: current_customers,
+    current_employees: current_employees,
+    current_free_tables: current_free_tables,
+    current_percent_capacity: (current_customers+current_employees)/(customer_capacity+employee_capacity)
   });
 
   return new Promise(async (resolve) => {
