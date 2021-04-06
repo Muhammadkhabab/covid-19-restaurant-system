@@ -23,8 +23,9 @@ const Restaurants = ({
     <Spinner />
   ) : (
     <Container className='my-4'>
-      <h1>View all restaurants</h1>
+      <h2 class="text-center">Dine and Stay Safe. </h2>
       <AdvancedSearch restaurants={restaurants} />
+      <h4>Search results: {restaurants.length}</h4>
       {restaurants.map((r, k) => {
         return <RestaurantCard key={k} restObj={r} />;
       })}
