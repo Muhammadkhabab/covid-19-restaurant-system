@@ -6,6 +6,7 @@ const connectDB = require('./config/db');
 const dotenv = require('dotenv');
 dotenv.config();
 const app = express();
+const { getNotifications } = require('./services/notifications');
 
 const setup = async () => {
   if (process.env.NODE_ENV !== 'test') {
@@ -37,20 +38,11 @@ const setup = async () => {
   // Listening to app.
   const PORT = process.env.PORT || 5000;
   app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
+
+  getNotifications();
 };
 
 setup();
-
-const schedule = require('node-schedule');
-
-schedule.scheduleJob('15 * * * * *', function (fireDate) {
-  console.log(
-    'This job was supposed to run at ' +
-      fireDate +
-      ', but actually ran at ' +
-      new Date()
-  );
-});
 
 // Export app for testing purposes.
 module.exports = app;
