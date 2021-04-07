@@ -1,4 +1,4 @@
-import React, { useEffect, Fragment } from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { getMyRestaurant } from '../../actions/restaurant';
@@ -9,12 +9,17 @@ import '../../styles/Dashboard.scss';
 
 const RestaurantDashboard = ({
   auth: { user, loading },
-  restaurantObject: { restaurant, loadingRestaurant },
+  restaurantObject: { dashboardRestaurant, loadingRestaurant },
   getMyRestaurant,
 }) => {
   useEffect(() => {
     // Get restaurant data when admin or staff logs in
-    if (!restaurant && !loading && user && (user.is_admin || user.is_staff)) {
+    if (
+      !dashboardRestaurant &&
+      !loading &&
+      user &&
+      (user.is_admin || user.is_staff)
+    ) {
       getMyRestaurant();
     }
 
@@ -24,10 +29,10 @@ const RestaurantDashboard = ({
   return loadingRestaurant ||
     loading ||
     user === null ||
-    restaurant === null ? (
+    dashboardRestaurant === null ? (
     <Spinner />
   ) : (
-    <RestaurantProfile restObj={restaurant} user={user} />
+    <RestaurantProfile restObj={dashboardRestaurant} user={user} />
   );
 };
 

@@ -8,6 +8,7 @@ import {
   GET_RESTAURANT_DATA,
   GET_ALL_RESTAURANTS,
   FILTER_RESTAURANT,
+  SET_DASHBOARD_RESTAURANT,
 } from '../constants/actions';
 import { toast } from 'react-toastify';
 import { loadUser } from './auth';
@@ -155,7 +156,7 @@ export const getMyRestaurant = () => async (dispatch) => {
 
     // Call reducer to register restaurant.
     dispatch({
-      type: SET_RESTAURANT,
+      type: SET_DASHBOARD_RESTAURANT,
       payload: res.data,
     });
   } catch (err) {
@@ -198,7 +199,7 @@ export const getRestaurantData = (rid) => async (dispatch) => {
 export const getFilteredRestaurant = (params) => async (dispatch) => {
   try {
     // Send request to API endpoint.
-    const res = await axios.get(`/${API}/restaurants/filter/`,{params});
+    const res = await axios.get(`/${API}/restaurants/filter/`, { params });
 
     // Call reducer to register restaurant.
     dispatch({
@@ -218,4 +219,3 @@ export const getFilteredRestaurant = (params) => async (dispatch) => {
     }
   }
 };
-
