@@ -6,6 +6,7 @@ import { ROUTE_EDIT_RESTAURANT } from '../../constants/routes';
 import Charts from '../charts/Charts';
 import PolicyBadges from '../layout/PolicyBadges';
 import Avatar from '../layout/Avatar';
+import { toast } from 'react-toastify';
 
 const RestaurantProfile = ({
   restObj: {
@@ -30,6 +31,15 @@ const RestaurantProfile = ({
   user,
 }) => {
   const policies = { dine_in, dine_outside, pickup, curbside_pickup, delivery };
+
+  const onClick = (i, val) => {
+    const prompts = ['employees', 'customers', 'free tables'];
+    const ans = window.prompt(`Current number of ${prompts[i]}`, val);
+    if (isNaN(ans) || parseInt(ans) < 0) {
+      toast.error('Value must be a non-negative integer');
+    }
+  };
+
   return (
     <div id='restaurant-profile'>
       <Jumbotron>
@@ -53,15 +63,30 @@ const RestaurantProfile = ({
                 <Row className='mt-3'>
                   <Col lg='2'>
                     <p className='mb-1'># of employees</p>
-                    <div className='stat-box'>{current_employees}</div>
+                    <div
+                      className='stat-box'
+                      onClick={() => onClick(0, current_employees)}
+                    >
+                      {current_employees}
+                    </div>
                   </Col>
                   <Col lg='2'>
                     <p className='mb-1'># of customers</p>
-                    <div className='stat-box'>{current_customers}</div>
+                    <div
+                      className='stat-box'
+                      onClick={() => onClick(1, current_customers)}
+                    >
+                      {current_customers}
+                    </div>
                   </Col>
                   <Col lg='2'>
                     <p className='mb-1'># of free tables</p>
-                    <div className='stat-box'>{current_free_tables}</div>
+                    <div
+                      className='stat-box'
+                      onClick={() => onClick(2, current_free_tables)}
+                    >
+                      {current_free_tables}
+                    </div>
                   </Col>
                 </Row>
               </div>

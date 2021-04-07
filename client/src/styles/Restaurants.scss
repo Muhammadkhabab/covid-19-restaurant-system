@@ -39,6 +39,10 @@
       font-size: 40px;
       color: blue;
       font-weight: bold;
+
+      &:hover {
+        cursor: pointer;
+      }
     }
   }
 
