@@ -103,6 +103,40 @@ export const editRestaurant = (restaurantObj) => async (dispatch) => {
   }
 };
 
+export const updateStatsRestaurant = (restaurantObj) => async (dispatch) => {
+  // Request headers.
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  };
+
+  // User data.
+  const body = JSON.stringify(restaurantObj);
+
+  try {
+    // Send request to API endpoint.
+    const res = await axios.put(`/${API}/restaurants/stats`, body, config);
+
+    // Call reducer to register restaurant.
+    dispatch({
+      type: EDIT_RESTAURANT,
+      payload: res.data,
+    });
+    toast.success('You successfully updated restaurant information! Welcome!');
+  } catch (err) {
+    // Loop through errors and notify user.
+    const errors = err.response.data.errors;
+    if (errors) {
+      errors.forEach((error) => {
+        toast.error(error.msg);
+        toast.error(error.param);
+        console.log(error);
+      });
+    }
+  }
+};
+
 export const getRestaurantById = (id) => async (dispatch) => {
   try {
     // Send request to API endpoint.

@@ -1,7 +1,10 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { getMyRestaurant } from '../../actions/restaurant';
+import {
+  getMyRestaurant,
+  updateStatsRestaurant,
+} from '../../actions/restaurant';
 import Spinner from '../layout/Spinner';
 import RestaurantProfile from '../restaurants/RestaurantProfile';
 
@@ -11,6 +14,7 @@ const RestaurantDashboard = ({
   auth: { user, loading },
   restaurantObject: { dashboardRestaurant, loadingRestaurant },
   getMyRestaurant,
+  updateStatsRestaurant,
 }) => {
   useEffect(() => {
     // Get restaurant data when admin or staff logs in
@@ -32,7 +36,11 @@ const RestaurantDashboard = ({
     dashboardRestaurant === null ? (
     <Spinner />
   ) : (
-    <RestaurantProfile restObj={dashboardRestaurant} user={user} />
+    <RestaurantProfile
+      restObj={dashboardRestaurant}
+      user={user}
+      update={updateStatsRestaurant}
+    />
   );
 };
 
@@ -49,6 +57,7 @@ const mapStateToProps = (state) => ({
 
 const mapFunctionsToProps = {
   getMyRestaurant,
+  updateStatsRestaurant,
 };
 
 export default connect(

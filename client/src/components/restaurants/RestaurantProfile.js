@@ -29,6 +29,7 @@ const RestaurantProfile = ({
     _id,
   },
   user,
+  update,
 }) => {
   const policies = { dine_in, dine_outside, pickup, curbside_pickup, delivery };
 
@@ -37,7 +38,20 @@ const RestaurantProfile = ({
     const ans = window.prompt(`Current number of ${prompts[i]}`, val);
     if (isNaN(ans) || parseInt(ans) < 0) {
       toast.error('Value must be a non-negative integer');
+      return;
     }
+    const dataObj = {
+      current_customers,
+      current_employees,
+      current_free_tables,
+    };
+    const fields = [
+      'current_employees',
+      'current_customers',
+      'current_free_tables',
+    ];
+    dataObj[fields[i]] = parseInt(ans);
+    update(dataObj);
   };
 
   return (
