@@ -29,16 +29,36 @@ smtpTransport.use('compile', hbs(handlebarsOptions));
 
 module.exports = {
   sendEmail: async (email, restaurants) => {
-    console.log(emailId);
     const contents = restaurants.map((res, i) => {
-      const { restaurant_name } = res;
-      return `<p>${restaurant_name}</p>`;
+      const {
+        restaurant_name,
+        avatar,
+        address,
+        current_employees,
+        current_customers,
+        current_percent_capacity,
+      } = res;
+      return `
+        <div class='col-6 d-flex justify-content-start'>
+          <img
+            class='res-avatar'
+            src='${avatar}'
+          />
+          <div class='ml-3'>
+            <h4 class='m-0 text-uppercase font-weight-bold'>${restaurant_name}</h4>
+            <p class='m-0 font-italic'>${address}</p>
+            <p class='m-0'>Employees: ${current_employees} | Customers: ${current_customers}</p>
+            <p class='m-0'>Current percent capacity: ${Math.round(
+              current_percent_capacity * 100
+            )}%</p>
+          </div>
+        </div>`;
     });
+
     try {
       const emailData = {
         to: email,
         from: emailId,
-        template: 'forgot-password-email',
         subject: 'Restaurants - Safe Dining',
         html: `
         <!DOCTYPE html>
@@ -49,13 +69,21 @@ module.exports = {
           <meta name="viewport" content="width=device-width, initial-scale=1.0">
           <meta http-equiv="X-UA-Compatible" content="ie=edge">
           <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-          <title>Email from Safe Dining</title>
+
+          <style>
+            .res-avatar {
+              width: 100px;
+              height: 100px;
+            }
+          </style>
         </head>
         
         <body>
           <div class="container mt-3">
             <h1>Restaurants</h1>
-            ${contents.join('')}
+            <div class='row'>
+              ${contents.join('')}
+            </div>
           </div>
         </body>
         

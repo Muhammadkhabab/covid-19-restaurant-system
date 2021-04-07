@@ -54,7 +54,6 @@ module.exports = {
             });
 
             if (is_contact_email) {
-              console.log('Before sending email...');
               sendEmail(contact, data.restaurants);
             }
           });
