@@ -23,7 +23,9 @@
     "express": "^4.17.1",
     "express-validator": "^6.10.0",
     "jsonwebtoken": "^8.5.1",
+    "moment": "^2.29.1",
     "mongoose": "^5.11.19",
+    "node-geocoder": "^3.27.0",
     "node-schedule": "^2.0.0"
   },
   "devDependencies": {
@@ -32,7 +34,6 @@
     "concurrently": "^6.0.0",
     "faker": "^5.4.0",
     "mocha": "^8.3.1",
-    "moment": "^2.29.1",
     "nodemon": "^2.0.7",
     "nyc": "^15.1.0",
     "selenium-side-runner": "^3.17.0",
