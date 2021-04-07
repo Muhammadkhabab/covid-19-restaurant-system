@@ -4,6 +4,7 @@ import {
   EDIT_RESTAURANT,
   GET_RESTAURANT_DATA,
   GET_ALL_RESTAURANTS,
+  FILTER_RESTAURANT,
 } from '../constants/actions';
 
 // Get token, set isAuthenticated and user to null, set loading to true.
@@ -27,6 +28,8 @@ export default function auth_red(state = initialState, action) {
       return { ...state, chartData: payload, loadingRestaurant: false };
     case GET_ALL_RESTAURANTS:
       return { ...state, restaurants: payload, loadingRestaurant: false };
+    case FILTER_RESTAURANT:
+    return { ...state, restaurants: payload, loadingRestaurant: false };
     default:
       // Do nothing.
       return state;

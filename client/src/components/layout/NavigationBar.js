@@ -112,7 +112,7 @@ const NavigationBar = ({
 };
 
 NavigationBar.defaultProps = {
-  title: 'Covid-19 Info System',
+  title: 'Safe Dining',
   icon: 'fas fa-utensils',
 };
 

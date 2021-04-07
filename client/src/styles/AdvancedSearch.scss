@@ -1,0 +1,12 @@
+@import 'Variables';
+#filter-section{
+  .active {
+    background-color: green !important;
+    border-color: green !important;
+  }
+  .btn.btn-primary{
+    background-color: $brand-primary-color;
+    border-color: $brand-primary-color;
+    font-weight: bold;
+  }
+}

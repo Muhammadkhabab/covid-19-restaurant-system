@@ -25,22 +25,22 @@ const configureDB = () => {
 
 const generate = () => {
   return new Promise(async (resolve) => {
-    const n1 = 15;
+    const n1 = 30;
     const rids1 = await Restaurant.generateRestaurants(n1);
     await User.generateAdmins(rids1);
     await Record.generateRecordsMultipleRestaurants(rids1);
 
-    const n2 = 35;
-    const rids2 = await Restaurant.generateRestaurants(n2);
-    await User.generateAdmins(rids2);
+    // const n2 = 35;
+    // const rids2 = await Restaurant.generateRestaurants(n2);
+    // await User.generateAdmins(rids2);
 
     const n3 = 100;
     await User.generateCustomers(n3);
     console.log('----------------------');
     console.log('Total data generated:');
-    console.log(`- ${n1 + n2} admins`);
+    console.log(`- ${n1} admins`);
     console.log(`- ${n3} customers`);
-    console.log(`- ${n1 + n2} restaurants`);
+    console.log(`- ${n1} restaurants`);
     console.log(`- ${n1 * 7 * 24} records`);
 
     return resolve();
