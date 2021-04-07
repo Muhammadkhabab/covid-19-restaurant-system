@@ -2,6 +2,7 @@ const schedule = require('node-schedule');
 const moment = require('moment');
 const Notification = require('../models/Notification');
 const { searchRestaurants } = require('./search');
+const { sendEmail } = require('./email');
 
 module.exports = {
   getNotifications: async () => {
@@ -11,6 +12,8 @@ module.exports = {
       console.log('Start scheduling...');
       notifs.forEach(async (noti) => {
         const {
+          contact,
+          is_contact_email,
           start_time,
           end_time,
           interval,
@@ -50,7 +53,10 @@ module.exports = {
               max_customers,
             });
 
-            console.log(data.count);
+            if (is_contact_email) {
+              console.log('Before sending email...');
+              sendEmail(contact, data.restaurants);
+            }
           });
         }
       });
