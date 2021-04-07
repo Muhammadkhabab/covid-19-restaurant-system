@@ -49,9 +49,10 @@ router.post(
     check('pickup').optional().isBoolean(),
     check('curbside_pickup').optional().isBoolean(),
     check('delivery').optional().isBoolean(),
-    check('max_employess').optional().isNumeric(),
+    check('max_employees').optional().isNumeric(),
     check('max_customers').optional().isNumeric(),
     check('min_tables').optional().isNumeric(),
+    check('percent_capacity').optional().isNumeric(),
   ],
   notificationController.subscribe
 );

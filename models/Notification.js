@@ -54,7 +54,7 @@ const NotificationSchema = new mongoose.Schema({
   delivery: {
     type: Boolean,
   },
-  max_employess: {
+  max_employees: {
     type: Number,
   },
   max_customers: {
@@ -62,7 +62,9 @@ const NotificationSchema = new mongoose.Schema({
   },
   min_tables: {
     type: Number,
-    default: 1000,
+  },
+  percent_capacity: {
+    type: Number,
   },
 });
 

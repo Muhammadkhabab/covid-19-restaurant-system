@@ -29,9 +29,10 @@ module.exports = {
       pickup,
       curbside,
       delivery,
-      max_employess,
+      max_employees,
       max_customers,
       min_tables,
+      percent_capacity,
     } = req.body;
 
     try {
@@ -73,9 +74,10 @@ module.exports = {
         pickup,
         curbside,
         delivery,
-        max_employess,
+        max_employees,
         max_customers,
         min_tables,
+        percent_capacity,
       });
 
       await notification.save();
