@@ -4,6 +4,7 @@ const User = require('./Users');
 const Record = require('./Records');
 
 const connectDB = require('../config/db');
+const TestingSeeds = require('./TestingSeeds');
 
 const sleep = (s) => {
   return new Promise((resolve) => {
@@ -47,11 +48,21 @@ const generate = () => {
   });
 };
 
+const testingData = () => {
+  return new Promise(async (resolve) => {
+    await TestingSeeds.addTestUser();
+
+    return resolve();
+  })
+}
+
 const run = async () => {
   try {
     console.log('Running seeds...');
     await configureDB();
-    console.log('Generating data...');
+    console.log('Generating testing data...');
+    await testingData();
+    console.log('Generating mock data...');
     await generate();
     console.log('Finished running seeds!');
     process.exit();
