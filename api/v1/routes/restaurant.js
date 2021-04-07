@@ -28,23 +28,44 @@ router.post(
       .withMessage('Password must be between 6 and 20 characters long!')
       .matches(/\d/)
       .withMessage('Password must contain a number!'),
-    check('confirmed_password').notEmpty().withMessage('Missing confirmed password!'),
+    check('confirmed_password')
+      .notEmpty()
+      .withMessage('Missing confirmed password!'),
     check('restaurant_name').notEmpty().withMessage('Missing restaurant name!'),
     check('address').notEmpty().withMessage('Missing address!'),
     check('avatar').optional().isString(),
-    check('restaurant_email').notEmpty().withMessage('Missing restaurant email!'),
-    check('restaurant_phone_number').notEmpty().withMessage('Missing restaurant phone number!'),
+    check('restaurant_email')
+      .notEmpty()
+      .withMessage('Missing restaurant email!'),
+    check('restaurant_phone_number')
+      .notEmpty()
+      .withMessage('Missing restaurant phone number!'),
     check('cuisine').optional().isString(),
     check('website_url').optional().isURL(),
     check('dine_in').notEmpty().isIn([0, 1]).withMessage('Missing dine in!'),
-    check('dine_outside').notEmpty().isIn([0, 1]).withMessage('Missing dine outside!'),
+    check('dine_outside')
+      .notEmpty()
+      .isIn([0, 1])
+      .withMessage('Missing dine outside!'),
     check('pickup').notEmpty().isIn([0, 1]).withMessage('Missing pickup!'),
-    check('curbside_pickup').notEmpty().isIn([0, 1]).withMessage('Missing curbside pickup!'),
+    check('curbside_pickup')
+      .notEmpty()
+      .isIn([0, 1])
+      .withMessage('Missing curbside pickup!'),
     check('delivery').notEmpty().isIn([0, 1]).withMessage('Missing delivery!'),
     check('policy_notes').optional(),
-    check('employee_capacity').notEmpty().withMessage('Missing employee capacity!').isNumeric(),
-    check('customer_capacity').notEmpty().withMessage('Missing customer capacity!').isNumeric(),
-    check('number_tables').notEmpty().withMessage('Missing number tables!').isNumeric(),
+    check('employee_capacity')
+      .notEmpty()
+      .withMessage('Missing employee capacity!')
+      .isNumeric(),
+    check('customer_capacity')
+      .notEmpty()
+      .withMessage('Missing customer capacity!')
+      .isNumeric(),
+    check('number_tables')
+      .notEmpty()
+      .withMessage('Missing number tables!')
+      .isNumeric(),
     check('square_footage').isNumeric(),
     check('customer_per_table').isNumeric(),
     check('tables_distance').isNumeric(),

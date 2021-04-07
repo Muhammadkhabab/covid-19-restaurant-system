@@ -9,7 +9,7 @@ module.exports = {
       console.log('Getting notifications...');
       const notifs = await Notification.find();
       console.log('Start scheduling...');
-      notifs.forEach((noti) => {
+      notifs.forEach(async (noti) => {
         const {
           start_time,
           end_time,
@@ -28,38 +28,31 @@ module.exports = {
           percent_capacity,
         } = noti;
 
-        const res = searchRestaurants({
-          cuisine,
-          dine_in,
-          dine_outside,
-          pickup,
-          curbside,
-          delivery,
-
-          tables_distance: min_table_distance,
-          current_free_tables: min_tables,
-          current_percent_capacity: percent_capacity,
-          max_employees,
-          max_customers,
-        });
-
-        console.log(res.count);
-
         const start = moment(start_time);
         const end = moment(end_time);
-        const dt = interval;
-        for (let i = start; i < end; i = i.add(dt, 'm')) {
-          console.log(i.toDate());
-        }
+        const dt = Math.max(interval, 15);
 
-        // schedule.scheduleJob(noti.start_date_requested, (fireDate) => {
-        //   console.log(
-        //     'This job was supposed to run at ' +
-        //       fireDate +
-        //       ', but actually ran at ' +
-        //       new Date()
-        //   );
-        // });
+        for (let i = start; i < end; i = i.add(dt, 'm')) {
+          schedule.scheduleJob(i.toDate(), async () => {
+            console.log(i.toDate());
+            const data = await searchRestaurants({
+              cuisine,
+              dine_in,
+              dine_outside,
+              pickup,
+              curbside,
+              delivery,
+
+              tables_distance: min_table_distance,
+              current_free_tables: min_tables,
+              current_percent_capacity: percent_capacity,
+              max_employees,
+              max_customers,
+            });
+
+            console.log(data.count);
+          });
+        }
       });
     } catch (err) {
       console.error(err.message);

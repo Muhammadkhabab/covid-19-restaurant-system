@@ -121,7 +121,6 @@ module.exports = {
         },
       };
 
-
       jwt.sign(
         payload,
         process.env.JWT_PRIVATE_KEY,
@@ -492,18 +491,27 @@ module.exports = {
       }
       const restaurant = await Restaurant.findById(user.restaurant_id);
 
-      const {employee_capacity,customer_capacity} = restaurant;
+      const { employee_capacity, customer_capacity } = restaurant;
 
-      if(current_employees>employee_capacity || current_customers>customer_capacity){
-        return res
-          .status(400)
-          .json({ errors: [{ msg: `Warning: Capacity violation!
-          Customer capacity is ${customer_capacity} and employee capacity is ${employee_capacity}`}] });
+      if (
+        current_employees > employee_capacity ||
+        current_customers > customer_capacity
+      ) {
+        return res.status(400).json({
+          errors: [
+            {
+              msg: `Warning: Capacity violation!
+          Customer capacity is ${customer_capacity} and employee capacity is ${employee_capacity}`,
+            },
+          ],
+        });
       }
       restaurant.current_customers = current_customers;
       restaurant.current_employees = current_employees;
       restaurant.current_free_tables = current_free_tables;
-      restaurant.current_percent_capacity = (current_customers+current_employees)/(employee_capacity+customer_capacity)
+      restaurant.current_percent_capacity =
+        (current_customers + current_employees) /
+        (employee_capacity + customer_capacity);
 
       const record = await new Record({
         current_customers,
