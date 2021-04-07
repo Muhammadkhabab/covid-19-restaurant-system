@@ -22,6 +22,9 @@ const RestaurantProfile = ({
     customer_capacity,
     restaurant_email,
     restaurant_phone_number,
+    current_customers,
+    current_employees,
+    current_free_tables,
     _id,
   },
   user,
@@ -47,6 +50,20 @@ const RestaurantProfile = ({
                 </h1>
                 <p className='info-text'>{address}</p>
                 <PolicyBadges policies={policies} />
+                <Row className='mt-3'>
+                  <Col lg='2'>
+                    <p className='mb-1'># of employees</p>
+                    <div className='stat-box'>{current_employees}</div>
+                  </Col>
+                  <Col lg='2'>
+                    <p className='mb-1'># of customers</p>
+                    <div className='stat-box'>{current_customers}</div>
+                  </Col>
+                  <Col lg='2'>
+                    <p className='mb-1'># of free tables</p>
+                    <div className='stat-box'>{current_free_tables}</div>
+                  </Col>
+                </Row>
               </div>
             </Col>
           </Row>
