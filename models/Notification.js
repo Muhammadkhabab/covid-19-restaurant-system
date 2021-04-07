@@ -29,6 +29,10 @@ const NotificationSchema = new mongoose.Schema({
     type: Number,
     default: 15,
   },
+  max_distance: {
+    type: Number,
+    required: true,
+  },
   min_table_distance: {
     type: Number,
   },
@@ -38,13 +42,13 @@ const NotificationSchema = new mongoose.Schema({
   dine_in: {
     type: Boolean,
   },
-  dine_out: {
+  dine_outside: {
     type: Boolean,
   },
   pickup: {
     type: Boolean,
   },
-  curbside: {
+  curbside_pickup: {
     type: Boolean,
   },
   delivery: {

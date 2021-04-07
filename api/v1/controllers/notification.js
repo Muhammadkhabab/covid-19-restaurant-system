@@ -1,7 +1,7 @@
 // Validation.
 const { validationResult } = require('express-validator');
 
-// Link Notification model 
+// Link Notification model
 const Notification = require('../../../models/Notification');
 
 module.exports = {
@@ -16,31 +16,41 @@ module.exports = {
     const {
       is_contact_email,
       contact,
-      lat,
-      long,
-      start_date_requested,
-      end_date_requested,
+      location_lat,
+      location_long,
+      start_time,
+      end_time,
+      interval,
       max_distance,
+      min_table_distance,
       cuisine,
       dine_in,
-      dine_out,
+      dine_outside,
       pickup,
       curbside,
       delivery,
-      max_empl,
-      max_cust,
-      max_cust_per_table,
-      min_table_distance
+      max_employess,
+      max_customers,
+      min_tables,
     } = req.body;
 
     try {
       const errors = [];
 
-      if (start_date_requested >= end_date_requested) {
-        errors.push({ msg: 'Enter an end time later than the start time!' });
+      const start_datetime = new Date(start_time);
+      const end_datetime = new Date(end_time);
+
+      if (start_datetime <= new Date()) {
+        errors.push({ msg: 'Start time cannot be in the past!' });
       }
-      if (!dine_in && !dine_out && !pickup && !curbside && !delivery) {
-        errors.push({ msg: 'Enter at least one option for dining experience!' });
+      if (start_datetime >= end_datetime) {
+        errors.push({ msg: 'End time must be later than start time!' });
+      }
+
+      if (!dine_in && !dine_outside && !pickup && !curbside && !delivery) {
+        errors.push({
+          msg: 'Enter at least one option for dining experience!',
+        });
       }
       if (errors.length > 0) {
         return res.status(400).json({ errors });
@@ -50,26 +60,28 @@ module.exports = {
       const notification = new Notification({
         is_contact_email,
         contact,
-        lat,
-        long,
-        start_date_requested,
-        end_date_requested,
+        location_lat,
+        location_long,
+        start_time,
+        end_time,
+        interval,
         max_distance,
+        min_table_distance,
         cuisine,
         dine_in,
-        dine_out,
+        dine_outside,
         pickup,
         curbside,
         delivery,
-        max_empl,
-        max_cust,
-        max_cust_per_table,
-        min_table_distance
+        max_employess,
+        max_customers,
+        min_tables,
       });
 
       await notification.save();
-      return res.status(200).json({ msg: 'Signed up for notification successfully!' });
-
+      return res
+        .status(200)
+        .json({ msg: 'Signed up for notification successfully!' });
     } catch (err) {
       console.error(err.message);
       return res.status(500).json({
@@ -83,10 +95,15 @@ module.exports = {
   get: async (req, res, _next) => {
     try {
       const user = await User.findById(req.user.id);
-      const email_notifications = await Notification.find({ contact: user.email })
-      const phone_notifications = await Notification.find({ contact: user.phone_number })
-      return res.status(200).json(email_notifications.concat(phone_notifications));
-
+      const email_notifications = await Notification.find({
+        contact: user.email,
+      });
+      const phone_notifications = await Notification.find({
+        contact: user.phone_number,
+      });
+      return res
+        .status(200)
+        .json(email_notifications.concat(phone_notifications));
     } catch (err) {
       console.error(err.message);
       return res.status(500).json({
@@ -98,23 +115,29 @@ module.exports = {
   },
 
   delete: async (req, res, _next) => {
-
     try {
       const errors = [];
+
       const user = await User.findById(req.user.id);
       const notification = await Notification.findById(req.params.nid);
-      if ((notification.contact != user.phone_number) && (notification.contact != user.email)) {
-        errors.push({ msg:  notification.contact });
-        errors.push({ msg:  user.phone_number });
-        errors.push({ msg: 'User not authorized to delete this notification!' });
+      if (
+        notification.contact != user.phone_number &&
+        notification.contact != user.email
+      ) {
+        errors.push({
+          msg: 'User not authorized to delete this notification!',
+        });
       }
+
       if (errors.length > 0) {
         return res.status(400).json({ errors });
       }
 
       await Notification.findByIdAndDelete(req.params.nid);
 
-      return res.status(200).json({ msg: 'Notification deleted successfully!' });
+      return res
+        .status(200)
+        .json({ msg: 'Notification deleted successfully!' });
     } catch (err) {
       console.error(err.message);
       return res.status(500).json({
@@ -124,5 +147,4 @@ module.exports = {
       });
     }
   },
-  
 };
