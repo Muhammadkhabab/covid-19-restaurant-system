@@ -37,21 +37,25 @@ const connectDB = (db = null) => {
     db = chooseDB();
   }
 
-  mongoose.connect(db, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useCreateIndex: true,
-    useFindAndModify: false,
-  });
-  mongoose.connection
-    .once('open', () => {
-      console.log('MongoDB connected...');
-    })
-    .on('error', (err) => {
-      console.error(err.message);
-      // Exit process with failure.
-      process.exit(1);
+  return new Promise(async (resolve) => {
+    mongoose.connect(db, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      useCreateIndex: true,
+      useFindAndModify: false,
     });
+
+    mongoose.connection
+      .once('open', () => {
+        console.log('MongoDB connected...');
+        return resolve();
+      })
+      .on('error', (err) => {
+        console.error(err.message);
+        // Exit process with failure.
+        process.exit(1);
+      });
+  });
 };
 
 module.exports = connectDB;

@@ -11,11 +11,11 @@ const NotificationSchema = new mongoose.Schema({
   },
   lat: {
     type: Number,
-    required: true,
+    // required: true,
   },
   long: {
     type: Number,
-    required: true,
+    // required: true,
   },
   start_date_requested: {
     type: Date,
@@ -71,4 +71,7 @@ const NotificationSchema = new mongoose.Schema({
   },
 });
 
-module.exports = Notification = mongoose.model('notification', NotificationSchema);
+module.exports = Notification = mongoose.model(
+  'notification',
+  NotificationSchema
+);
