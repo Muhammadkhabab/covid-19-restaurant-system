@@ -9,66 +9,66 @@ const NotificationSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  lat: {
+  location_lat: {
     type: Number,
-    required: true,
+    // required: true,
   },
-  long: {
+  location_long: {
     type: Number,
-    required: true,
+    // required: true,
   },
-  start_date_requested: {
+  start_time: {
     type: Date,
     required: true,
   },
-  end_date_requested: {
+  end_time: {
     type: Date,
     required: true,
+  },
+  interval: {
+    type: Number,
+    default: 15,
   },
   max_distance: {
     type: Number,
-    default: 1000,
-  },
-  cuisine: {
-    type: String,
-    default: 'All',
-  },
-  dine_in: {
-    type: Boolean,
-    default: false,
-  },
-  dine_out: {
-    type: Boolean,
-    default: false,
-  },
-  pickup: {
-    type: Boolean,
-    default: false,
-  },
-  curbside: {
-    type: Boolean,
-    default: false,
-  },
-  delivery: {
-    type: Boolean,
-    default: false,
-  },
-  max_empl: {
-    type: Number,
-    default: 1000,
-  },
-  max_cust: {
-    type: Number,
-    default: 1000,
-  },
-  max_cust_per_table: {
-    type: Number,
-    default: 1000,
+    required: true,
   },
   min_table_distance: {
     type: Number,
-    default: 0,
+  },
+  cuisine: {
+    type: String,
+  },
+  dine_in: {
+    type: Boolean,
+  },
+  dine_outside: {
+    type: Boolean,
+  },
+  pickup: {
+    type: Boolean,
+  },
+  curbside_pickup: {
+    type: Boolean,
+  },
+  delivery: {
+    type: Boolean,
+  },
+  max_employees: {
+    type: Number,
+  },
+  max_customers: {
+    type: Number,
+  },
+  min_tables: {
+    type: Number,
+  },
+  percent_capacity: {
+    type: Number,
   },
 });
 
-module.exports = Notification = mongoose.model('notification', NotificationSchema);
+module.exports = Notification = mongoose.model(
+  'notification',
+  NotificationSchema
+);

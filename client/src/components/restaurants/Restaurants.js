@@ -23,7 +23,7 @@ const Restaurants = ({
     <Spinner />
   ) : (
     <Container className='my-4'>
-      <h2 class="text-center">Dine and Stay Safe. </h2>
+      <h2 class='text-center'>Dine and Stay Safe. </h2>
       <AdvancedSearch restaurants={restaurants} />
       <h4>Search results: {restaurants.length}</h4>
       {restaurants.map((r, k) => {
