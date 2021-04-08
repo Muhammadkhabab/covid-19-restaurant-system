@@ -34,24 +34,29 @@ const RestaurantProfile = ({
   const policies = { dine_in, dine_outside, pickup, curbside_pickup, delivery };
 
   const onClick = (i, val) => {
-    const prompts = ['employees', 'customers', 'free tables'];
-    const ans = window.prompt(`Current number of ${prompts[i]}`, val);
-    if (isNaN(ans) || parseInt(ans) < 0) {
-      toast.error('Value must be a non-negative integer');
-      return;
+    if (user && user.is_admin && user.restaurant_id === _id) {
+      const prompts = ['employees', 'customers', 'free tables'];
+      const ans = window.prompt(`Current number of ${prompts[i]}`, val);
+      if (isNaN(ans) || parseInt(ans) < 0) {
+        toast.error('Value must be a non-negative integer');
+        return;
+      }
+      if (ans === null) {
+        return;
+      }
+      const dataObj = {
+        current_customers,
+        current_employees,
+        current_free_tables,
+      };
+      const fields = [
+        'current_employees',
+        'current_customers',
+        'current_free_tables',
+      ];
+      dataObj[fields[i]] = parseInt(ans);
+      update(dataObj);
     }
-    const dataObj = {
-      current_customers,
-      current_employees,
-      current_free_tables,
-    };
-    const fields = [
-      'current_employees',
-      'current_customers',
-      'current_free_tables',
-    ];
-    dataObj[fields[i]] = parseInt(ans);
-    update(dataObj);
   };
 
   return (
