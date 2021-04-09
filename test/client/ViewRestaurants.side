@@ -203,18 +203,6 @@
         ["xpath=//p[contains(.,'Email: testRestauarant@gmail.com')]", "xpath:innerText"]
       ],
       "value": "4000"
-    }, {
-      "id": "f5247f7e-96f0-402c-aed9-92d07a67056e",
-      "comment": "",
-      "command": "assertElementPresent",
-      "target": "xpath=//p[contains(.,'Tel: 555-555-5555')]",
-      "targets": [
-        ["css=.msg-text:nth-child(1) > p:nth-child(3)", "css:finder"],
-        ["xpath=//div[@id='restaurant-profile']/div[2]/div/div/div/div/p[2]", "xpath:idRelative"],
-        ["xpath=//p[2]", "xpath:position"],
-        ["xpath=//p[contains(.,'Tel: -5555')]", "xpath:innerText"]
-      ],
-      "value": ""
     }]
   }, {
     "id": "41b54595-9dc8-4c84-b686-e04a75909093",
@@ -377,7 +365,7 @@
     "persistSession": false,
     "parallel": false,
     "timeout": 300,
-    "tests": ["501c21a4-975f-4e6f-ae28-c8bf69830b19"]
+    "tests": ["501c21a4-975f-4e6f-ae28-c8bf69830b19", "4f967333-28d8-466c-9172-2dec72608a62", "b0cbb863-2903-47b7-9d2c-63cebb78f3e3", "56c18eae-4977-4680-89e5-8158c3321284", "41b54595-9dc8-4c84-b686-e04a75909093"]
   }],
   "urls": ["http://localhost:3000/"],
   "plugins": []

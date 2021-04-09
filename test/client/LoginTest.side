@@ -200,7 +200,7 @@
     "persistSession": false,
     "parallel": false,
     "timeout": 300,
-    "tests": ["36252a02-c8df-43ad-a496-0fa8056034f1"]
+    "tests": ["36252a02-c8df-43ad-a496-0fa8056034f1", "4daee429-44b7-4fb5-a73c-9eee74cf1bc1"]
   }],
   "urls": ["localhost:3000/login"],
   "plugins": []
