@@ -32,3 +32,13 @@ cd ..
 Run: `npm run dev`
 13. A browser window should open to localhost:3000 and 
 14. To log in as a restauarant, reach out to Harry for a username and password
+
+## Running Tests:
+### Frontend - Selenium
+Selenium runs using the .side files found in /test/client/. These can be run directly using the selenium browser extension, or via the command line using `selenium-side-runner`.
+To run all frontend tests using the command line:
+1. Run `npm run seeds`. This will ensure the database is in a known state before running the tests
+2. Run `npm run dev` to launch the server.
+3. Run `npm run frontend-test` will cause the tests to be run
+
+Alternatively, if `selenium-side-runner` is installed, the .side files can be run directly. Check if the package is installed by running `selenium-side-runner --version`. If it is not installed, run `npm install -g selenium-side-runner`. Additional dependencies might also need to be installed, such as jest and webdriver
