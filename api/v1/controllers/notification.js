@@ -83,7 +83,7 @@ module.exports = {
       await notification.save();
       return res
         .status(200)
-        .json({ msg: 'Signed up for notification successfully!' });
+        .json(notification);
     } catch (err) {
       console.error(err.message);
       return res.status(500).json({
@@ -122,6 +122,17 @@ module.exports = {
 
       const user = await User.findById(req.user.id);
       const notification = await Notification.findById(req.params.nid);
+
+      if (!notification) {
+        return res
+          .status(404)
+          .json({
+            errors: [
+              { msg: 'Notification not found!' },
+            ]
+          });
+      }
+
       if (
         notification.contact != user.phone_number &&
         notification.contact != user.email
