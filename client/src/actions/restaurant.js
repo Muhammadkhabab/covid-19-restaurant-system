@@ -7,6 +7,7 @@ import {
   EDIT_RESTAURANT,
   GET_RESTAURANT_DATA,
   GET_ALL_RESTAURANTS,
+  FILTER_RESTAURANT,
 } from '../constants/actions';
 import { toast } from 'react-toastify';
 import { loadUser } from './auth';
@@ -192,3 +193,29 @@ export const getRestaurantData = (rid) => async (dispatch) => {
     }
   }
 };
+
+// Search and filter restaurants
+export const getFilteredRestaurant = (params) => async (dispatch) => {
+  try {
+    // Send request to API endpoint.
+    const res = await axios.get(`/${API}/restaurants/filter/`,{params});
+
+    // Call reducer to register restaurant.
+    dispatch({
+      type: FILTER_RESTAURANT,
+      payload: res.data.filtered_restaurant,
+    });
+    console.log(res.data);
+  } catch (err) {
+    // Loop through errors and notify user.
+    const errors = err.response.data.errors;
+    if (errors) {
+      errors.forEach((error) => {
+        toast.error(error.msg);
+        toast.error(error.param);
+        console.log(error);
+      });
+    }
+  }
+};
+

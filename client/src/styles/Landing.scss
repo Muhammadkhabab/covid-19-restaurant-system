@@ -2,8 +2,6 @@
 
 #landing-page {
   height: 100vh;
-  background: url('https://cdn5.vectorstock.com/i/1000x1000/70/64/people-drink-coffee-into-interior-cafe-bar-vector-20687064.jpg')
-    no-repeat center -248px;
   background-size: cover;
   text-align: center;
   color: #eee;
@@ -13,28 +11,14 @@
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
+    height:100%;
     position: relative;
-
-    .btn-side-group {
-      position: absolute;
-      top: 60px;
-      right: 0;
-      z-index: 1000;
-
-      .btn {
-        width: 250px;
-      }
-    }
   }
 
   .content {
     background: rgba(0, 0, 0, 0.6);
-    position: absolute;
-    top: 0vh;
-    width: 100vw;
-    padding: 25px;
+    position: fixed;
+    bottom:0px;
   }
 
   .btn {
@@ -42,18 +26,9 @@
     margin-bottom: 0.5em;
   }
 
-  #restaurant-info {
-    width: 300px;
-    line-height: 300%;
-  }
-
   h1 {
     font-weight: bold;
     font-size: 75px;
     text-shadow: 3px 3px 25px #00ff00, -3px -3px 50px #ff0000;
-  }
-
-  p {
-    font-weight: bold;
   }
 }
