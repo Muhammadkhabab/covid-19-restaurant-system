@@ -50,11 +50,38 @@ module.exports = {
     });
   },
 
+  addTestAdmin: async (rid) => {
+    return new Promise(async (resolve) => {
+      const salt = await bcrypt.genSalt(15);
+      const password = await bcrypt.hash('abc123', salt);
+
+      testRestaurantUser = new User({
+        first_name: "testRestaurantUser_first",
+        last_name: "testRestaurantUser_last",
+        username: "testRestaurantUser",
+        password: password,
+        phone_number: "123-456-1234",
+        email: "testRestaurantUser@gmail.com",
+        is_admin: true,
+        is_staff: false,
+        is_developer: false,
+        is_customer: false,
+        restaurant_id: rid,
+      });
+
+      console.log('Generating test admin...');
+
+      testRestaurantUser.id = rid;
+      await testRestaurantUser.save();
+      return resolve();
+    });
+  },
+
   addTestRestaurant: async () => {
     return new Promise(async (resolve) => {
       console.log('Generating test restaurant...');
-      await Restaurant.create(testRestaurant);
-      return resolve();
+      await testRestaurant.save();
+      return resolve(testRestaurant.id);
     });
   },
 }

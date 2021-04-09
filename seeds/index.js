@@ -51,7 +51,8 @@ const generate = () => {
 const testingData = () => {
   return new Promise(async (resolve) => {
     await TestingSeeds.addTestUser();
-    await TestingSeeds.addTestRestaurant();
+    const rid = await TestingSeeds.addTestRestaurant();
+    await TestingSeeds.addTestAdmin(rid);
     return resolve();
   })
 }
