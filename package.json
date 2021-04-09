@@ -47,7 +47,8 @@
       "services",
       "test",
       "seeds",
-      "config"
+      "config",
+      "server.js"
     ]
   }
 }

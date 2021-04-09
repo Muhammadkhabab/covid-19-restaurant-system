@@ -15,8 +15,8 @@ const data0 = {
 };
 
 const data1 = {
-  username: 'khoa165_update',
-  email: 'khoa_update@gmail.com',
+  username: 'khoa165_update1',
+  email: 'khoa_update1@gmail.com',
   password: 'abc123',
   confirmed_password: 'abc123',
   first_name: 'Harry',
@@ -25,13 +25,11 @@ const data1 = {
 };
 
 const data2 = {
-  username: 'khoa165_update2',
-  email: 'khoa_update@gmail.com',
-  password: 'abc123',
-  confirmed_password: 'abc123',
-  first_name: 'Harry',
+  username: 'khoa165_update1',
+  email: 'khoa_update1@gmail.com',
+  first_name: 'Khoa',
   last_name: 'Le',
-  phone_number: '604-312-1111',
+  phone_number: '604-312-1112',
 };
 
 module.exports = update = () => {
@@ -249,6 +247,163 @@ module.exports = update = () => {
             .to.equal('Email was already taken. Please enter another email!');
 
           done();
+        });
+    });
+
+    it('8. should not update if user tries to update password without old password', (done) => {
+      const temp8 = {
+        new_password: 'abc1234',
+        confirmed_newpassword: 'abc1234',
+      };
+      request(app)
+        .put('/users')
+        .use(prefix)
+        .send(temp8)
+        .set({ Accept: 'application/json', 'x-auth-token': token })
+        .expect('Content-Type', /json/)
+        .end((err, res) => {
+          if (err) return done(err);
+          expect(res.statusCode).to.equal(200);
+
+          request(app)
+            .post('/auth')
+            .use(prefix)
+            .send({ credential: 'khoa165_update1', password: 'abc123' })
+            .set('Accept', 'application/json')
+            .expect('Content-Type', /json/)
+            .end((err, res) => {
+              if (err) return done(err);
+              expect(res.statusCode).to.equal(200);
+              expect(res.body).to.have.property('token');
+              done();
+            });
+        });
+    });
+
+    it('9. should return error message if old password does not match', (done) => {
+      const temp9 = {
+        old_password: 'abc12345',
+        new_password: 'abc1234',
+        confirmed_newpassword: 'abc1234',
+      };
+      request(app)
+        .put('/users')
+        .use(prefix)
+        .send(temp9)
+        .set({ Accept: 'application/json', 'x-auth-token': token })
+        .expect('Content-Type', /json/)
+        .end((err, res) => {
+          if (err) return done(err);
+          expect(res.statusCode).to.equal(401);
+          expect(res.body).to.have.property('errors');
+          expect(res.body.errors).to.have.lengthOf(1);
+          expect(res.body.errors[0])
+            .to.have.property('msg')
+            .to.equal('Existing password is not correct! Please try again!');
+          done();
+        });
+    });
+
+    it('10. should return error message if new password is the same as old password', (done) => {
+      const temp10 = {
+        old_password: 'abc123',
+        new_password: 'abc123',
+        confirmed_newpassword: 'abc123',
+      };
+      request(app)
+        .put('/users')
+        .use(prefix)
+        .send(temp10)
+        .set({ Accept: 'application/json', 'x-auth-token': token })
+        .expect('Content-Type', /json/)
+        .end((err, res) => {
+          if (err) return done(err);
+          expect(res.statusCode).to.equal(401);
+          expect(res.body).to.have.property('errors');
+          expect(res.body.errors).to.have.lengthOf(1);
+          expect(res.body.errors[0])
+            .to.have.property('msg')
+            .to.equal('New password cannot be the same as old password!');
+          done();
+        });
+    });
+
+    it('11. should return error message if new passwords do not match', (done) => {
+      const temp11 = {
+        old_password: 'abc123',
+        new_password: 'abc1235',
+        confirmed_newpassword: 'abc1234',
+      };
+      request(app)
+        .put('/users')
+        .use(prefix)
+        .send(temp11)
+        .set({ Accept: 'application/json', 'x-auth-token': token })
+        .expect('Content-Type', /json/)
+        .end((err, res) => {
+          if (err) return done(err);
+          expect(res.statusCode).to.equal(401);
+          expect(res.body).to.have.property('errors');
+          expect(res.body.errors).to.have.lengthOf(1);
+          expect(res.body.errors[0])
+            .to.have.property('msg')
+            .to.equal('Passwords do not match!');
+          done();
+        });
+    });
+
+    it('12. should return error message if new password has length less than 6', (done) => {
+      const temp11 = {
+        old_password: 'abc123',
+        new_password: 'abc',
+        confirmed_newpassword: 'abc',
+      };
+      request(app)
+        .put('/users')
+        .use(prefix)
+        .send(temp11)
+        .set({ Accept: 'application/json', 'x-auth-token': token })
+        .expect('Content-Type', /json/)
+        .end((err, res) => {
+          if (err) return done(err);
+          expect(res.statusCode).to.equal(400);
+          expect(res.body).to.have.property('errors');
+          expect(res.body.errors).to.have.lengthOf(1);
+          expect(res.body.errors[0])
+            .to.have.property('msg')
+            .to.equal('Password must be between 6 and 20 characters long!');
+          done();
+        });
+    });
+
+    it('13. should update password if input is valid', (done) => {
+      const temp11 = {
+        old_password: 'abc123',
+        new_password: 'abc1234',
+        confirmed_newpassword: 'abc1234',
+      };
+      request(app)
+        .put('/users')
+        .use(prefix)
+        .send(temp11)
+        .set({ Accept: 'application/json', 'x-auth-token': token })
+        .expect('Content-Type', /json/)
+        .end((err, res) => {
+          if (err) return done(err);
+          expect(res.statusCode).to.equal(200);
+
+          request(app)
+            .post('/auth')
+            .use(prefix)
+            .send({ credential: 'khoa165_update1', password: 'abc1234' })
+            .set('Accept', 'application/json')
+            .expect('Content-Type', /json/)
+            .end((err, res) => {
+              if (err) return done(err);
+              expect(res.statusCode).to.equal(200);
+              expect(res.body).to.have.property('token');
+              done();
+            });
         });
     });
   });

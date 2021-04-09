@@ -157,7 +157,56 @@ module.exports = filter = () => {
         .end((err, res) => {
           if (err) return done(err);
           expect(res.statusCode).to.equal(200);
-          console.log(res.body);
+          // console.log(res.body);
+          // expect(res.body).to.have.lengthOf(2);
+          done();
+        });
+    });
+
+    it('2. should return 0 restaurant when no restaurants matched criteria', (done) => {
+      request(app)
+        .get(`/restaurants/filter?search=cat`)
+        .use(prefix)
+        .set({ Accept: 'application/json' })
+        .expect('Content-Type', /json/)
+        .end((err, res) => {
+          if (err) return done(err);
+          expect(res.statusCode).to.equal(404);
+          // console.log(res.body);
+          // expect(res.body).to.have.lengthOf(2);
+          done();
+        });
+    });
+
+    it('3. should return 0 restaurant when no restaurants matched criteria', (done) => {
+      request(app)
+        .get(
+          `/restaurants/filter?dine_in=1&dine_outside=0&curbside_pickup=1&pickup=1&delivery=1`
+        )
+        .use(prefix)
+        .set({ Accept: 'application/json' })
+        .expect('Content-Type', /json/)
+        .end((err, res) => {
+          if (err) return done(err);
+          expect(res.statusCode).to.equal(404);
+          // console.log(res.body);
+          // expect(res.body).to.have.lengthOf(2);
+          done();
+        });
+    });
+
+    it('4. should return 0 restaurant when no restaurants matched criteria', (done) => {
+      request(app)
+        .get(
+          `/restaurants/filter?tables_distance=1&current_free_tables=2&current_percent_capacity=0.5&total_customers=20`
+        )
+        .use(prefix)
+        .set({ Accept: 'application/json' })
+        .expect('Content-Type', /json/)
+        .end((err, res) => {
+          if (err) return done(err);
+          expect(res.statusCode).to.equal(404);
+          // console.log(res.body);
           // expect(res.body).to.have.lengthOf(2);
           done();
         });

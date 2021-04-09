@@ -116,7 +116,45 @@ module.exports = login = () => {
       request(app)
         .post('/auth')
         .use(prefix)
+        .send({ credential: 'khoa_login@gmail.com', password: '123456789' })
+        .set('Accept', 'application/json')
+        .expect('Content-Type', /json/)
+        .end((err, res) => {
+          if (err) return done(err);
+          expect(res.statusCode).to.equal(401);
+          expect(res.body).to.have.property('errors');
+          expect(res.body.errors).to.have.lengthOf(1);
+          expect(res.body.errors[0])
+            .to.have.property('msg')
+            .to.equal('Invalid credentials! Please try again!');
+          done();
+        });
+    });
+
+    it('6. should return error message for not existing email', (done) => {
+      request(app)
+        .post('/auth')
+        .use(prefix)
         .send({ credential: 'khoa165@gmail.com', password: '123456789' })
+        .set('Accept', 'application/json')
+        .expect('Content-Type', /json/)
+        .end((err, res) => {
+          if (err) return done(err);
+          expect(res.statusCode).to.equal(401);
+          expect(res.body).to.have.property('errors');
+          expect(res.body.errors).to.have.lengthOf(1);
+          expect(res.body.errors[0])
+            .to.have.property('msg')
+            .to.equal('Invalid credentials! Please try again!');
+          done();
+        });
+    });
+
+    it('7. should return error message for not existing username', (done) => {
+      request(app)
+        .post('/auth')
+        .use(prefix)
+        .send({ credential: 'khoa165_login7', password: '123456789' })
         .set('Accept', 'application/json')
         .expect('Content-Type', /json/)
         .end((err, res) => {
