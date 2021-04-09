@@ -8,5 +8,3 @@ package-lock.json
 .vscode/
 /.nyc_output
 /coverage
-
-/riza-seeds
