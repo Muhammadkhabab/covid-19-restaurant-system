@@ -107,8 +107,8 @@ module.exports = create = () => {
           expect(res.body.errors).to.have.lengthOf(5);
           const msgs = [
             ['restaurant_name', 'Missing restaurant name!'],
-            ['pickup', 'Invalid value'],
             ['pickup', 'Missing pickup!'],
+            ['pickup', 'Value must be 0 or 1'],
             ['number_tables', 'Missing number tables!'],
             ['number_tables', 'Invalid value'],
           ];
