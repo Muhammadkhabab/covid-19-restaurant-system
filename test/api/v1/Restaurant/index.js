@@ -8,7 +8,6 @@ const filter = require('./filter');
 const getChartData = require('./getChartData');
 const getById = require('./getById');
 
-
 module.exports = restaurant = () => {
   describe('Restaurant routes', () => {
     create();
@@ -18,7 +17,7 @@ module.exports = restaurant = () => {
     getMy();
     getById();
     deleteRestaurant();
-    //filter();
-    //getChartData();
+    filter();
+    getChartData();
   });
 };

@@ -392,6 +392,9 @@ module.exports = {
 
     const filterArray = {};
 
+    console.log('in controller');
+    console.log(search);
+
     try {
       //If criteria exists, add to the conditions
       if (search) {
