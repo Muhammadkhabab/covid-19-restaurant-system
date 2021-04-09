@@ -40,5 +40,13 @@
     "nyc": "^15.1.0",
     "supertest": "^6.1.3",
     "supertest-prefix": "^1.0.2"
+  },
+  "nyc": {
+    "exclude": [
+      "services",
+      "test",
+      "seeds",
+      "config"
+    ]
   }
 }
