@@ -1,7 +1,7 @@
-const User = require('../models/User');
+const User = require('../../models/User');
 const bcrypt = require('bcryptjs');
-const { getMaxListeners } = require('../models/User');
-const Restaurant = require('../models/Restaurant');
+const { getMaxListeners } = require('../../models/User');
+const Restaurant = require('../../models/Restaurant');
 
 const testRestaurant = new Restaurant({
   restaurant_name: "Test Restaurant",
@@ -23,6 +23,9 @@ const testRestaurant = new Restaurant({
   square_footage: 1500,
   customer_per_table: 4,
   tables_distance: 6,
+  current_customers: 30,
+  current_employees: 15,
+  current_free_tables: 4,
 });
 
 module.exports = {

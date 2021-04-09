@@ -11,6 +11,7 @@
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client",
     "seeds": "node seeds",
+    "frontend-seeds": "node seeds/client",
     "coverage": "nyc --reporter=html --reporter=text npm run test",
     "frontend-test": "selenium-side-runner ./test/client/*.side"
   },
@@ -33,7 +34,6 @@
   },
   "devDependencies": {
     "chai": "^4.3.3",
-    "chromedriver": "^89.0.0",
     "concurrently": "^6.0.0",
     "faker": "^5.4.0",
     "mocha": "^8.3.1",

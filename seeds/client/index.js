@@ -1,9 +1,10 @@
 const mongoose = require('mongoose');
-const Restaurant = require('./Restaurants');
-const User = require('./Users');
-const Record = require('./Records');
+const Restaurant = require('../Restaurants');
+const User = require('../Users');
+const Record = require('../Records');
+const TestingSeeds = require('./TestingSeeds');
 
-const connectDB = require('../config/db');
+const connectDB = require('../../config/db');
 
 const sleep = (s) => {
   return new Promise((resolve) => {
@@ -25,7 +26,7 @@ const configureDB = () => {
 
 const generate = () => {
   return new Promise(async (resolve) => {
-    const n1 = 30;
+    const n1 = 10;
     const rids1 = await Restaurant.generateRestaurants(n1);
     await User.generateAdmins(rids1);
     await Record.generateRecordsMultipleRestaurants(rids1);
@@ -47,10 +48,21 @@ const generate = () => {
   });
 };
 
+const testingData = () => {
+  return new Promise(async (resolve) => {
+    await TestingSeeds.addTestUser();
+    const rid = await TestingSeeds.addTestRestaurant();
+    await TestingSeeds.addTestAdmin(rid);
+    return resolve();
+  })
+}
+
 const run = async () => {
   try {
     console.log('Running seeds...');
     await configureDB();
+    console.log('Generating testing data...');
+    await testingData();
     console.log('Generating mock data...');
     await generate();
     console.log('Finished running seeds!');
