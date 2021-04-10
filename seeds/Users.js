@@ -81,7 +81,7 @@ module.exports = {
       const harry = User({
         first_name: 'Harry',
         last_name: 'Le',
-        username: generateUsername('Harry', 'Le'),
+        username: 'harry165',
         phone_number: '608-923-3447',
         email: 'khoa165@gmail.com',
         is_admin: true,

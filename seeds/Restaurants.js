@@ -81,6 +81,7 @@ module.exports = {
         restaurant_email: 'food.planet@gmail.com',
         restaurant_phone_number: '908-187-2626',
         website_url: 'https://foodandplanet.org/',
+        cuisine: 'American',
         dine_in: true,
         dine_outside: false,
         pickup: true,

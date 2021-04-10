@@ -1,5 +1,5 @@
 import React from 'react';
-import { Jumbotron, Container, Badge, Row, Col } from 'reactstrap';
+import { Jumbotron, Container, Button, Row, Col } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import '../../styles/Restaurants.scss';
 import { ROUTE_EDIT_RESTAURANT } from '../../constants/routes';
@@ -27,6 +27,13 @@ const RestaurantProfile = ({
     current_customers,
     current_employees,
     current_free_tables,
+
+    number_tables,
+    customer_per_table,
+    tables_distance,
+    square_footage,
+    cuisine,
+    website_url,
     _id,
   },
   user,
@@ -67,6 +74,14 @@ const RestaurantProfile = ({
           <Row className='header-wrapper'>
             <Col xs='12' lg='3'>
               <Avatar avatar={avatar} />
+              <a
+                target='_blank'
+                rel='noreferrer'
+                href={website_url}
+                className='external-link btn btn-outline-primary'
+              >
+                Restaurant website
+              </a>
             </Col>
             <Col xs='12' lg='9'>
               <div className='basic-info'>
@@ -78,7 +93,9 @@ const RestaurantProfile = ({
                     </Link>
                   )}
                 </h1>
-                <p className='info-text'>{address}</p>
+                {cuisine && <p className='m-0 info-text'>Cuisine: {cuisine}</p>}
+                <p className='m-0 info-text'>Address: {address}</p>
+
                 <PolicyBadges policies={policies} />
                 <Row className='mt-3'>
                   <Col lg='2'>
@@ -148,6 +165,13 @@ const RestaurantProfile = ({
               <h1>Capacity</h1>
               <p>Employee capacity: {employee_capacity}</p>
               <p>Customer capacity: {customer_capacity}</p>
+              <p>Table capacity: {number_tables}</p>
+            </div>
+            <div className='msg-text mt-5'>
+              <h1>Additional information</h1>
+              <p>Customers allowed per table: {customer_per_table}</p>
+              <p>Distance between tables: {tables_distance}</p>
+              <p>Dining area: {square_footage}</p>
             </div>
           </div>
         </Col>
