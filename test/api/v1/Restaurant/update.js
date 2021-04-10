@@ -10,7 +10,6 @@ const commonUserInfo = {
   phone_number: '222-222-2222',
   password: 'abc123',
   confirmed_password: 'abc123',
-  avatar: 'avater.jpg',
 };
 
 const commonResInfo = {
@@ -465,7 +464,7 @@ module.exports = update = () => {
         });
     });
 
-    it('5. Should return error message if invalid token is passed', (done) => {
+    it('5. should return error message if invalid token is passed', (done) => {
       const data5 = {
         ...res1,
         dine_in: 1,
