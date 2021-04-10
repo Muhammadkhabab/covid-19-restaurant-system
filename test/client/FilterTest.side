@@ -131,7 +131,7 @@
       "id": "c11183e5-7ff8-41b8-88c1-8a13e4680250",
       "comment": "",
       "command": "store",
-      "target": "Rath",
+      "target": "test",
       "targets": [],
       "value": "string"
     }, {

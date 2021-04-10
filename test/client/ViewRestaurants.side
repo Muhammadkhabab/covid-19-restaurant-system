@@ -1,0 +1,594 @@
+{
+  "id": "ce6a6ddd-9eb3-4307-86ba-699b84f65d23",
+  "version": "2.0",
+  "name": "ViewRestaurants",
+  "url": "http://localhost:3000/",
+  "tests": [{
+    "id": "501c21a4-975f-4e6f-ae28-c8bf69830b19",
+    "name": "ViewRestaurantList",
+    "commands": [{
+      "id": "bf9a0794-9e4b-47cf-a91c-f986f245a113",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:3000/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "51d78ae7-292e-46bd-83a6-b9b8ccbe646e",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1440x773",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "b95615a8-048b-46b6-adee-19a600a33b15",
+      "comment": "",
+      "command": "click",
+      "target": "id=restaurant-info",
+      "targets": [
+        ["id=restaurant-info", "id"],
+        ["linkText=View Restaurant Information", "linkText"],
+        ["css=#restaurant-info", "css:finder"],
+        ["xpath=//a[contains(text(),'View Restaurant Information')]", "xpath:link"],
+        ["xpath=//a[@id='restaurant-info']", "xpath:attributes"],
+        ["xpath=//div[@id='landing-page']/div/div[2]/div/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '/restaurants')]", "xpath:href"],
+        ["xpath=//div[2]/div/a", "xpath:position"],
+        ["xpath=//a[contains(.,'View Restaurant Information')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "07adfc0e-564a-4cdb-9903-d609f013133b",
+      "comment": "",
+      "command": "waitForElementPresent",
+      "target": "xpath=//h1[contains(.,'Test Restaurant')]",
+      "targets": [
+        ["css=.restaurant-card:nth-child(3) .m-0", "css:finder"],
+        ["xpath=//div[@id='root']/div[2]/div[2]/a/div/div[2]/h1", "xpath:idRelative"],
+        ["xpath=//a/div/div[2]/h1", "xpath:position"],
+        ["xpath=//h1[contains(.,'Test Restaurant')]", "xpath:innerText"]
+      ],
+      "value": "5000"
+    }, {
+      "id": "18b99eea-66f3-4ef7-8c0c-d3d1f183134c",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "xpath=//p[contains(.,'100 State Street')]",
+      "targets": [
+        ["css=.restaurant-card:nth-child(3) .col-md-5:nth-child(2) > p", "css:finder"],
+        ["xpath=//div[@id='root']/div[2]/div[2]/a/div/div[2]/p", "xpath:idRelative"],
+        ["xpath=//p", "xpath:position"],
+        ["xpath=//p[contains(.,'100 State Street')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "17cb0ff2-8029-444c-a000-4030ccbc98bc",
+      "comment": "Assert Dine-In True",
+      "command": "assertElementPresent",
+      "target": "css=.badge:nth-child(1) > .fa-check-square",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "4bd5411f-5554-47b2-86c1-283b6cf6ff9a",
+      "comment": "Assert Dine Outside False",
+      "command": "assertElementPresent",
+      "target": "css=.restaurant-card:nth-child(4) .badge:nth-child(2) > .fa-times-circle",
+      "targets": [
+        ["css=.restaurant-card:nth-child(4) .badge:nth-child(2) > .fas", "css:finder"],
+        ["xpath=//div[@id='root']/div[2]/div[2]/a/div/div[3]/div/span[2]/i", "xpath:idRelative"],
+        ["xpath=//span[2]/i", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "03993d84-50ff-4e9c-bc40-b619e796713f",
+      "comment": "Assert Pickup False",
+      "command": "assertElementPresent",
+      "target": "css=.restaurant-card:nth-child(4) .badge:nth-child(3) > .fa-times-circle",
+      "targets": [
+        ["css=.restaurant-card:nth-child(4) .badge:nth-child(3) > .fas", "css:finder"],
+        ["xpath=//div[@id='root']/div[2]/div[2]/a/div/div[3]/div/span[3]/i", "xpath:idRelative"],
+        ["xpath=//span[3]/i", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "fe037285-ef06-4270-ba19-97f0486f8910",
+      "comment": "Assert Curbside Pickup False",
+      "command": "assertElementPresent",
+      "target": "css=.restaurant-card:nth-child(4) .badge:nth-child(4) > .fa-times-circle",
+      "targets": [
+        ["css=.restaurant-card:nth-child(4) .badge:nth-child(4) > .fas", "css:finder"],
+        ["xpath=//div[@id='root']/div[2]/div[2]/a/div/div[3]/div/span[4]/i", "xpath:idRelative"],
+        ["xpath=//span[4]/i", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "ae44ad37-d775-4e0c-9501-b355f3db1ef2",
+      "comment": "Assert Delivery True",
+      "command": "assertElementPresent",
+      "target": "css=.restaurant-card:nth-child(4) .badge:nth-child(5) > .fa-check-square",
+      "targets": [
+        ["css=.restaurant-card:nth-child(4) .badge:nth-child(5) > .fas", "css:finder"],
+        ["xpath=//div[@id='root']/div[2]/div[2]/a/div/div[3]/div/span[5]/i", "xpath:idRelative"],
+        ["xpath=//span[5]/i", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "ab28041a-34aa-4836-85fa-013ddb4e045e",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=.restaurant-card:nth-child(4) .col-md-5:nth-child(3) > p",
+      "targets": [
+        ["css=.restaurant-card:nth-child(4) .col-md-5:nth-child(3) > p", "css:finder"],
+        ["xpath=//div[@id='root']/div[2]/div[2]/a/div/div[3]/p", "xpath:idRelative"],
+        ["xpath=//div[3]/p", "xpath:position"],
+        ["xpath=//p[contains(.,'Current Capacity: ?/50')]", "xpath:innerText"]
+      ],
+      "value": "Current Capacity: 30/50"
+    }]
+  }, {
+    "id": "4f967333-28d8-466c-9172-2dec72608a62",
+    "name": "RestaurantProfile",
+    "commands": [{
+      "id": "dc4eed82-34d4-4dc9-8442-21f56fc41abc",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:3000/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "d9bad01e-5f7b-420e-86be-85cff3432af9",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1440x773",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "f4978570-91d4-40f6-bd25-f317d4e6752c",
+      "comment": "",
+      "command": "click",
+      "target": "id=restaurant-info",
+      "targets": [
+        ["id=restaurant-info", "id"],
+        ["linkText=View Restaurant Information", "linkText"],
+        ["css=#restaurant-info", "css:finder"],
+        ["xpath=//a[contains(text(),'View Restaurant Information')]", "xpath:link"],
+        ["xpath=//a[@id='restaurant-info']", "xpath:attributes"],
+        ["xpath=//div[@id='landing-page']/div/div[2]/div/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '/restaurants')]", "xpath:href"],
+        ["xpath=//div[2]/div/a", "xpath:position"],
+        ["xpath=//a[contains(.,'View Restaurant Information')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "f6300356-b6f4-4d0e-914b-cb12241a1f67",
+      "comment": "",
+      "command": "waitForElementPresent",
+      "target": "xpath=//h1[contains(.,'Test Restaurant')]",
+      "targets": [
+        ["css=.restaurant-card:nth-child(3) .m-0", "css:finder"],
+        ["xpath=//div[@id='root']/div[2]/div[2]/a/div/div[2]/h1", "xpath:idRelative"],
+        ["xpath=//a/div/div[2]/h1", "xpath:position"],
+        ["xpath=//h1[contains(.,'Test Restaurant')]", "xpath:innerText"]
+      ],
+      "value": "20000"
+    }, {
+      "id": "ee7d10aa-1b01-4737-b27c-1429ed15017b",
+      "comment": "",
+      "command": "pause",
+      "target": "1000",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "e931a95b-6dea-4626-94d5-e3e1e1f06b6d",
+      "comment": "",
+      "command": "runScript",
+      "target": "window.scrollTo(0,600)",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "00035310-6739-4fe1-ad85-1a66259eaa6b",
+      "comment": "",
+      "command": "pause",
+      "target": "1000",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "d2072691-63c2-49fd-9a2f-38e703b4d26b",
+      "comment": "",
+      "command": "click",
+      "target": "xpath=//h1[contains(.,'Test Restaurant')]",
+      "targets": [
+        ["css=.restaurant-card:nth-child(3) .m-0", "css:finder"],
+        ["xpath=//div[@id='root']/div[2]/div[2]/a/div/div[2]/h1", "xpath:idRelative"],
+        ["xpath=//a/div/div[2]/h1", "xpath:position"],
+        ["xpath=//h1[contains(.,'Test Restaurant')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "8cbfe14d-7dcd-4f79-affd-d1d79ffca027",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=.header",
+      "targets": [
+        ["css=.header", "css:finder"],
+        ["xpath=//div[@id='restaurant-profile']/div/div/div/div[2]/div/h1", "xpath:idRelative"],
+        ["xpath=//h1", "xpath:position"],
+        ["xpath=//h1[contains(.,'Test Restaurant')]", "xpath:innerText"]
+      ],
+      "value": "Test Restaurant"
+    }]
+  }, {
+    "id": "56c18eae-4977-4680-89e5-8158c3321284",
+    "name": "RestaurantProfileContact",
+    "commands": [{
+      "id": "8082089c-820d-482d-8fcd-ac130ccd782a",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:3000/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "a5f6b448-7890-477c-8fbe-993c7d35cf75",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1440x773",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "323826c3-f352-462c-8bbe-3a00897187ab",
+      "comment": "",
+      "command": "click",
+      "target": "id=restaurant-info",
+      "targets": [
+        ["id=restaurant-info", "id"],
+        ["linkText=View Restaurant Information", "linkText"],
+        ["css=#restaurant-info", "css:finder"],
+        ["xpath=//a[contains(text(),'View Restaurant Information')]", "xpath:link"],
+        ["xpath=//a[@id='restaurant-info']", "xpath:attributes"],
+        ["xpath=//div[@id='landing-page']/div/div[2]/div/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '/restaurants')]", "xpath:href"],
+        ["xpath=//div[2]/div/a", "xpath:position"],
+        ["xpath=//a[contains(.,'View Restaurant Information')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "bf2d3345-6e8d-49ff-b0f4-271e124418a2",
+      "comment": "",
+      "command": "waitForElementPresent",
+      "target": "xpath=//h1[contains(.,'Test Restaurant')]",
+      "targets": [
+        ["css=.restaurant-card:nth-child(3) .m-0", "css:finder"],
+        ["xpath=//div[@id='root']/div[2]/div[2]/a/div/div[2]/h1", "xpath:idRelative"],
+        ["xpath=//a/div/div[2]/h1", "xpath:position"],
+        ["xpath=//h1[contains(.,'Test Restaurant')]", "xpath:innerText"]
+      ],
+      "value": "3000"
+    }, {
+      "id": "33cd3470-8977-4e90-ac36-d25e142a51cc",
+      "comment": "",
+      "command": "pause",
+      "target": "1000",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "a67dd528-8cd9-4353-b1e4-e731b28a7ffc",
+      "comment": "",
+      "command": "runScript",
+      "target": "window.scrollTo(0,600)",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "63de64ff-3955-4ed5-a08f-93bf1544f3c5",
+      "comment": "",
+      "command": "pause",
+      "target": "1000",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "ee30c36a-b8f1-4b17-b555-738a632a3e3b",
+      "comment": "",
+      "command": "click",
+      "target": "xpath=//h1[contains(.,'Test Restaurant')]",
+      "targets": [
+        ["css=.restaurant-card:nth-child(3) .m-0", "css:finder"],
+        ["xpath=//div[@id='root']/div[2]/div[2]/a/div/div[2]/h1", "xpath:idRelative"],
+        ["xpath=//a/div/div[2]/h1", "xpath:position"],
+        ["xpath=//h1[contains(.,'Test Restaurant')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "37d8c289-9eac-4d52-896b-9c7d1b55344c",
+      "comment": "",
+      "command": "waitForElementPresent",
+      "target": "xpath=//p[contains(.,'Email: testRestauarant@gmail.com')]",
+      "targets": [
+        ["css=.contact-info p:nth-child(2)", "css:finder"],
+        ["xpath=//div[@id='restaurant-profile']/div[2]/div/div/div/div/p", "xpath:idRelative"],
+        ["xpath=//div[2]/div/div/div/div/p", "xpath:position"],
+        ["xpath=//p[contains(.,'Email: testRestauarant@gmail.com')]", "xpath:innerText"]
+      ],
+      "value": "4000"
+    }]
+  }, {
+    "id": "41b54595-9dc8-4c84-b686-e04a75909093",
+    "name": "RestaurantProfilePolicy",
+    "commands": [{
+      "id": "17f4b00b-f1f7-4b58-97c8-6a9dc5320b70",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:3000/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "3296ac43-6ff0-44f9-837c-214ba7592b40",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1440x773",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "c1598dbc-9391-4553-a125-f820bfa702c3",
+      "comment": "",
+      "command": "click",
+      "target": "id=restaurant-info",
+      "targets": [
+        ["id=restaurant-info", "id"],
+        ["linkText=View Restaurant Information", "linkText"],
+        ["css=#restaurant-info", "css:finder"],
+        ["xpath=//a[contains(text(),'View Restaurant Information')]", "xpath:link"],
+        ["xpath=//a[@id='restaurant-info']", "xpath:attributes"],
+        ["xpath=//div[@id='landing-page']/div/div[2]/div/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '/restaurants')]", "xpath:href"],
+        ["xpath=//div[2]/div/a", "xpath:position"],
+        ["xpath=//a[contains(.,'View Restaurant Information')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "856df0d0-2b92-41e2-95fb-d62add00dc66",
+      "comment": "",
+      "command": "waitForElementPresent",
+      "target": "xpath=//h1[contains(.,'Test Restaurant')]",
+      "targets": [
+        ["css=.restaurant-card:nth-child(3) .m-0", "css:finder"],
+        ["xpath=//div[@id='root']/div[2]/div[2]/a/div/div[2]/h1", "xpath:idRelative"],
+        ["xpath=//a/div/div[2]/h1", "xpath:position"],
+        ["xpath=//h1[contains(.,'Test Restaurant')]", "xpath:innerText"]
+      ],
+      "value": "3000"
+    }, {
+      "id": "82a5ed43-dd68-456f-a346-96f809b8ea35",
+      "comment": "",
+      "command": "pause",
+      "target": "1000",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "4d9fafeb-1ec2-4427-96e3-01124c259306",
+      "comment": "",
+      "command": "runScript",
+      "target": "window.scrollTo(0,600)",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "177acecf-5d37-4099-af40-1e898cf2eadc",
+      "comment": "",
+      "command": "pause",
+      "target": "1000",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "fa518f65-bbac-4d03-8e99-f61a0e4818da",
+      "comment": "",
+      "command": "click",
+      "target": "xpath=//h1[contains(.,'Test Restaurant')]",
+      "targets": [
+        ["css=.restaurant-card:nth-child(3) .m-0", "css:finder"],
+        ["xpath=//div[@id='root']/div[2]/div[2]/a/div/div[2]/h1", "xpath:idRelative"],
+        ["xpath=//a/div/div[2]/h1", "xpath:position"],
+        ["xpath=//h1[contains(.,'Test Restaurant')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "49182d10-d74d-4a5f-ad16-e6bb27573f75",
+      "comment": "",
+      "command": "waitForElementPresent",
+      "target": "xpath=//p[contains(.,'Test Restauarnt Policy')]",
+      "targets": [
+        ["css=.right-panel > .msg-text:nth-child(1) > p", "css:finder"],
+        ["xpath=//div[@id='restaurant-profile']/div[2]/div[3]/div/div/p", "xpath:idRelative"],
+        ["xpath=//div[3]/div/div/p", "xpath:position"],
+        ["xpath=//p[contains(.,'Test Restauarnt Policy')]", "xpath:innerText"]
+      ],
+      "value": "4000"
+    }]
+  }, {
+    "id": "b0cbb863-2903-47b7-9d2c-63cebb78f3e3",
+    "name": "RestaurantProfileCapacity",
+    "commands": [{
+      "id": "ada49556-1e9e-4928-aad7-9b297d262bd5",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:3000/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "36518662-af91-40fc-afb1-0740edf596c3",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1440x773",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "3383bec7-a50d-4d64-97d8-c44f8e003451",
+      "comment": "",
+      "command": "click",
+      "target": "id=restaurant-info",
+      "targets": [
+        ["id=restaurant-info", "id"],
+        ["linkText=View Restaurant Information", "linkText"],
+        ["css=#restaurant-info", "css:finder"],
+        ["xpath=//a[contains(text(),'View Restaurant Information')]", "xpath:link"],
+        ["xpath=//a[@id='restaurant-info']", "xpath:attributes"],
+        ["xpath=//div[@id='landing-page']/div/div[2]/div/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '/restaurants')]", "xpath:href"],
+        ["xpath=//div[2]/div/a", "xpath:position"],
+        ["xpath=//a[contains(.,'View Restaurant Information')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "ceb31484-1d01-4bd2-bd9b-5277c98d3549",
+      "comment": "",
+      "command": "waitForElementPresent",
+      "target": "xpath=//h1[contains(.,'Test Restaurant')]",
+      "targets": [
+        ["css=.restaurant-card:nth-child(3) .m-0", "css:finder"],
+        ["xpath=//div[@id='root']/div[2]/div[2]/a/div/div[2]/h1", "xpath:idRelative"],
+        ["xpath=//a/div/div[2]/h1", "xpath:position"],
+        ["xpath=//h1[contains(.,'Test Restaurant')]", "xpath:innerText"]
+      ],
+      "value": "3000"
+    }, {
+      "id": "0b3f215f-dd94-43ad-8c14-471bccb6f8af",
+      "comment": "",
+      "command": "pause",
+      "target": "1000",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "dfe554d1-702f-4520-a298-15d96c59053e",
+      "comment": "",
+      "command": "runScript",
+      "target": "window.scrollTo(0,600)",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "9029ef82-82ab-4ef5-bec2-a0346fbeb647",
+      "comment": "",
+      "command": "pause",
+      "target": "1000",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "3c725fc1-c4f0-43b4-a8e3-c90957c4cc37",
+      "comment": "",
+      "command": "click",
+      "target": "xpath=//h1[contains(.,'Test Restaurant')]",
+      "targets": [
+        ["css=.restaurant-card:nth-child(3) .m-0", "css:finder"],
+        ["xpath=//div[@id='root']/div[2]/div[2]/a/div/div[2]/h1", "xpath:idRelative"],
+        ["xpath=//a/div/div[2]/h1", "xpath:position"],
+        ["xpath=//h1[contains(.,'Test Restaurant')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "ee39c8d2-5e34-40b4-a1f5-e9486faf74fc",
+      "comment": "",
+      "command": "waitForElementPresent",
+      "target": "xpath=//p[contains(.,'Employee capacity: 20')]",
+      "targets": [
+        ["css=.mt-5 > p:nth-child(2)", "css:finder"],
+        ["xpath=//div[@id='restaurant-profile']/div[2]/div[3]/div/div[2]/p", "xpath:idRelative"],
+        ["xpath=//div[2]/p", "xpath:position"],
+        ["xpath=//p[contains(.,'Employee capacity: 20')]", "xpath:innerText"]
+      ],
+      "value": "4000"
+    }, {
+      "id": "83039cdc-827b-42a9-9777-4a624eab568a",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "xpath=//p[contains(.,'Customer capacity: 50')]",
+      "targets": [
+        ["css=.mt-5 > p:nth-child(3)", "css:finder"],
+        ["xpath=//div[@id='restaurant-profile']/div[2]/div[3]/div/div[2]/p[2]", "xpath:idRelative"],
+        ["xpath=//div[2]/p[2]", "xpath:position"],
+        ["xpath=//p[contains(.,'Customer capacity: 50')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "e5303222-7217-4976-9fd6-11b66686ea16",
+      "comment": "",
+      "command": "runScript",
+      "target": "window.scrollTo(0,600)",
+      "targets": [],
+      "value": ""
+    }]
+  }, {
+    "id": "f0160a47-f526-4f98-86c6-7335a5026026",
+    "name": "scroll",
+    "commands": [{
+      "id": "68669007-3028-49fb-9fd2-fdaa22a47ebe",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:3000/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "0b0744a0-b070-4c3e-aa02-438c43f840e2",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1440x773",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "13cddbf1-f406-42cd-837a-be5381d9dacc",
+      "comment": "",
+      "command": "click",
+      "target": "id=restaurant-info",
+      "targets": [
+        ["id=restaurant-info", "id"],
+        ["linkText=View Restaurant Information", "linkText"],
+        ["css=#restaurant-info", "css:finder"],
+        ["xpath=//a[contains(text(),'View Restaurant Information')]", "xpath:link"],
+        ["xpath=//a[@id='restaurant-info']", "xpath:attributes"],
+        ["xpath=//div[@id='landing-page']/div/div[2]/div/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '/restaurants')]", "xpath:href"],
+        ["xpath=//div[2]/div/a", "xpath:position"],
+        ["xpath=//a[contains(.,'View Restaurant Information')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "550e5cc2-d29e-4783-9da5-980fcabe6c92",
+      "comment": "",
+      "command": "pause",
+      "target": "2000",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "6f1fa51d-7a3f-4a55-848c-3511f5090544",
+      "comment": "",
+      "command": "runScript",
+      "target": "window.scrollTo(0,600)",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "df006533-8f39-4502-a29a-4f8c5a3dac58",
+      "comment": "",
+      "command": "pause",
+      "target": "2000",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "582d60d5-df0e-4ac6-bd8d-4a0e51c84776",
+      "comment": "",
+      "command": "click",
+      "target": "xpath=//h1[contains(.,'Test Restaurant')]",
+      "targets": [
+        ["css=.restaurant-card:nth-child(4) .m-0", "css:finder"],
+        ["xpath=//div[@id='root']/div[2]/div[2]/a/div/div[2]/h1", "xpath:idRelative"],
+        ["xpath=//h1", "xpath:position"],
+        ["xpath=//h1[contains(.,'Test Restaurant')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }],
+  "suites": [{
+    "id": "74e3b07d-6e8e-48c0-83e2-599239e8bad4",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["4f967333-28d8-466c-9172-2dec72608a62", "b0cbb863-2903-47b7-9d2c-63cebb78f3e3", "56c18eae-4977-4680-89e5-8158c3321284", "41b54595-9dc8-4c84-b686-e04a75909093", "501c21a4-975f-4e6f-ae28-c8bf69830b19"]
+  }],
+  "urls": ["http://localhost:3000/"],
+  "plugins": []
+}
