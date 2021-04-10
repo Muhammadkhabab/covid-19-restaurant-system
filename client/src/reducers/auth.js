@@ -29,7 +29,7 @@ export default function auth_red(state = initialState, action) {
     case REGISTER_SUCCESS:
     case LOGIN_SUCCESS:
       // Add token to local storage.
-      localStorage.setItem('token', payload.token);
+      localStorage.setItem('token', payload);
       // Set isAuthenticated to true and loading to false.
       return { ...state, isAuthenticated: true, loading: true };
     case UPDATE_SUCCESS:

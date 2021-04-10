@@ -52,11 +52,13 @@ const RestaurantProfile = ({
       if (ans === null) {
         return;
       }
-      const dataObj = {
-        current_customers,
-        current_employees,
-        current_free_tables,
-      };
+      const dataObj = {};
+      dataObj['current_customers'] = current_customers ? current_customers : 0;
+      dataObj['current_employees'] = current_employees ? current_employees : 0;
+      dataObj['current_free_tables'] = current_free_tables
+        ? current_free_tables
+        : 0;
+
       const fields = [
         'current_employees',
         'current_customers',
@@ -104,7 +106,7 @@ const RestaurantProfile = ({
                       className='stat-box'
                       onClick={() => onClick(0, current_employees)}
                     >
-                      {current_employees}
+                      {current_employees ? current_employees : 0}
                     </div>
                   </Col>
                   <Col lg='2'>
@@ -113,7 +115,7 @@ const RestaurantProfile = ({
                       className='stat-box'
                       onClick={() => onClick(1, current_customers)}
                     >
-                      {current_customers}
+                      {current_customers ? current_customers : 0}
                     </div>
                   </Col>
                   <Col lg='2'>
@@ -122,7 +124,7 @@ const RestaurantProfile = ({
                       className='stat-box'
                       onClick={() => onClick(2, current_free_tables)}
                     >
-                      {current_free_tables}
+                      {current_free_tables ? current_free_tables : 0}
                     </div>
                   </Col>
                 </Row>

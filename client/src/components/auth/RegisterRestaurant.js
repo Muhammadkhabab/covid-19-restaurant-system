@@ -9,7 +9,8 @@ import {
   ROUTE_LOGIN,
   ROUTE_REGISTER_RESTAURANT,
 	ROUTE_DASHBOARD_USER,
-	ROUTE_DASHBOARD_RESTAURANT
+	ROUTE_DASHBOARD_RESTAURANT,
+	ROUTE_RESTAURANTS
 } from '../../constants/routes';
 
 const RegisterRestaurant = ({ registerRestaurant, auth: { isAuthenticated, user } }) => {
@@ -71,7 +72,7 @@ const RegisterRestaurant = ({ registerRestaurant, auth: { isAuthenticated, user 
 		if (user && (user.is_admin || user.is_staff)) {
 			return <Redirect to={ROUTE_DASHBOARD_RESTAURANT} />;
 		} else {
-			return <Redirect to={ROUTE_DASHBOARD_USER} />;
+			return <Redirect to={ROUTE_RESTAURANTS} />;
 		}
 	}
 

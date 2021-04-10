@@ -103,7 +103,7 @@ export const login = ({ credential, password }) => async (dispatch) => {
     // Call reducer to login user.
     dispatch({
       type: LOGIN_SUCCESS,
-      payload: res.data,
+      payload: res.data.token,
     });
 
     // Call reducer to load user.
