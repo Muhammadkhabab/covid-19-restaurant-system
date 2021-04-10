@@ -233,7 +233,7 @@
     }, {
       "id": "601aa3e7-701e-424f-a5c0-c69255ceddee",
       "comment": "",
-      "command": "assert",
+      "command": "//assert",
       "target": "webURL",
       "targets": [],
       "value": "http://localhost:3000/login"
@@ -1060,8 +1060,8 @@
     }, {
       "id": "d42b563c-86f1-4340-b0c2-84baaf18e9c1",
       "comment": "Assert password is at least 6 char",
-      "command": "assertText",
-      "target": "css=div.Toastify__toast-body",
+      "command": "//assertElementPresent",
+      "target": "css=#xebnl4qhy > .Toastify__toast-body",
       "targets": [],
       "value": "Password must be at least 6 characters and contain at least a number!"
     }]

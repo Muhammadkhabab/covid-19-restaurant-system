@@ -7,6 +7,7 @@ import Charts from '../charts/Charts';
 import PolicyBadges from '../layout/PolicyBadges';
 import Avatar from '../layout/Avatar';
 import { toast } from 'react-toastify';
+import RestaurantMap from './RestaurantMap';
 
 const RestaurantProfile = ({
   restObj: {
@@ -123,7 +124,9 @@ const RestaurantProfile = ({
                 <p>Tel: {restaurant_phone_number}</p>
               </div>
             </div>
-            <div className='map-wrapper'></div>
+            <div className='map-wrapper'>
+              <RestaurantMap addr={address} />
+            </div>
           </div>
         </Col>
         <Col xs='12' lg='4'>
