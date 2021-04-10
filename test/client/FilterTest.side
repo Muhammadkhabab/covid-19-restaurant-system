@@ -554,11 +554,11 @@
       "id": "9ae8a72d-45a3-43e6-9eb1-e5cfaeec25ea",
       "comment": "",
       "command": "assertElementPresent",
-      "target": "css=.restaurant-card:nth-child(5) .badge:nth-child(3) > .fa-check-square",
+      "target": "css=.restaurant-card:nth-child(5) .badge:nth-child(4) > .fa-check-square",
       "targets": [
-        ["css=.restaurant-card:nth-child(5) .badge:nth-child(2) > .fas", "css:finder"],
-        ["xpath=//div[@id='root']/div[2]/div[3]/a/div/div[3]/div/span[2]/i", "xpath:idRelative"],
-        ["xpath=//div[3]/a/div/div[3]/div/span[2]/i", "xpath:position"]
+        ["css=.restaurant-card:nth-child(5) .badge:nth-child(4) > .fas", "css:finder"],
+        ["xpath=//div[@id='root']/div[2]/div[3]/a/div/div[3]/div/span[4]/i", "xpath:idRelative"],
+        ["xpath=//div[3]/a/div/div[3]/div/span[4]/i", "xpath:position"]
       ],
       "value": ""
     }, {
