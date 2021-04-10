@@ -31,6 +31,17 @@ const NavigationBar = ({
   const privateLinks = (
     <Fragment>
       <NavItem>
+        <a
+          target='_blank'
+          rel='noreferrer'
+          href='https://www.cdc.gov/coronavirus/2019-ncov/community/organizations/business-employers/bars-restaurants.html'
+          className='nav-link'
+        >
+          <i className='fas fa-file-alt mr-1'></i>
+          CDC Guideline
+        </a>
+      </NavItem>
+      <NavItem>
         <Link to={ROUTE_ACCOUNT} className='nav-link'>
           <i className='fas fa-user mr-1' />
           Account
@@ -68,6 +79,17 @@ const NavigationBar = ({
 
   const publicLinks = (
     <Fragment>
+      <NavItem>
+        <a
+          target='_blank'
+          rel='noreferrer'
+          href='https://www.cdc.gov/coronavirus/2019-ncov/community/organizations/business-employers/bars-restaurants.html'
+          className='nav-link'
+        >
+          <i className='fas fa-file-alt mr-1'></i>
+          CDC Guideline
+        </a>
+      </NavItem>
       <NavItem>
         <Link to={ROUTE_RESTAURANTS} className='nav-link'>
           <i className='fas fa-store mr-1' />
