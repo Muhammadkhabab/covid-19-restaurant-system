@@ -25,6 +25,10 @@ const configureDB = () => {
 
 const generate = () => {
   return new Promise(async (resolve) => {
+    const rid = await Restaurant.generateHarryRestaurant();
+    await User.generateHarryAdmin(rid);
+    await Record.generateRecordsMultipleRestaurants([rid]);
+
     const n1 = 30;
     const rids1 = await Restaurant.generateRestaurants(n1);
     await User.generateAdmins(rids1);
