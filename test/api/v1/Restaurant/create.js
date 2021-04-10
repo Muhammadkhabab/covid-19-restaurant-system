@@ -4,6 +4,33 @@ const expect = require('chai').expect;
 const supertestPrefix = require('supertest-prefix').default;
 const app = require('../../../../server');
 
+const commonUserInfo = {
+  first_name: 'Cecelia',
+  last_name: 'Peterson',
+  phone_number: '222-222-2222',
+  password: 'abc123',
+  confirmed_password: 'abc123',
+};
+
+const commonResInfo = {
+  restaurant_email: 'rest_email@gmail.com',
+  restaurant_phone_number: '111-111-1111',
+  cuisine: 'vegan',
+  website_url: 'awebsite.com',
+  dine_in: 0,
+  dine_outside: 0,
+  pickup: 0,
+  curbside_pickup: 1,
+  delivery: 0,
+  policy_notes: 'Keep your mask over your nose!',
+  employee_capacity: 10,
+  customer_capacity: 10,
+  number_tables: 7,
+  square_footage: 500,
+  customer_per_table: 10,
+  tables_distance: 10,
+};
+
 module.exports = create = () => {
   describe('POST /restaurants (create)', () => {
     const prefix = supertestPrefix('/api/v1');
@@ -48,7 +75,7 @@ module.exports = create = () => {
       done();
     });
 
-    it('1. Should return token for valid input', (done) => {
+    it('1. should return token for valid input', (done) => {
       mongoose.connection.dropCollection('users');
       mongoose.connection.dropCollection('restaurants');
       request(app)
@@ -59,14 +86,13 @@ module.exports = create = () => {
         .expect('Content-Type', /json/)
         .end((err, res) => {
           if (err) return done(err);
-          // console.log(err.errors);
           expect(res.statusCode).to.equal(200);
           expect(res.body).to.have.property('token');
           done();
         });
     });
 
-    it('2. Should return error messages for missing fields', (done) => {
+    it('2. should return error messages for missing fields', (done) => {
       const data0 = {
         first_name: 'Cecelia',
         last_name: 'Peterson',
@@ -122,7 +148,7 @@ module.exports = create = () => {
         });
     });
 
-    it('3. Should return error message for existing email', (done) => {
+    it('3. should return error message for existing email', (done) => {
       const data1 = {
         first_name: 'Paul',
         last_name: 'Peterson',
@@ -177,13 +203,15 @@ module.exports = create = () => {
               expect(res.body.errors).to.have.lengthOf(1);
               expect(res.body.errors[0])
                 .to.have.property('msg')
-                .to.equal('Email was already taken. Please enter another email!');
+                .to.equal(
+                  'Email was already taken. Please enter another email!'
+                );
               done();
             });
         });
     });
 
-    it('4. Should return error message for existing username', (done) => {
+    it('4. should return error message for existing username', (done) => {
       const data1 = {
         first_name: 'Paul',
         last_name: 'Peterson',
@@ -238,14 +266,15 @@ module.exports = create = () => {
               expect(res.body.errors).to.have.lengthOf(1);
               expect(res.body.errors[0])
                 .to.have.property('msg')
-                .to.equal('Username was already taken. Please enter another username!');
+                .to.equal(
+                  'Username was already taken. Please enter another username!'
+                );
               done();
             });
         });
     });
 
-
-    it('5. Should return error message for mismatching passwords', (done) => {
+    it('5. should return error message for mismatching passwords', (done) => {
       const data0 = {
         first_name: 'Cecelia',
         last_name: 'Peterson',
@@ -274,7 +303,7 @@ module.exports = create = () => {
         customer_per_table: 10,
         tables_distance: 10,
       };
-      
+
       mongoose.connection.dropCollection('users');
       mongoose.connection.dropCollection('restaurants');
       request(app)
@@ -295,7 +324,7 @@ module.exports = create = () => {
         });
     });
 
-    it('6. Should return error message for invalid email', (done) => {
+    it('6. should return error message for invalid email', (done) => {
       const data0 = {
         first_name: 'Cecelia',
         last_name: 'Peterson',
@@ -345,7 +374,7 @@ module.exports = create = () => {
         });
     });
 
-    it('7. Should return error message for multiple invalid input', (done) => {
+    it('7. should return error message for multiple invalid input', (done) => {
       const data0 = {
         first_name: 'Cecelia',
         last_name: 'Peterson',
@@ -402,7 +431,7 @@ module.exports = create = () => {
         });
     });
 
-    it('8. Should return error message for an invalid password (wrong num chars)', (done) => {
+    it('8. should return error message for an invalid password (wrong num chars)', (done) => {
       const data0 = {
         first_name: 'Cecelia',
         last_name: 'Peterson',
@@ -452,7 +481,7 @@ module.exports = create = () => {
         });
     });
 
-    it('9. Should return error message for an invalid password (no number)', (done) => {
+    it('9. should return error message for an invalid password (no number)', (done) => {
       const data0 = {
         first_name: 'Cecelia',
         last_name: 'Peterson',
@@ -502,5 +531,55 @@ module.exports = create = () => {
         });
     });
 
+    it('10. should return error message if there exists another restaurant with same name and address', (done) => {
+      const res10a = {
+        restaurant_name: 'Harry create10 restaurant',
+        address: '10 State St',
+
+        username: 'harry_create10a',
+        email: 'harry_create10a@wisc.edu',
+
+        ...commonUserInfo,
+        ...commonResInfo,
+      };
+      request(app)
+        .post('/restaurants')
+        .use(prefix)
+        .send(res10a)
+        .set({ Accept: 'application/json' })
+        .expect('Content-Type', /json/)
+        .end((err, res) => {
+          if (err) return done(err);
+
+          const res10b = {
+            restaurant_name: 'Harry create10 restaurant',
+            address: '10 State St',
+
+            username: 'harry_create10b',
+            email: 'harry_create10b@wisc.edu',
+
+            ...commonUserInfo,
+            ...commonResInfo,
+          };
+          request(app)
+            .post('/restaurants')
+            .use(prefix)
+            .send(res10b)
+            .set({ Accept: 'application/json' })
+            .expect('Content-Type', /json/)
+            .end((err, res) => {
+              if (err) return done(err);
+              expect(res.statusCode).to.equal(400);
+              expect(res.body).to.have.property('errors');
+              expect(res.body.errors).to.have.lengthOf(1);
+              expect(res.body.errors[0])
+                .to.have.property('msg')
+                .to.equal(
+                  'There exists a restaurant with the same name at this address. Please enter another name or address.'
+                );
+              done();
+            });
+        });
+    });
   });
 };

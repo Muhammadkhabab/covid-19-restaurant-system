@@ -189,7 +189,7 @@ module.exports = {
         }
 
         if (errors.length > 0) {
-          return res.status(400).json({ errors });
+          return res.status(401).json({ errors });
         }
 
         // Encrypt new password.

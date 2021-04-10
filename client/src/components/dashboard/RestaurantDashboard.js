@@ -1,7 +1,10 @@
-import React, { useEffect, Fragment } from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { getMyRestaurant } from '../../actions/restaurant';
+import {
+  getMyRestaurant,
+  updateStatsRestaurant,
+} from '../../actions/restaurant';
 import Spinner from '../layout/Spinner';
 import RestaurantProfile from '../restaurants/RestaurantProfile';
 
@@ -9,12 +12,18 @@ import '../../styles/Dashboard.scss';
 
 const RestaurantDashboard = ({
   auth: { user, loading },
-  restaurantObject: { restaurant, loadingRestaurant },
+  restaurantObject: { dashboardRestaurant, loadingRestaurant },
   getMyRestaurant,
+  updateStatsRestaurant,
 }) => {
   useEffect(() => {
     // Get restaurant data when admin or staff logs in
-    if (!restaurant && !loading && user && (user.is_admin || user.is_staff)) {
+    if (
+      !dashboardRestaurant &&
+      !loading &&
+      user &&
+      (user.is_admin || user.is_staff)
+    ) {
       getMyRestaurant();
     }
 
@@ -24,10 +33,14 @@ const RestaurantDashboard = ({
   return loadingRestaurant ||
     loading ||
     user === null ||
-    restaurant === null ? (
+    dashboardRestaurant === null ? (
     <Spinner />
   ) : (
-    <RestaurantProfile restObj={restaurant} user={user} />
+    <RestaurantProfile
+      restObj={dashboardRestaurant}
+      user={user}
+      update={updateStatsRestaurant}
+    />
   );
 };
 
@@ -44,6 +57,7 @@ const mapStateToProps = (state) => ({
 
 const mapFunctionsToProps = {
   getMyRestaurant,
+  updateStatsRestaurant,
 };
 
 export default connect(

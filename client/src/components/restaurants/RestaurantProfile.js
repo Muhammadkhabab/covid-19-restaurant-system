@@ -1,12 +1,13 @@
 import React from 'react';
-import { Jumbotron, Container, Badge, Row, Col } from 'reactstrap';
+import { Jumbotron, Container, Button, Row, Col } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import '../../styles/Restaurants.scss';
 import { ROUTE_EDIT_RESTAURANT } from '../../constants/routes';
 import Charts from '../charts/Charts';
 import PolicyBadges from '../layout/PolicyBadges';
 import Avatar from '../layout/Avatar';
-import RestaurantMap from './RestaurantMap'
+import { toast } from 'react-toastify';
+import RestaurantMap from './RestaurantMap';
 
 const RestaurantProfile = ({
   restObj: {
@@ -23,11 +24,49 @@ const RestaurantProfile = ({
     customer_capacity,
     restaurant_email,
     restaurant_phone_number,
+    current_customers,
+    current_employees,
+    current_free_tables,
+
+    number_tables,
+    customer_per_table,
+    tables_distance,
+    square_footage,
+    cuisine,
+    website_url,
     _id,
   },
   user,
+  update,
 }) => {
   const policies = { dine_in, dine_outside, pickup, curbside_pickup, delivery };
+
+  const onClick = (i, val) => {
+    if (user && user.is_admin && user.restaurant_id === _id) {
+      const prompts = ['employees', 'customers', 'free tables'];
+      const ans = window.prompt(`Current number of ${prompts[i]}`, val);
+      if (isNaN(ans) || parseInt(ans) < 0) {
+        toast.error('Value must be a non-negative integer');
+        return;
+      }
+      if (ans === null) {
+        return;
+      }
+      const dataObj = {
+        current_customers,
+        current_employees,
+        current_free_tables,
+      };
+      const fields = [
+        'current_employees',
+        'current_customers',
+        'current_free_tables',
+      ];
+      dataObj[fields[i]] = parseInt(ans);
+      update(dataObj);
+    }
+  };
+
   return (
     <div id='restaurant-profile'>
       <Jumbotron>
@@ -35,6 +74,14 @@ const RestaurantProfile = ({
           <Row className='header-wrapper'>
             <Col xs='12' lg='3'>
               <Avatar avatar={avatar} />
+              <a
+                target='_blank'
+                rel='noreferrer'
+                href={website_url}
+                className='external-link btn btn-outline-primary'
+              >
+                Restaurant website
+              </a>
             </Col>
             <Col xs='12' lg='9'>
               <div className='basic-info'>
@@ -46,8 +93,39 @@ const RestaurantProfile = ({
                     </Link>
                   )}
                 </h1>
-                <p className='info-text'>{address}</p>
+                {cuisine && <p className='m-0 info-text'>Cuisine: {cuisine}</p>}
+                <p className='m-0 info-text'>Address: {address}</p>
+
                 <PolicyBadges policies={policies} />
+                <Row className='mt-3'>
+                  <Col lg='2'>
+                    <p className='mb-1'># of employees</p>
+                    <div
+                      className='stat-box'
+                      onClick={() => onClick(0, current_employees)}
+                    >
+                      {current_employees}
+                    </div>
+                  </Col>
+                  <Col lg='2'>
+                    <p className='mb-1'># of customers</p>
+                    <div
+                      className='stat-box'
+                      onClick={() => onClick(1, current_customers)}
+                    >
+                      {current_customers}
+                    </div>
+                  </Col>
+                  <Col lg='2'>
+                    <p className='mb-1'># of free tables</p>
+                    <div
+                      className='stat-box'
+                      onClick={() => onClick(2, current_free_tables)}
+                    >
+                      {current_free_tables}
+                    </div>
+                  </Col>
+                </Row>
               </div>
             </Col>
           </Row>
@@ -87,6 +165,13 @@ const RestaurantProfile = ({
               <h1>Capacity</h1>
               <p>Employee capacity: {employee_capacity}</p>
               <p>Customer capacity: {customer_capacity}</p>
+              <p>Table capacity: {number_tables}</p>
+            </div>
+            <div className='msg-text mt-5'>
+              <h1>Additional information</h1>
+              <p>Customers allowed per table: {customer_per_table}</p>
+              <p>Distance between tables: {tables_distance}</p>
+              <p>Dining area: {square_footage}</p>
             </div>
           </div>
         </Col>

@@ -64,6 +64,7 @@ router.put(
       .optional()
       .isLength({ min: 6, max: 20 })
       .withMessage('Password must be between 6 and 20 characters long!')
+      .bail()
       .matches(/\d/)
       .withMessage('Password must contain a number!'),
     check('confirmed_newpassword').optional().notEmpty(),

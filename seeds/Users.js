@@ -75,4 +75,27 @@ module.exports = {
       return resolve();
     });
   },
+
+  generateHarryAdmin: async (rid) => {
+    return new Promise(async (resolve) => {
+      const harry = User({
+        first_name: 'Harry',
+        last_name: 'Le',
+        username: 'harry165',
+        phone_number: '608-923-3447',
+        email: 'khoa165@gmail.com',
+        is_admin: true,
+        is_staff: false,
+        is_developer: false,
+        is_customer: false,
+      });
+
+      const salt = await bcrypt.genSalt(15);
+      const password = await bcrypt.hash('abc123', salt);
+      harry.password = password;
+      harry.restaurant_id = rid;
+      await harry.save();
+      return resolve();
+    });
+  },
 };

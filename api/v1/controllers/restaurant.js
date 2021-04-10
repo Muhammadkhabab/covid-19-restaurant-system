@@ -425,8 +425,8 @@ module.exports = {
       //LATER ITERATION
       //TODO : Get the distance between the restaurant and the user
       //If the user is within the users_distance value, return the restaurant
-      if (user_distance) {
-      }
+      // if (user_distance) {
+      // }
 
       if (current_percent_capacity) {
         filterArray['current_percent_capacity'] = {
@@ -452,7 +452,7 @@ module.exports = {
       //numbers of filtered restaurant
       const num_restaurants = Object.keys(filtered_restaurant).length;
 
-      if (filtered_restaurant) {
+      if (filtered_restaurant && filtered_restaurant.length > 0) {
         return res.status(200).json({ num_restaurants, filtered_restaurant });
       } else {
         return res

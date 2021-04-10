@@ -16,7 +16,7 @@ const Account = ({ auth: { loading, user }, updateUser }) => {
     phone_number: '',
     old_password: '',
     new_password: '',
-    confirmed_new_password: '',
+    confirmed_newpassword: '',
   });
 
   useEffect(() => {
@@ -62,7 +62,7 @@ const Account = ({ auth: { loading, user }, updateUser }) => {
         ...data,
         old_password: '',
         new_password: '',
-        confirmed_new_password: '',
+        confirmed_newpassword: '',
       });
     }
   };

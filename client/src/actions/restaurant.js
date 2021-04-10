@@ -8,6 +8,7 @@ import {
   GET_RESTAURANT_DATA,
   GET_ALL_RESTAURANTS,
   FILTER_RESTAURANT,
+  SET_DASHBOARD_RESTAURANT,
 } from '../constants/actions';
 import { toast } from 'react-toastify';
 import { loadUser } from './auth';
@@ -102,6 +103,40 @@ export const editRestaurant = (restaurantObj) => async (dispatch) => {
   }
 };
 
+export const updateStatsRestaurant = (restaurantObj) => async (dispatch) => {
+  // Request headers.
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  };
+
+  // User data.
+  const body = JSON.stringify(restaurantObj);
+
+  try {
+    // Send request to API endpoint.
+    const res = await axios.put(`/${API}/restaurants/stats`, body, config);
+
+    // Call reducer to register restaurant.
+    dispatch({
+      type: EDIT_RESTAURANT,
+      payload: res.data,
+    });
+    toast.success('You successfully updated restaurant information! Welcome!');
+  } catch (err) {
+    // Loop through errors and notify user.
+    const errors = err.response.data.errors;
+    if (errors) {
+      errors.forEach((error) => {
+        toast.error(error.msg);
+        toast.error(error.param);
+        console.log(error);
+      });
+    }
+  }
+};
+
 export const getRestaurantById = (id) => async (dispatch) => {
   try {
     // Send request to API endpoint.
@@ -155,7 +190,7 @@ export const getMyRestaurant = () => async (dispatch) => {
 
     // Call reducer to register restaurant.
     dispatch({
-      type: SET_RESTAURANT,
+      type: SET_DASHBOARD_RESTAURANT,
       payload: res.data,
     });
   } catch (err) {
@@ -198,7 +233,7 @@ export const getRestaurantData = (rid) => async (dispatch) => {
 export const getFilteredRestaurant = (params) => async (dispatch) => {
   try {
     // Send request to API endpoint.
-    const res = await axios.get(`/${API}/restaurants/filter/`,{params});
+    const res = await axios.get(`/${API}/restaurants/filter/`, { params });
 
     // Call reducer to register restaurant.
     dispatch({
@@ -218,4 +253,3 @@ export const getFilteredRestaurant = (params) => async (dispatch) => {
     }
   }
 };
-

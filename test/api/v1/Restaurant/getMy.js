@@ -100,7 +100,7 @@ module.exports = getMy = () => {
       });
     });
 
-    it("1. Should return current user's restaurants with a token", (done) => {
+    it("1. should return current user's restaurants with a token", (done) => {
       request(app)
         .get('/restaurants/me')
         .use(prefix)
@@ -140,7 +140,7 @@ module.exports = getMy = () => {
         });
     });
 
-    it('2. Should return error with invalid token', (done) => {
+    it('2. should return error with invalid token', (done) => {
       request(app)
         .get('/restaurants/me')
         .use(prefix)

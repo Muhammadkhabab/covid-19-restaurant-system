@@ -68,7 +68,7 @@ module.exports = updateStats = () => {
       });
     });
 
-    it('1. Should update stats for restaurant if valid token is passed', (done) => {
+    it('1. should update stats for restaurant if valid token is passed', (done) => {
       request(app)
         .put('/restaurants/stats')
         .use(prefix)

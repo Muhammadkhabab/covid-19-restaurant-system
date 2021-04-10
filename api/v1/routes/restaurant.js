@@ -42,11 +42,32 @@ router.post(
       .withMessage('Missing restaurant phone number!'),
     check('cuisine').optional().isString(),
     check('website_url').optional().isURL(),
-    check('dine_in').notEmpty().withMessage('Missing dine in!').bail().isIn([0, 1]).withMessage('Value must be 0 or 1'),
-    check('dine_outside').notEmpty().withMessage('Missing dine ouside!').isIn([0, 1]).withMessage('Value must be 0 or 1!'),
-    check('pickup').notEmpty().withMessage('Missing pickup!').isIn([0, 1]).withMessage('Value must be 0 or 1'),
-    check('curbside_pickup').notEmpty().withMessage('Missing curbside pickup!').isIn([0, 1]).withMessage('Value must be 0 or 1'),
-    check('delivery').notEmpty().withMessage('Missing delivery!').isIn([0, 1]).withMessage('Value must be 0 or 1'),
+    check('dine_in')
+      .notEmpty()
+      .withMessage('Missing dine in!')
+      .bail()
+      .isIn([0, 1])
+      .withMessage('Value must be 0 or 1'),
+    check('dine_outside')
+      .notEmpty()
+      .withMessage('Missing dine ouside!')
+      .isIn([0, 1])
+      .withMessage('Value must be 0 or 1!'),
+    check('pickup')
+      .notEmpty()
+      .withMessage('Missing pickup!')
+      .isIn([0, 1])
+      .withMessage('Value must be 0 or 1'),
+    check('curbside_pickup')
+      .notEmpty()
+      .withMessage('Missing curbside pickup!')
+      .isIn([0, 1])
+      .withMessage('Value must be 0 or 1'),
+    check('delivery')
+      .notEmpty()
+      .withMessage('Missing delivery!')
+      .isIn([0, 1])
+      .withMessage('Value must be 0 or 1'),
     check('policy_notes').optional(),
     check('employee_capacity')
       .notEmpty()

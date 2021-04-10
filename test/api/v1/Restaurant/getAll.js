@@ -98,7 +98,7 @@ module.exports = getAll = () => {
       });
     });
 
-    it('1. Should return all restaurants with a token', (done) => {
+    it('1. should return all restaurants with a token', (done) => {
       request(app)
         .get('/restaurants')
         .use(prefix)
@@ -139,7 +139,7 @@ module.exports = getAll = () => {
         });
     });
 
-    it('2. Should return all restaurants without a token', (done) => {
+    it('2. should return all restaurants without a token', (done) => {
       request(app)
         .get('/restaurants')
         .use(prefix)

@@ -100,7 +100,7 @@ module.exports = getAll = () => {
       });
     });
 
-    it('1. Should delete restaurant with a valid token', (done) => {
+    it('1. should delete restaurant with a valid token', (done) => {
       request(app)
         .delete('/restaurants')
         .use(prefix)

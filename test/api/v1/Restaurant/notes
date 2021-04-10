@@ -5,7 +5,7 @@
     
     
 
-    it('6. Should return error message for invalid email', (done) => {
+    it('6. should return error message for invalid email', (done) => {
       const data0 = {
         first_name: 'Cecelia',
         last_name: 'Peterson',
@@ -53,7 +53,7 @@
         });
     });
 
-    it('7. Should return error message for multiple invalid input', (done) => {
+    it('7. should return error message for multiple invalid input', (done) => {
       const data0 = {
         first_name: 'Cecelia',
         last_name: 'Peterson',
@@ -109,7 +109,7 @@
         });
     });
 
-    it('8. Should return error message for an invalid password (wrong num chars)', (done) => {
+    it('8. should return error message for an invalid password (wrong num chars)', (done) => {
       const data0 = {
         first_name: 'Cecelia',
         last_name: 'Peterson',
@@ -157,7 +157,7 @@
         });
     });
 
-    it('9. Should return error message for an invalid password (no number)', (done) => {
+    it('9. should return error message for an invalid password (no number)', (done) => {
       const data0 = {
         first_name: 'Cecelia',
         last_name: 'Peterson',
