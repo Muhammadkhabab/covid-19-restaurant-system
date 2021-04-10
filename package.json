@@ -11,8 +11,8 @@
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client",
     "seeds": "node seeds",
-    "coverage": "nyc --reporter=html --reporter=text npm run test",
-    "frontend-test": "selenium-side-runner ./test/client/*.side"
+    "riza-seeds": "node riza-seeds",
+    "coverage": "nyc --reporter=html --reporter=text npm run test"
   },
   "author": "Prasoon Sinha",
   "license": "MIT",
