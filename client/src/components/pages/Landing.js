@@ -45,11 +45,11 @@ const Landing = ({ isAuthenticated }) => {
         </Container>
         <div className='content w-100 pb-4'>
           <h1>Safe Dining</h1>
-          <p class="fw-bold fst-italic">
+          <p className="fw-bold fst-italic">
             Find up-to-date information about Covid-19 protocols and
             procedures at participating restaurants in Madison, Wisconsin.
           </p>
-          <div class="d-flex justify-content-center">
+          <div className="d-flex justify-content-center">
             <Link
               to={ROUTE_RESTAURANTS}
               className='btn btn-outline-light w-25'
