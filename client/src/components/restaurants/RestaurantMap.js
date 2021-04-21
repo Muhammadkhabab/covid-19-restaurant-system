@@ -1,52 +1,98 @@
-import React from 'react';
-import { GoogleMap, useJsApiLoader } from '@react-google-maps/api';
+import { React, Component } from 'react';
+import { Map, GoogleApiWrapper, Marker } from 'google-maps-react';
 
 const styling = {
   width: '100%',
-  height: '100%'
+  height: '394px'
 };
 
-// capitol building to center map if address not found
-const defaultCenter = {
+// the default center is the capitol in Madison
+const capitolCenter = {
   lat: 43.074699,
   lng: -89.384171
 };
 
-/* Map in restaurant info page */
-function RestaurantMap(props) {
+class RestaurantMap extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      userLocation: null,
+      restLocation: null,
+    }
+  }
+
+  componentDidMount() {
+    this.updateMap();
+  }
   
-  const {isLoaded} = useJsApiLoader({
-    id: 'google-map-script',
-    googleMapsApiKey: "AIzaSyBvofUxqoCcatToPg3pJqZzQrUXdQ6vjow"
-  })
+  componentDidUpdate(prevProps) {
+    if (this.props.addr!==prevProps.addr) {
+      this.updateMap();
+    }
+  } 
 
-  const [map, setMap] = React.useState(null);
+  async updateMap() {
+    let currentComponent = this;
 
-  const onLoad = React.useCallback(function callback(map) {
+    if (navigator.geolocation) {
+      navigator.permissions
+        .query({ name: "geolocation" })
+        .then(function (result) {
+          if (result.state === "denied") {
+            // can show message on how to turn on location
+            currentComponent.setState({
+              userLocation: null
+            });
+          } else {
+            navigator.geolocation.getCurrentPosition(function(position) {
+              currentComponent.setState({
+                userLocation: new window.google.maps.LatLng(position.coords.latitude,position.coords.longitude)
+              });
+            });
+          }
+          result.onchange = function () {
+            console.log(result.state);
+          };
+        });
+    }
+
     const geocoder = new window.google.maps.Geocoder();
-    geocoder.geocode({ address: props.addr }, (results, status) => {
-      map.setZoom(15);
+    geocoder.geocode({ address: this.props.addr }, (results, status) => {
       if (status === "OK") {
-        map.setCenter(results[0].geometry.location);
-        new window.google.maps.Marker({
-          map: map,
-          position: results[0].geometry.location,
+        this.setState({
+          restLocation: new window.google.maps.LatLng(results[0].geometry.location.lat(),results[0].geometry.location.lng())
         });
       } else {
-        map.setCenter(defaultCenter);
+        this.setState({
+          restLocation: null
+        });
       }
     });
 
-    setMap(map)
-  }, [])
+  }
 
-  return isLoaded ? (
-    <GoogleMap
-      mapContainerStyle={styling}
-      onLoad={onLoad}
-    >
-    </GoogleMap>
-  ) : <></>
-};
+  render() {
+    return (
+      <Map
+        id='map'
+        google={window.google}
+        zoom={12}
+        style={styling}
+        center={new window.google.maps.LatLng(capitolCenter)}
+      >
+        { this.state.restLocation ? <Marker
+                                      label={this.props.restName}
+                                      position={this.state.restLocation}
+                                    /> : <></> }
+        { this.state.userLocation ? <Marker
+                                      label={'You'}
+                                      position={this.state.userLocation}
+                                    /> : <></> }
+      </Map>
+    )
+  }
+}
 
-export default React.memo(RestaurantMap)
+export default GoogleApiWrapper({
+  apiKey: 'AIzaSyBvofUxqoCcatToPg3pJqZzQrUXdQ6vjow'
+})(RestaurantMap);

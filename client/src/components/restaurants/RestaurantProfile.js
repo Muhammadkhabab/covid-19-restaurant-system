@@ -144,7 +144,7 @@ const RestaurantProfile = ({
               </div>
             </div>
             <div className='map-wrapper'>
-              <RestaurantMap addr={address} />
+              <RestaurantMap addr={address} restName={restaurant_name}/>
             </div>
           </div>
         </Col>
