@@ -6,9 +6,9 @@ import PropTypes from 'prop-types';
 import { Row, Col, Form, FormGroup, Input, Label, Card, CardTitle, Button, Container} from 'reactstrap';
 // import '../../styles/Form.scss';
 import {
-  ROUTE_LOGIN,
-  ROUTE_REGISTER_RESTAURANT,
-	ROUTE_DASHBOARD_USER,
+  // ROUTE_LOGIN,
+  // ROUTE_REGISTER_RESTAURANT,
+	// ROUTE_DASHBOARD_USER,
 	ROUTE_DASHBOARD_RESTAURANT,
 	ROUTE_RESTAURANTS
 } from '../../constants/routes';
