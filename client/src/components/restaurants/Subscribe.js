@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { subscribeNotification } from '../../actions/notification';
 import RangeSlider from 'react-bootstrap-range-slider';
 import { Row, Col, Form, FormGroup, Input, Label } from 'reactstrap';
 import TimePicker from 'react-time-picker';
 import { toast } from 'react-toastify';
 
-const Subscribe = () => {
+const Subscribe = ({ subscribeNotification }) => {
   const [data, setData] = useState({
     is_contact_email: true,
     contact: 'khoa1652000@gmail.com',
@@ -96,6 +99,7 @@ const Subscribe = () => {
     if (min_tables > 0) dataObj['min_tables'] = min_tables;
 
     console.log(dataObj);
+    subscribeNotification(dataObj);
   };
 
   return (
@@ -288,4 +292,14 @@ const Subscribe = () => {
   );
 };
 
-export default Subscribe;
+Subscribe.propTypes = {
+  subscribeNotification: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = (state) => ({});
+
+const mapFunctionsToProps = {
+  subscribeNotification,
+};
+
+export default connect(mapStateToProps, mapFunctionsToProps)(Subscribe);
