@@ -81,7 +81,7 @@ const RegisterRestaurant = ({ registerRestaurant, auth: { isAuthenticated, user 
 			<h3 className='text-left text-info mb-4'>Register Your Restaurant!</h3>
 			<Form onSubmit={onSubmit}>
 				<Row>
-					<Col sm={{ size: 4 }}>
+					<Col xs='12' lg='4'>
 						<Card body>
 							<CardTitle tag='h4'>Account Information</CardTitle>
 							<Row>
@@ -93,7 +93,7 @@ const RegisterRestaurant = ({ registerRestaurant, auth: { isAuthenticated, user 
 											name='first_name'
 											value={first_name}
 											onChange={onUserChange}
-										// required
+											required
 										/>
 									</FormGroup>
 									<FormGroup>
@@ -103,7 +103,7 @@ const RegisterRestaurant = ({ registerRestaurant, auth: { isAuthenticated, user 
 											name='last_name'
 											value={last_name}
 											onChange={onUserChange}
-										// required
+											required
 										/>
 									</FormGroup>
 									<FormGroup>
@@ -113,7 +113,7 @@ const RegisterRestaurant = ({ registerRestaurant, auth: { isAuthenticated, user 
 											name='username'
 											value={username}
 											onChange={onUserChange}
-										// required
+											required
 										/>
 									</FormGroup>
 									<FormGroup>
@@ -123,7 +123,7 @@ const RegisterRestaurant = ({ registerRestaurant, auth: { isAuthenticated, user 
 											name='password'
 											value={password}
 											onChange={onUserChange}
-										// required
+											required
 										/>
 									</FormGroup>
 									<FormGroup>
@@ -133,7 +133,7 @@ const RegisterRestaurant = ({ registerRestaurant, auth: { isAuthenticated, user 
 											name='confirmed_password'
 											value={confirmed_password}
 											onChange={onUserChange}
-										// required
+											required
 										/>
 									</FormGroup>
 									<FormGroup>
@@ -143,7 +143,7 @@ const RegisterRestaurant = ({ registerRestaurant, auth: { isAuthenticated, user 
 											name='email'
 											value={email}
 											onChange={onUserChange}
-										// required
+											required
 										/>
 									</FormGroup>
 									<FormGroup>
@@ -155,18 +155,18 @@ const RegisterRestaurant = ({ registerRestaurant, auth: { isAuthenticated, user 
 											value={phone_number}
 											placeholder='xxx-xxx-xxxx'
 											onChange={onUserChange}
-										// required
+											required
 										/>
 									</FormGroup>
 								</Col>
 							</Row>
 						</Card>
 					</Col>
-					<Col sm={{ size: 8, offset: 0.5 }}>
+					<Col xs='12' lg='8'>
 						<Card body>
 							<CardTitle tag='h4'>Restaurant Information</CardTitle>
 							<Row>
-								<Col>
+								<Col xs='12' lg='6'>
 									<FormGroup>
 										<Label>Restaurant Name</Label>
 										<Input
@@ -174,11 +174,11 @@ const RegisterRestaurant = ({ registerRestaurant, auth: { isAuthenticated, user 
 											name='restaurant_name'
 											value={restaurant_name}
 											onChange={onRestaurantChange}
-										// required
+											required
 										/>
 									</FormGroup>
 								</Col>
-								<Col>
+								<Col xs='12' lg='6'>
 									<FormGroup>
 										<Label>Restaurant Address</Label>
 										<Input
@@ -186,13 +186,13 @@ const RegisterRestaurant = ({ registerRestaurant, auth: { isAuthenticated, user 
 											name='address'
 											value={address}
 											onChange={onRestaurantChange}
-										// required
+											required
 										/>
 									</FormGroup>
 								</Col>
 							</Row>
 							<Row>
-								<Col>
+								<Col xs='12' lg='4'>
 									<FormGroup>
 										<Label>Website URL</Label>
 										<Input
@@ -203,7 +203,7 @@ const RegisterRestaurant = ({ registerRestaurant, auth: { isAuthenticated, user 
 										/>
 									</FormGroup>
 								</Col>
-								<Col>
+								<Col xs='12' lg='4'>
 									<FormGroup>
 										<Label>Restaurant Email</Label>
 										<Input
@@ -211,11 +211,11 @@ const RegisterRestaurant = ({ registerRestaurant, auth: { isAuthenticated, user 
 											name='restaurant_email'
 											value={restaurant_email}
 											onChange={onRestaurantChange}
-										// required
+											required
 										/>
 									</FormGroup>
 								</Col>
-								<Col>
+								<Col xs='12' lg='4'>
 									<FormGroup>
 										<Label>Restaurant Phone Number</Label>
 										<Input
@@ -225,13 +225,13 @@ const RegisterRestaurant = ({ registerRestaurant, auth: { isAuthenticated, user 
 											value={restaurant_phone_number}
 											placeholder='xxx-xxx-xxxx'
 											onChange={onRestaurantChange}
-										// required
+											required
 										/>
 									</FormGroup>
 								</Col>
 							</Row>
 							<Row>
-								<Col>
+								<Col xs='12' lg='4'>
 									<FormGroup>
 										<Label>Restaurant Cuisine</Label>
 										<Input type='select' name='cuisine' onChange={onRestaurantChange}>
@@ -244,7 +244,7 @@ const RegisterRestaurant = ({ registerRestaurant, auth: { isAuthenticated, user 
 										</Input>
 									</FormGroup>
 								</Col>
-								<Col>
+								<Col xs='12' lg='4'>
 									<FormGroup>
 										<Label>Max Employees</Label>
 										<Input
@@ -252,11 +252,11 @@ const RegisterRestaurant = ({ registerRestaurant, auth: { isAuthenticated, user 
 											name='employee_capacity'
 											value={employee_capacity}
 											onChange={onRestaurantChange}
-										// required
+											required
 										/>
 									</FormGroup>
 								</Col>
-								<Col>
+								<Col xs='12' lg='4'>
 									<FormGroup>
 										<Label>Max Customers</Label>
 										<Input
@@ -264,13 +264,11 @@ const RegisterRestaurant = ({ registerRestaurant, auth: { isAuthenticated, user 
 											name='customer_capacity'
 											value={customer_capacity}
 											onChange={onRestaurantChange}
-										// required
+											required
 										/>
 									</FormGroup>
 								</Col>
-							</Row>
-							<Row>
-								<Col>
+								<Col xs='12' lg='6'>
 									<FormGroup>
 										<Label># of Tables</Label>
 										<Input
@@ -278,11 +276,11 @@ const RegisterRestaurant = ({ registerRestaurant, auth: { isAuthenticated, user 
 											name='number_tables'
 											value={number_tables}
 											onChange={onRestaurantChange}
-										// required
+											required
 										/>
 									</FormGroup>
 								</Col>
-								<Col>
+								<Col xs='12' lg='6'>
 									<FormGroup>
 										<Label>Customers per Tables</Label>
 										<Input
@@ -290,13 +288,11 @@ const RegisterRestaurant = ({ registerRestaurant, auth: { isAuthenticated, user 
 											name='customer_per_table'
 											value={customer_per_table}
 											onChange={onRestaurantChange}
-										// required
+											required
 										/>
 									</FormGroup>
 								</Col>
-							</Row>
-							<Row>
-								<Col>
+								<Col xs='12' lg='6'>
 									<FormGroup>
 										<Label>Distance Between Tables (ft)</Label>
 										<Input
@@ -304,11 +300,11 @@ const RegisterRestaurant = ({ registerRestaurant, auth: { isAuthenticated, user 
 											name='tables_distance'
 											value={tables_distance}
 											onChange={onRestaurantChange}
-										// required
+											required
 										/>
 									</FormGroup>
 								</Col>
-								<Col>
+								<Col xs='12' lg='6'>
 									<FormGroup>
 										<Label>Common Room Square Footage</Label>
 										<Input
@@ -316,7 +312,7 @@ const RegisterRestaurant = ({ registerRestaurant, auth: { isAuthenticated, user 
 											name='square_footage'
 											value={square_footage}
 											onChange={onRestaurantChange}
-										// required
+											required
 										/>
 									</FormGroup>
 								</Col>

@@ -115,7 +115,7 @@ const NavigationBar = ({
   return (
     <Navbar dark expand='md' id='navbar'>
       <Container>
-        <NavbarBrand tag={Link} to={ROUTE_RESTAURANTS}>
+        <NavbarBrand tag={Link} to='/'>
           <i className={`${icon} mr-1`} /> {title}
         </NavbarBrand>
         <NavbarToggler onClick={toggle} />
