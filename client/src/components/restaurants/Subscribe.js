@@ -113,19 +113,19 @@ const Subscribe = ({ subscribeNotification }) => {
               max={20}
               onChange={(e) => onChangeSlide(e, 'min_table_distance')}
             />
-            <p class='m-0'>Capacity (%)</p>
+            <p className='m-0'>Capacity (%)</p>
             <RangeSlider
               value={percent_capacity}
               max={100}
               onChange={(e) => onChangeSlide(e, 'percent_capacity')}
             />
-            <p class='m-0'>Total customers</p>
+            <p className='m-0'>Total customers</p>
             <RangeSlider
               value={max_customers}
               max={50}
               onChange={(e) => onChangeSlide(e, 'max_customers')}
             />
-            <p class='m-0'>Free tables</p>
+            <p className='m-0'>Free tables</p>
             <RangeSlider
               value={min_tables}
               max={10}

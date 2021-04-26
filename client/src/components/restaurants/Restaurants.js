@@ -53,10 +53,16 @@ const Restaurants = ({
       {leftActive ? (
         <div>
           <AdvancedSearch restaurants={restaurants} />
-          <h4>Search results: {restaurants.length}</h4>
-          {restaurants.map((r, k) => {
-            return <RestaurantCard key={k} restObj={r} />;
-          })}
+          <div className='mt-5'>
+            <h4 className='search-summary'>
+              Search results: {restaurants.length}
+            </h4>
+            <div className='search-results'>
+              {restaurants.map((r, k) => {
+                return <RestaurantCard key={k} restObj={r} />;
+              })}
+            </div>
+          </div>
         </div>
       ) : (
         <Subscribe />
