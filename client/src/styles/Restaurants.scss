@@ -1,5 +1,49 @@
 @import 'Variables';
 
+#restaurants-page {
+  .tab {
+    border: 8px solid $brand-primary-color;
+    border-radius: 15px 15px 0 0;
+    text-align: center;
+    padding: 15px 0;
+    margin-bottom: 25px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #888;
+    }
+
+    p {
+      margin: 0;
+      color: $brand-primary-color;
+      font-weight: bold;
+      text-transform: uppercase;
+      font-size: 30px;
+    }
+
+    &.tab-active {
+      border-bottom: none;
+      background-color: #555;
+
+      &:hover {
+        background-color: #000;
+      }
+    }
+
+    &.tab-non-active {
+      border-top: none;
+      border-left: none;
+      border-right: none;
+
+      &:hover {
+        padding-top: 8px;
+        border-top: 8px solid white;
+        border-radius: 0;
+      }
+    }
+  }
+}
+
 #restaurant-profile {
   .jumbotron {
     padding-top: 40px;

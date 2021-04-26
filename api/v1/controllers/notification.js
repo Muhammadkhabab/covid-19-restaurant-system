@@ -27,7 +27,7 @@ module.exports = {
       dine_in,
       dine_outside,
       pickup,
-      curbside,
+      curbside_pickup,
       delivery,
       max_employees,
       max_customers,
@@ -48,7 +48,13 @@ module.exports = {
         errors.push({ msg: 'End time must be later than start time!' });
       }
 
-      if (!dine_in && !dine_outside && !pickup && !curbside && !delivery) {
+      if (
+        !dine_in &&
+        !dine_outside &&
+        !pickup &&
+        !curbside_pickup &&
+        !delivery
+      ) {
         errors.push({
           msg: 'Enter at least one option for dining experience!',
         });
@@ -72,7 +78,7 @@ module.exports = {
         dine_in,
         dine_outside,
         pickup,
-        curbside,
+        curbside_pickup,
         delivery,
         max_employees,
         max_customers,
@@ -81,9 +87,7 @@ module.exports = {
       });
 
       await notification.save();
-      return res
-        .status(200)
-        .json(notification);
+      return res.status(200).json(notification);
     } catch (err) {
       console.error(err.message);
       return res.status(500).json({
@@ -124,13 +128,9 @@ module.exports = {
       const notification = await Notification.findById(req.params.nid);
 
       if (!notification) {
-        return res
-          .status(404)
-          .json({
-            errors: [
-              { msg: 'Notification not found!' },
-            ]
-          });
+        return res.status(404).json({
+          errors: [{ msg: 'Notification not found!' }],
+        });
       }
 
       if (
