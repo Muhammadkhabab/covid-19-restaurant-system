@@ -66,7 +66,7 @@ const AdvancedSearch = ({ restaurants, getFilteredRestaurant }) => {
   const moreFiltersSection = () => {
     if (moreFilters === true) {
       return (
-        <Row>
+        <Row className='mt-4'>
           <Col>
             <RangeSlider
               value={tableDistance}
@@ -75,7 +75,7 @@ const AdvancedSearch = ({ restaurants, getFilteredRestaurant }) => {
                 setTableDistance(changeEvent.target.value)
               }
             />
-            <p class='text-center'>Distance between tables</p>
+            <p className='text-center'>Distance between tables</p>
           </Col>
           <Col>
             <RangeSlider
@@ -85,7 +85,7 @@ const AdvancedSearch = ({ restaurants, getFilteredRestaurant }) => {
                 setPercentCapacity(changeEvent.target.value)
               }
             />
-            <p class='text-center'>Current Capacity (%)</p>
+            <p className='text-center'>Current Capacity (%)</p>
           </Col>
           <Col>
             <RangeSlider
@@ -95,7 +95,7 @@ const AdvancedSearch = ({ restaurants, getFilteredRestaurant }) => {
                 setTotalCustomer(changeEvent.target.value)
               }
             />
-            <p class='text-center'>Current Total Customer</p>
+            <p className='text-center'>Current Total Customer</p>
           </Col>
           <Col>
             <RangeSlider
@@ -105,7 +105,7 @@ const AdvancedSearch = ({ restaurants, getFilteredRestaurant }) => {
                 setCurrentFreeTable(changeEvent.target.value)
               }
             />
-            <p class='text-center'>Current Free Tables</p>
+            <p className='text-center'>Current Free Tables</p>
           </Col>
         </Row>
       );
@@ -114,85 +114,105 @@ const AdvancedSearch = ({ restaurants, getFilteredRestaurant }) => {
   return (
     <div id='filter-section'>
       <Container className='mb-4'>
-        <Row className='d-flex justify-content-center' lg={3}>
-          <SvgCupcake class='w-75 h-75' />
+        <Row className='justify-content-center' lg={3}>
+          <SvgCupcake className='w-25 h-25' />
         </Row>
-        <Row className='mt-2 d-flex justify-content-center'>
-          <Col xs={8} md={5}>
-            <Input
-              type='text'
-              placeholder='Search for restaurant'
-              onChange={(e) => onChange(e)}
-              value={searchText}
-              className='py-3'
-            />
-          </Col>
-          <Col xs={2} md={2}>
-            <button
-              type='button'
-              class='btn btn-outline-primary'
-              xs={4}
-              md={2}
-              onClick={onSearch}
-            >
-              Search
-            </button>
+        <Row className='mt-2 justify-content-center'>
+          <Col lg='9' className='p-0'>
+            <Row className='justify-content-between'>
+              <Col xs='10' className='p-1'>
+                <Input
+                  type='text'
+                  placeholder='Search for restaurant'
+                  onChange={(e) => onChange(e)}
+                  value={searchText}
+                  className='py-3'
+                />
+              </Col>
+              <Col xs='2' className='p-1'>
+                <Button color='primary' block outline onClick={onSearch}>
+                  Search
+                </Button>
+              </Col>
+            </Row>
           </Col>
         </Row>
-        <Row className='mt-4 d-flex justify-content-center'>
-          <Button
-            color='primary'
-            className='mr-2 mt-1'
-            size='sm'
-            onClick={() => onCheckboxBtnClick(1)}
-            active={checkbox.includes(1)}
-          >
-            Dine Inside
-          </Button>
-          <Button
-            color='primary'
-            className='mr-2 mt-1'
-            size='sm'
-            onClick={() => onCheckboxBtnClick(2)}
-            active={checkbox.includes(2)}
-          >
-            Dine Outside
-          </Button>
-          <Button
-            color='primary'
-            className='mr-2 mt-1'
-            size='sm'
-            onClick={() => onCheckboxBtnClick(3)}
-            active={checkbox.includes(3)}
-          >
-            Pickup
-          </Button>
-          <Button
-            color='primary'
-            className='mr-2 mt-1'
-            size='sm'
-            onClick={() => onCheckboxBtnClick(4)}
-            active={checkbox.includes(4)}
-          >
-            Curbside Pickup
-          </Button>
-          <Button
-            color='primary'
-            className='mr-2 mt-1'
-            size='sm'
-            onClick={() => onCheckboxBtnClick(5)}
-            active={checkbox.includes(5)}
-          >
-            Delivery
-          </Button>
-          <Button
-            color='secondary'
-            className='ml-1 mt-1 font-weight-bold'
-            size='sm'
-            onClick={() => setMoreFilters(!moreFilters)}
-          >
-            More Filters
-          </Button>
+        <Row className='mt-3 justify-content-center'>
+          <Col lg='9' className='p-0'>
+            <Row>
+              <Col xs='4' lg='2' className='px-1'>
+                <Button
+                  color='primary'
+                  block
+                  className='mr-2 mt-1'
+                  size='sm'
+                  onClick={() => onCheckboxBtnClick(1)}
+                  active={checkbox.includes(1)}
+                >
+                  Dine Inside
+                </Button>
+              </Col>
+              <Col xs='4' lg='2' className='px-1'>
+                <Button
+                  color='primary'
+                  block
+                  className='mr-2 mt-1'
+                  size='sm'
+                  onClick={() => onCheckboxBtnClick(2)}
+                  active={checkbox.includes(2)}
+                >
+                  Dine Outside
+                </Button>
+              </Col>
+              <Col xs='4' lg='2' className='px-1'>
+                <Button
+                  color='primary'
+                  block
+                  className='mr-2 mt-1'
+                  size='sm'
+                  onClick={() => onCheckboxBtnClick(3)}
+                  active={checkbox.includes(3)}
+                >
+                  Pickup
+                </Button>
+              </Col>
+              <Col xs='4' lg='2' className='px-1'>
+                <Button
+                  color='primary'
+                  block
+                  className='mr-2 mt-1'
+                  size='sm'
+                  onClick={() => onCheckboxBtnClick(4)}
+                  active={checkbox.includes(4)}
+                >
+                  Curbside Pickup
+                </Button>
+              </Col>
+              <Col xs='4' lg='2' className='px-1'>
+                <Button
+                  color='primary'
+                  block
+                  className='mr-2 mt-1'
+                  size='sm'
+                  onClick={() => onCheckboxBtnClick(5)}
+                  active={checkbox.includes(5)}
+                >
+                  Delivery
+                </Button>
+              </Col>
+              <Col xs='4' lg='2' className='px-1'>
+                <Button
+                  color='secondary'
+                  block
+                  className='ml-1 mt-1 font-weight-bold'
+                  size='sm'
+                  onClick={() => setMoreFilters(!moreFilters)}
+                >
+                  More Filters
+                </Button>
+              </Col>
+            </Row>
+          </Col>
         </Row>
         {moreFiltersSection()}
       </Container>

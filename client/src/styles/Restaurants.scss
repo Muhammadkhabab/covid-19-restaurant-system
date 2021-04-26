@@ -1,6 +1,21 @@
 @import 'Variables';
 
 #restaurants-page {
+  .search-results {
+    border-right: 5px solid #000;
+    padding-right: 20px;
+    padding-top: 20px;
+  }
+
+  .search-summary {
+    font-weight: bold;
+    color: #000;
+    border-bottom: 5px solid #000;
+    text-align: right;
+    padding-bottom: 5px;
+    margin-bottom: 0;
+  }
+
   .tab {
     border: 8px solid $brand-primary-color;
     border-radius: 15px 15px 0 0;
