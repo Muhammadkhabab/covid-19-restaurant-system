@@ -24,11 +24,11 @@ const EditRestaurant = ({
   auth: { user, loading, isAuthenticated },
   editRestaurant,
   getMyRestaurant,
-  restaurantState: { loadingRestaurant, restaurant },
+  restaurantState: { loadingRestaurant, dashboardRestaurant },
 }) => {
   useEffect(() => {
     // Get restaurant data when admin or staff logs in
-    if (!restaurant && !loading && user && user.is_admin) {
+    if (!dashboardRestaurant && !loading && user && user.is_admin) {
       getMyRestaurant();
     }
 
@@ -60,32 +60,32 @@ const EditRestaurant = ({
   const [restaurantObj, setRestaurant] = useState(INITIAL_DATA);
 
   useEffect(() => {
-    if (!loadingRestaurant && restaurant) {
-      console.log(restaurant);
+    if (!loadingRestaurant && dashboardRestaurant) {
+      console.log(dashboardRestaurant);
       setRestaurant({
-        restaurant_name: restaurant.restaurant_name,
-        address: restaurant.address,
-        website_url: restaurant.website_url,
-        restaurant_email: restaurant.restaurant_email,
-        restaurant_phone_number: restaurant.restaurant_phone_number,
-        cuisine: restaurant.cuisine,
-        employee_capacity: restaurant.employee_capacity,
-        customer_capacity: restaurant.customer_capacity,
-        number_tables: restaurant.number_tables,
-        customer_per_table: restaurant.customer_per_table,
-        tables_distance: restaurant.tables_distance,
-        square_footage: restaurant.square_footage,
-        policy_notes: restaurant.policy_notes,
-        dine_in: restaurant.dine_in ? 1 : 0,
-        dine_outside: restaurant.dine_outside ? 1 : 0,
-        pickup: restaurant.pickup ? 1 : 0,
-        curbside_pickup: restaurant.curbside_pickup ? 1 : 0,
-        delivery: restaurant.delivery ? 1 : 0,
+        restaurant_name: dashboardRestaurant.restaurant_name,
+        address: dashboardRestaurant.address,
+        website_url: dashboardRestaurant.website_url,
+        restaurant_email: dashboardRestaurant.restaurant_email,
+        restaurant_phone_number: dashboardRestaurant.restaurant_phone_number,
+        cuisine: dashboardRestaurant.cuisine,
+        employee_capacity: dashboardRestaurant.employee_capacity,
+        customer_capacity: dashboardRestaurant.customer_capacity,
+        number_tables: dashboardRestaurant.number_tables,
+        customer_per_table: dashboardRestaurant.customer_per_table,
+        tables_distance: dashboardRestaurant.tables_distance,
+        square_footage: dashboardRestaurant.square_footage,
+        policy_notes: dashboardRestaurant.policy_notes,
+        dine_in: dashboardRestaurant.dine_in ? 1 : 0,
+        dine_outside: dashboardRestaurant.dine_outside ? 1 : 0,
+        pickup: dashboardRestaurant.pickup ? 1 : 0,
+        curbside_pickup: dashboardRestaurant.curbside_pickup ? 1 : 0,
+        delivery: dashboardRestaurant.delivery ? 1 : 0,
       });
     }
 
     // eslint-disable-next-line
-  }, [restaurant]);
+  }, [dashboardRestaurant]);
 
   const {
     restaurant_name,

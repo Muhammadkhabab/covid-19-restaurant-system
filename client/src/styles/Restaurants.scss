@@ -23,11 +23,7 @@
 
     &.tab-active {
       border-bottom: none;
-      background-color: #555;
-
-      &:hover {
-        background-color: #000;
-      }
+      background-color: #000;
     }
 
     &.tab-non-active {
