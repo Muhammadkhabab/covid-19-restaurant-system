@@ -1,5 +1,5 @@
 import React from 'react';
-import { Jumbotron, Container, Button, Row, Col } from 'reactstrap';
+import { Jumbotron, Container, Row, Col } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import '../../styles/Restaurants.scss';
 import { ROUTE_EDIT_RESTAURANT } from '../../constants/routes';
