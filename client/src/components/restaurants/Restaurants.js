@@ -20,7 +20,7 @@ const Restaurants = ({
     // eslint-disable-next-line
   }, []);
 
-  const [leftActive, setLeftActive] = useState(false);
+  const [leftActive, setLeftActive] = useState(true);
 
   return loadingRestaurant || restaurants === null ? (
     <Spinner />
