@@ -4,6 +4,8 @@ const { validationResult } = require('express-validator');
 // Link Notification model
 const Notification = require('../../../models/Notification');
 
+const { scheduleNotification } = require('../../../services/notifications');
+
 module.exports = {
   subscribe: async (req, res, _next) => {
     // Check for errors.
@@ -87,6 +89,7 @@ module.exports = {
       });
 
       await notification.save();
+      scheduleNotification(notification);
       return res.status(200).json(notification);
     } catch (err) {
       console.error(err.message);

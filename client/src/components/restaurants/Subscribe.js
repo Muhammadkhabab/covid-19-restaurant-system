@@ -10,19 +10,19 @@ import { toast } from 'react-toastify';
 const Subscribe = ({ subscribeNotification }) => {
   const [data, setData] = useState({
     is_contact_email: true,
-    contact: 'khoa1652000@gmail.com',
-    start_time: '22:00',
-    end_time: '23:00',
+    contact: '',
+    start_time: '19:00',
+    end_time: '20:00',
     interval: 15,
     min_table_distance: 0,
-    percent_capacity: 50,
-    max_customers: 10,
+    percent_capacity: 0,
+    max_customers: 0,
     min_tables: 0,
-    dine_in: false,
-    dine_outside: false,
-    pickup: true,
-    curbside_pickup: false,
-    delivery: false,
+    dine_in: 0,
+    dine_outside: 0,
+    pickup: 0,
+    curbside_pickup: 0,
+    delivery: 0,
   });
 
   const {
@@ -48,7 +48,7 @@ const Subscribe = ({ subscribeNotification }) => {
     setData({ ...data, [e.target.name]: e.target.value === 'true' });
 
   const onCheckboxChange = (e) =>
-    setData({ ...data, [e.target.name]: e.target.value === 'false' });
+    setData({ ...data, [e.target.name]: 1 - e.target.value });
 
   const onChangeSlide = (e, fieldName) =>
     setData({ ...data, [fieldName]: e.target.value });
@@ -59,11 +59,11 @@ const Subscribe = ({ subscribeNotification }) => {
       is_contact_email,
       contact,
       interval,
-      dine_in,
-      dine_outside,
-      pickup,
-      curbside_pickup,
-      delivery,
+      dine_in: dine_in === 1,
+      dine_outside: dine_outside === 1,
+      pickup: pickup === 1,
+      curbside_pickup: curbside_pickup === 1,
+      delivery: delivery === 1,
     };
 
     const startTimeObj = new Date();
@@ -221,6 +221,7 @@ const Subscribe = ({ subscribeNotification }) => {
                       type='checkbox'
                       name='dine_in'
                       value={dine_in}
+                      checked={dine_in === 1}
                       onChange={onCheckboxChange}
                     />{' '}
                     Dine-In?
@@ -234,6 +235,7 @@ const Subscribe = ({ subscribeNotification }) => {
                       type='checkbox'
                       name='dine_outside'
                       value={dine_outside}
+                      checked={dine_outside === 1}
                       onChange={onCheckboxChange}
                     />{' '}
                     Dine-Out?
@@ -247,6 +249,7 @@ const Subscribe = ({ subscribeNotification }) => {
                       type='checkbox'
                       name='pickup'
                       value={pickup}
+                      checked={pickup === 1}
                       onChange={onCheckboxChange}
                     />{' '}
                     Pickup?
@@ -260,6 +263,7 @@ const Subscribe = ({ subscribeNotification }) => {
                       type='checkbox'
                       name='curbside_pickup'
                       value={curbside_pickup}
+                      checked={curbside_pickup === 1}
                       onChange={onCheckboxChange}
                     />{' '}
                     Curbside?
@@ -273,6 +277,7 @@ const Subscribe = ({ subscribeNotification }) => {
                       type='checkbox'
                       name='delivery'
                       value={delivery}
+                      checked={delivery === 1}
                       onChange={onCheckboxChange}
                     />{' '}
                     Delivery?
