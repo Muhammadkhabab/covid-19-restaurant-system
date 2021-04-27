@@ -1,11 +1,12 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Spinner from '../layout/Spinner';
 import RestaurantCard from './RestaurantCard';
 import { getAllRestaurants } from '../../actions/restaurant';
-import { Container } from 'reactstrap';
+import { Container, Row, Col } from 'reactstrap';
 import AdvancedSearch from './AdvancedSearch';
+import Subscribe from './Subscribe';
 
 const Restaurants = ({
   restaurantObject: { restaurants, loadingRestaurant },
@@ -19,16 +20,53 @@ const Restaurants = ({
     // eslint-disable-next-line
   }, []);
 
+  const [leftActive, setLeftActive] = useState(true);
+
   return loadingRestaurant || restaurants === null ? (
     <Spinner />
   ) : (
-    <Container className='my-4'>
-      <h2 class='text-center'>Dine and Stay Safe. </h2>
-      <AdvancedSearch restaurants={restaurants} />
-      <h4>Search results: {restaurants.length}</h4>
-      {restaurants.map((r, k) => {
-        return <RestaurantCard key={k} restObj={r} />;
-      })}
+    <Container id='restaurants-page' className='my-4'>
+      <div>
+        <Row>
+          <Col className='pr-0'>
+            <div
+              className={`tab tab-left ${
+                leftActive ? 'tab-active' : 'tab-non-active'
+              }`}
+              onClick={() => setLeftActive(true)}
+            >
+              <p>Search</p>
+            </div>
+          </Col>
+          <Col className='pl-0'>
+            <div
+              className={`tab tab-right ${
+                leftActive ? 'tab-non-active' : 'tab-active'
+              }`}
+              onClick={() => setLeftActive(false)}
+            >
+              <p>Subscribe</p>
+            </div>
+          </Col>
+        </Row>
+      </div>
+      {leftActive ? (
+        <div>
+          <AdvancedSearch restaurants={restaurants} />
+          <div className='mt-5'>
+            <h4 className='search-summary'>
+              Search results: {restaurants.length}
+            </h4>
+            <div className='search-results'>
+              {restaurants.map((r, k) => {
+                return <RestaurantCard key={k} restObj={r} />;
+              })}
+            </div>
+          </div>
+        </div>
+      ) : (
+        <Subscribe />
+      )}
     </Container>
   );
 };

@@ -491,7 +491,11 @@ module.exports = {
       }
       const restaurant = await Restaurant.findById(user.restaurant_id);
 
-      const { employee_capacity, customer_capacity } = restaurant;
+      const {
+        employee_capacity,
+        customer_capacity,
+        number_tables,
+      } = restaurant;
 
       if (
         current_employees > employee_capacity ||
@@ -506,6 +510,18 @@ module.exports = {
           ],
         });
       }
+
+      if (current_free_tables > number_tables) {
+        return res.status(400).json({
+          errors: [
+            {
+              msg: `Warning: Capacity violation!
+          Tables capacity is ${number_tables}`,
+            },
+          ],
+        });
+      }
+
       restaurant.current_customers = current_customers;
       restaurant.current_employees = current_employees;
       restaurant.current_free_tables = current_free_tables;
