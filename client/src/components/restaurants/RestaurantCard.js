@@ -18,6 +18,10 @@ const RestaurantRow = ({
     avatar,
     current_customers,
     customer_capacity,
+    current_employees,
+    employee_capacity,
+    number_tables,
+    current_free_tables,
     _id: id,
   },
 }) => {
@@ -35,9 +39,23 @@ const RestaurantRow = ({
           </Col>
           <Col md='5'>
             <PolicyBadges policies={policies} />
+            <p className='mt-2 m-0'>
+              Current capacity:{' '}
+              {current_customers && current_employees
+                ? current_customers + current_employees
+                : '?'}
+              /{customer_capacity + employee_capacity}
+              {current_customers &&
+                current_employees &&
+                ` (${(
+                  ((current_customers + current_employees) /
+                    (customer_capacity + employee_capacity)) *
+                  100
+                ).toFixed(0)}%)`}
+            </p>
             <p>
-              Current Capacity: {current_customers ? current_customers : '?'}/
-              {customer_capacity}
+              Current free tables:{' '}
+              {current_free_tables ? current_free_tables : '?'}/{number_tables}
             </p>
           </Col>
         </Row>

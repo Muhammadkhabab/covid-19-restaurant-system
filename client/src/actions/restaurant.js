@@ -55,8 +55,7 @@ export const registerRestaurant = (userObj, restaurantObj) => async (
     const errors = err.response.data.errors;
     if (errors) {
       errors.forEach((error) => {
-        toast.error(error.msg);
-        toast.error(error.param);
+        toast.error(`${error.param}: ${error.msg}`);
         console.log(error);
       });
     }
@@ -95,8 +94,7 @@ export const editRestaurant = (restaurantObj) => async (dispatch) => {
     const errors = err.response.data.errors;
     if (errors) {
       errors.forEach((error) => {
-        toast.error(error.msg);
-        toast.error(error.param);
+        toast.error(`${error.param}: ${error.msg}`);
         console.log(error);
       });
     }
@@ -129,8 +127,7 @@ export const updateStatsRestaurant = (restaurantObj) => async (dispatch) => {
     const errors = err.response.data.errors;
     if (errors) {
       errors.forEach((error) => {
-        toast.error(error.msg);
-        toast.error(error.param);
+        toast.error(`${error.param}: ${error.msg}`);
         console.log(error);
       });
     }
@@ -152,8 +149,7 @@ export const getRestaurantById = (id) => async (dispatch) => {
     const errors = err.response.data.errors;
     if (errors) {
       errors.forEach((error) => {
-        toast.error(error.msg);
-        toast.error(error.param);
+        toast.error(`${error.param}: ${error.msg}`);
         console.log(error);
       });
     }
@@ -175,8 +171,7 @@ export const getAllRestaurants = () => async (dispatch) => {
     const errors = err.response.data.errors;
     if (errors) {
       errors.forEach((error) => {
-        toast.error(error.msg);
-        toast.error(error.param);
+        toast.error(`${error.param}: ${error.msg}`);
         console.log(error);
       });
     }
@@ -198,8 +193,7 @@ export const getMyRestaurant = () => async (dispatch) => {
     const errors = err.response.data.errors;
     if (errors) {
       errors.forEach((error) => {
-        toast.error(error.msg);
-        toast.error(error.param);
+        toast.error(`${error.param}: ${error.msg}`);
         console.log(error);
       });
     }
@@ -221,8 +215,7 @@ export const getRestaurantData = (rid) => async (dispatch) => {
     const errors = err.response.data.errors;
     if (errors) {
       errors.forEach((error) => {
-        toast.error(error.msg);
-        toast.error(error.param);
+        toast.error(`${error.param}: ${error.msg}`);
         console.log(error);
       });
     }
@@ -246,8 +239,7 @@ export const getFilteredRestaurant = (params) => async (dispatch) => {
     const errors = err.response.data.errors;
     if (errors) {
       errors.forEach((error) => {
-        toast.error(error.msg);
-        toast.error(error.param);
+        toast.error(`${error.param}: ${error.msg}`);
         console.log(error);
       });
     }

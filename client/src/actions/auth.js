@@ -6,7 +6,7 @@ import {
   LOGIN_FAIL,
   USER_LOADED,
   UPDATE_SUCCESS,
-  UPDATE_FAIL,
+  // UPDATE_FAIL,
   AUTH_ERROR,
   LOGOUT,
 } from '../constants/actions';
@@ -35,7 +35,10 @@ export const loadUser = () => async (dispatch) => {
     // Loop through errors and notify user.
     const errors = err.response.data.errors;
     if (errors) {
-      errors.forEach((error) => toast.error(error.msg));
+      errors.forEach((error) => {
+        toast.error(`${error.param}: ${error.msg}`);
+        console.log(error);
+      });
     }
 
     // Call reducer to indicate authentication error.
@@ -74,7 +77,10 @@ export const register = (userObj) => async (dispatch) => {
     // Loop through errors and notify user.
     const errors = err.response.data.errors;
     if (errors) {
-      errors.forEach((error) => toast.error(error.msg));
+      errors.forEach((error) => {
+        toast.error(`${error.param}: ${error.msg}`);
+        console.log(error);
+      });
     }
 
     // Call reducer to indicate fail registration.
@@ -111,13 +117,14 @@ export const login = ({ credential, password }) => async (dispatch) => {
 
     toast.success('You successfully signed in! Welcome back!');
   } catch (err) {
-    console.log('error in login');
-    console.log(err);
-    console.log(err.response);
     // Loop through errors and notify user.
     const errors = err.response.data.errors;
+
     if (errors) {
-      errors.forEach((error) => toast.error(error.msg));
+      errors.forEach((error) => {
+        toast.error(`${error.param}: ${error.msg}`);
+        console.log(error);
+      });
     }
 
     // Call reducer to remove auth token.
@@ -153,8 +160,12 @@ export const updateUser = (userObj) => async (dispatch) => {
   } catch (err) {
     // Loop through errors and notify user.
     const errors = err.response.data.errors;
+
     if (errors) {
-      errors.forEach((error) => toast.error(error.msg));
+      errors.forEach((error) => {
+        toast.error(`${error.param}: ${error.msg}`);
+        console.log(error);
+      });
     }
 
     // Call reducer to indicate fail registration.
