@@ -72,6 +72,7 @@ const Login = ({ auth: { isAuthenticated, user, loading }, login }) => {
               type='submit'
               value='Login'
               className='btn-outline-info btn-block submitFormButton'
+              data-testid='login-btn'
             />
           </Form>
         </Col>
