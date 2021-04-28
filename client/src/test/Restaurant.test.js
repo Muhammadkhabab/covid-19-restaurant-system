@@ -3,13 +3,15 @@ import { MemoryRouter } from 'react-router-dom'
 import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
 
-import Restaurants from '../components/restaurants/Restaurants.js';
+import Restaurant from '../components/restaurants/Restaurant.js';
+import { expect } from 'chai';
 
 const mockStore = configureStore([]);
 
 const restaurantStore = mockStore({
+  match: {},
   restaurant: { 
-    restaurants: [{
+    restaurant: {
       address: "1234 State St.",
       avatar: "https://cdn3.vectorstock.com/i/1000x1000/73/07/cooking-and-restaurant-logo-design-vector-29707307.jpg",
       cuisine: "American",
@@ -36,18 +38,19 @@ const restaurantStore = mockStore({
       website_url: "https://foodandplanet.org/",
       __v: 0,
       _id: "608633a674e2d24b57226f36",
-    }],
+    },
     loadingRestaurant: false,
   }
 });
 
-describe('Restaurants Component', () => {
+describe('Restaurant Component', () => {
   it('should be redered without crashing', () => {
     render(
       <Provider store={restaurantStore}>
-        <Restaurants/>
+        <Restaurant/>
       </Provider>, { wrapper: MemoryRouter }
     );
     expect(screen.getByText('Food Planet')).toBeInTheDocument();
+    // expect(1).equals(1);
   });
 });
