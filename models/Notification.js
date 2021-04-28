@@ -31,7 +31,7 @@ const NotificationSchema = new mongoose.Schema({
   },
   max_distance: {
     type: Number,
-    required: true,
+    // required: true,
   },
   min_table_distance: {
     type: Number,

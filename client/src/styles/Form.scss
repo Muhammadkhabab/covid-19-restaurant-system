@@ -32,3 +32,14 @@
     color: $brand-primary-color;
   }
 }
+
+#restaurants-page {
+  .react-time-picker {
+    width: 100%;
+
+    .react-time-picker__wrapper {
+      border-radius: 8px;
+      padding: 7px 15px;
+    }
+  }
+}
