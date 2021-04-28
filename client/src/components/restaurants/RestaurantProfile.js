@@ -101,7 +101,7 @@ const RestaurantProfile = ({
                 <PolicyBadges policies={policies} />
                 <Row className='mt-3'>
                   <Col lg='2'>
-                    <p className='mb-1'># of employees</p>
+                    <p className='mb-1'># employees</p>
                     <div
                       className='stat-box'
                       onClick={() => onClick(0, current_employees)}
@@ -109,8 +109,8 @@ const RestaurantProfile = ({
                       {current_employees ? current_employees : 0}
                     </div>
                   </Col>
-                  <Col lg='2' className='mx-4'>
-                    <p className='mb-1'># of customers</p>
+                  <Col lg='2' className='mx-3'>
+                    <p className='mb-1'># customers</p>
                     <div
                       className='stat-box'
                       onClick={() => onClick(1, current_customers)}
@@ -119,7 +119,7 @@ const RestaurantProfile = ({
                     </div>
                   </Col>
                   <Col lg='2'>
-                    <p className='mb-1'># of free tables</p>
+                    <p className='mb-1'># free tables</p>
                     <div
                       className='stat-box'
                       onClick={() => onClick(2, current_free_tables)}

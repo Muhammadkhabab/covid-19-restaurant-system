@@ -75,7 +75,7 @@ module.exports = {
     return new Promise(async (resolve) => {
       const customData = {
         restaurant_name: 'Food Planet',
-        address: '1234 State St.',
+        address: '449 State St, Madison, WI 53706',
         avatar:
           'https://cdn3.vectorstock.com/i/1000x1000/73/07/cooking-and-restaurant-logo-design-vector-29707307.jpg',
         restaurant_email: 'food.planet@gmail.com',
