@@ -23,7 +23,7 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
     "react-select": "^4.3.0",
-    "react-test-renderer": "^17.0.2",
+    "react-test-renderer": "^16.0.1",
     "react-time-picker": "^4.2.1",
     "react-toastify": "^7.0.3",
     "reactstrap": "^8.9.0",
