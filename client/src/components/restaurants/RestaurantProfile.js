@@ -109,7 +109,7 @@ const RestaurantProfile = ({
                       {current_employees ? current_employees : 0}
                     </div>
                   </Col>
-                  <Col lg='2'>
+                  <Col lg='2' className='mx-4'>
                     <p className='mb-1'># of customers</p>
                     <div
                       className='stat-box'
@@ -144,7 +144,7 @@ const RestaurantProfile = ({
               </div>
             </div>
             <div className='map-wrapper'>
-              <RestaurantMap addr={address} restName={restaurant_name}/>
+              <RestaurantMap addr={address} restName={restaurant_name} />
             </div>
           </div>
         </Col>

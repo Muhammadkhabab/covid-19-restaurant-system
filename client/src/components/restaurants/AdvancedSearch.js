@@ -114,9 +114,9 @@ const AdvancedSearch = ({ restaurants, getFilteredRestaurant }) => {
   return (
     <div id='filter-section'>
       <Container className='mb-4'>
-        <Row className='justify-content-center' lg={3}>
+        {/* <Row className='justify-content-center' lg={3}>
           <SvgCupcake className='w-25 h-25' />
-        </Row>
+        </Row> */}
         <Row className='mt-2 justify-content-center'>
           <Col lg='9' className='p-0'>
             <Row className='justify-content-between'>
