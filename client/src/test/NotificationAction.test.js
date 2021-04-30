@@ -7,8 +7,6 @@ import { expect } from 'chai';
 const middlewares = [thunk]
 const mockStore = configureMockStore(middlewares)
 
-const API = 'api/v1';
-
 jest.mock('axios');
 
 const mockedData = {
