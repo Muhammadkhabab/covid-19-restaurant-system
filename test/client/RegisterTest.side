@@ -237,6 +237,28 @@
       "target": "webURL",
       "targets": [],
       "value": "http://localhost:3000/login"
+    }, {
+      "id": "bea5d2e9-8f53-45ea-a0a7-4d20a0877923",
+      "comment": "",
+      "command": "waitForElementNotPresent",
+      "target": "css=.Toastify__toast-body",
+      "targets": [],
+      "value": "30000"
+    }, {
+      "id": "b6f10ab0-7cd3-4406-963c-b34c6af6f50f",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Logout",
+      "targets": [
+        ["linkText=Logout", "linkText"],
+        ["css=.nav-item:nth-child(5) > .nav-link", "css:finder"],
+        ["xpath=//a[contains(text(),'Logout')]", "xpath:link"],
+        ["xpath=//nav[@id='navbar']/div/div/ul/li[5]/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '/dashboard#!')]", "xpath:href"],
+        ["xpath=//li[5]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Logout')]", "xpath:innerText"]
+      ],
+      "value": ""
     }]
   }, {
     "id": "5c0d79d7-5ce5-4d75-b592-b4c0c0871cbd",
@@ -471,7 +493,7 @@
       "command": "assertText",
       "target": "css=div.Toastify__toast-body",
       "targets": [],
-      "value": "Username was already taken. Please enter another username!"
+      "value": "undefined: Username was already taken. Please enter another username!"
     }]
   }, {
     "id": "7584a3f6-abc0-411a-9f60-395d7e4ce01c",
@@ -710,7 +732,7 @@
         ["xpath=//div[@id='ao8wegsw0']/div", "xpath:idRelative"],
         ["xpath=//div[2]/div", "xpath:position"]
       ],
-      "value": "Email was already taken. Please enter another email!"
+      "value": "undefined: Email was already taken. Please enter another email!"
     }]
   }, {
     "id": "34f740fd-2302-4324-a5cd-8f5b67b0cc83",
