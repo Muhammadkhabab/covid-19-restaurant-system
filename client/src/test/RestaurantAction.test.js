@@ -87,4 +87,72 @@ describe('restaurant async actions', () => {
       expect(store.getActions()).to.deep.equal(expected)
     });
   });
+
+  it('updates a restaurant\'s stats', () => {
+
+    axios.put.mockImplementationOnce(() => Promise.resolve(mockedData));
+
+    const expectedAction = [
+      {"payload": {"msg": "test"}, "type": "EDIT_RESTAURANT"}
+    ];
+    const store = mockStore({});
+
+    return store.dispatch(actions.updateStatsRestaurant()).then(() => {
+      expect(store.getActions()).to.deep.equal(expectedAction);
+    });
+  });
+
+  it('handles stat update errors', () => {
+    const error = {
+      response: {
+        data: {
+          errors: [
+            { param: "test", msg: "test" }
+          ]
+        }
+      }
+    }
+    axios.put.mockImplementationOnce(() => Promise.reject(error));
+
+    const expected = [];
+
+    const store = mockStore({});
+    return store.dispatch(actions.updateStatsRestaurant()).then(() => {
+      expect(store.getActions()).to.deep.equal(expected)
+    });
+  });
+
+  it('gets a restaurant by id', () => {
+
+    axios.get.mockImplementationOnce(() => Promise.resolve(mockedData));
+
+    const expectedAction = [
+      {"payload": {"msg": "test"}, "type": "SET_RESTAURANT"}
+    ];
+    const store = mockStore({});
+
+    return store.dispatch(actions.getRestaurantById()).then(() => {
+      expect(store.getActions()).to.deep.equal(expectedAction);
+    });
+  });
+
+  it('handles errors when getting restaurant data', () => {
+    const error = {
+      response: {
+        data: {
+          errors: [
+            { param: "test", msg: "test" }
+          ]
+        }
+      }
+    }
+    axios.get.mockImplementationOnce(() => Promise.reject(error));
+
+    const expected = [];
+
+    const store = mockStore({});
+    return store.dispatch(actions.getRestaurantById()).then(() => {
+      expect(store.getActions()).to.deep.equal(expected)
+    });
+  });
 });
