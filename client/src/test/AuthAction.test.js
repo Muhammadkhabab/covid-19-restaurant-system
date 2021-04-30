@@ -23,7 +23,7 @@ describe('auth async actions', () => {
 
     axios.get.mockImplementationOnce(() => Promise.resolve(mockedData));
 
-    const expectedAction = [{"payload": {"msg": "test"}, "type": "USER_LOADED"}];
+    const expectedAction = [{ "payload": { "msg": "test" }, "type": "USER_LOADED" }];
     const store = mockStore({});
 
     return store.dispatch(actions.loadUser()).then(() => {
@@ -33,17 +33,17 @@ describe('auth async actions', () => {
 
   it('handles user loading errors', () => {
     const error = {
-        response: {
-          data: {
-            errors: [
-              {param: "test", msg: "test"}
-            ]
-          }
+      response: {
+        data: {
+          errors: [
+            { param: "test", msg: "test" }
+          ]
         }
+      }
     }
     axios.get.mockImplementationOnce(() => Promise.reject(error));
 
-    const expected = [{"type": "AUTH_ERROR"}];
+    const expected = [{ "type": "AUTH_ERROR" }];
 
     const store = mockStore({});
     return store.dispatch(actions.loadUser()).then(() => {
@@ -57,29 +57,29 @@ describe('auth async actions', () => {
     axios.get.mockImplementationOnce(() => Promise.resolve(mockedData));
 
     const expectedAction = [
-      {"payload": undefined, "type": "REGISTER_SUCCESS"},
-      {"payload": {"msg": "test"}, "type": "USER_LOADED"},
+      { "payload": undefined, "type": "REGISTER_SUCCESS" },
+      { "payload": { "msg": "test" }, "type": "USER_LOADED" },
     ];
     const store = mockStore({});
 
-    return store.dispatch(actions.register({usr: "test"})).then(() => {
+    return store.dispatch(actions.register({ usr: "test" })).then(() => {
       expect(store.getActions()).to.deep.equal(expectedAction);
     });
   });
 
   it('handles registration errors', () => {
     const error = {
-        response: {
-          data: {
-            errors: [
-              {param: "test", msg: "test"}
-            ]
-          }
+      response: {
+        data: {
+          errors: [
+            { param: "test", msg: "test" }
+          ]
         }
+      }
     }
     axios.post.mockImplementationOnce(() => Promise.reject(error));
 
-    const expected = [{"type": "REGISTER_FAIL"}];
+    const expected = [{ "type": "REGISTER_FAIL" }];
 
     const store = mockStore({});
     return store.dispatch(actions.register({})).then(() => {
@@ -92,28 +92,33 @@ describe('auth async actions', () => {
     axios.get.mockImplementationOnce(() => Promise.resolve(mockedData));
 
     const expectedAction = [
-      {"payload": undefined, "type": "LOGIN_SUCCESS"},
-      {"payload": {"msg": "test"}, "type": "USER_LOADED"},
+      { "payload": undefined, "type": "LOGIN_SUCCESS" },
+      { "payload": { "msg": "test" }, "type": "USER_LOADED" },
     ];
     const store = mockStore({});
 
-    return store.dispatch(actions.login({usr: "test"})).then(() => {
+    return store.dispatch(actions.login({})).then(() => {
       expect(store.getActions()).to.deep.equal(expectedAction);
     });
   });
 
-  it('allows login', () => {
-    axios.post.mockImplementationOnce(() => Promise.resolve(mockedData));
-    axios.get.mockImplementationOnce(() => Promise.resolve(mockedData));
+  it('handles login errors', () => {
+    const error = {
+      response: {
+        data: {
+          errors: [
+            { param: "test", msg: "test" }
+          ]
+        }
+      }
+    }
+    axios.post.mockImplementationOnce(() => Promise.reject(error));
 
-    const expectedAction = [
-      {"payload": undefined, "type": "LOGIN_SUCCESS"},
-      {"payload": {"msg": "test"}, "type": "USER_LOADED"},
-    ];
+    const expected = [{ "type": "LOGIN_FAIL" }];
+
     const store = mockStore({});
-
-    return store.dispatch(actions.login({usr: "test"})).then(() => {
-      expect(store.getActions()).to.deep.equal(expectedAction);
+    return store.dispatch(actions.login({})).then(() => {
+      expect(store.getActions()).to.deep.equal(expected)
     });
   });
 })
