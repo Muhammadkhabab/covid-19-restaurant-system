@@ -257,4 +257,38 @@ describe('restaurant async actions', () => {
       expect(store.getActions()).to.deep.equal(expected)
     });
   });
+
+  it('gets filtered restaurants', () => {
+
+    axios.get.mockImplementationOnce(() => Promise.resolve(mockedData));
+
+    const expectedAction = [
+      {"payload": undefined, "type": "FILTER_RESTAURANT"}
+    ];
+    const store = mockStore({});
+
+    return store.dispatch(actions.getFilteredRestaurant()).then(() => {
+      expect(store.getActions()).to.deep.equal(expectedAction);
+    });
+  });
+
+  it('handles errors when getting filtered restaurants', () => {
+    const error = {
+      response: {
+        data: {
+          errors: [
+            { param: "test", msg: "test" }
+          ]
+        }
+      }
+    }
+    axios.get.mockImplementationOnce(() => Promise.reject(error));
+
+    const expected = [];
+
+    const store = mockStore({});
+    return store.dispatch(actions.getFilteredRestaurant()).then(() => {
+      expect(store.getActions()).to.deep.equal(expected)
+    });
+  });
 });
