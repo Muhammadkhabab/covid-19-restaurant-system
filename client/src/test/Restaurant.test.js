@@ -1,15 +1,19 @@
-import { fireEvent, render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom'
 import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
 
 import Restaurant from '../components/restaurants/Restaurant.js';
-import { expect } from 'chai';
+import thunk from 'redux-thunk';
 
-const mockStore = configureStore([]);
+const mockStore = configureStore([thunk]);
 
 const restaurantStore = mockStore({
-  match: {},
+  match: {
+    params: {
+      restaurant_id: "608633a674e2d24b57226f36",
+    },
+  },
   restaurant: { 
     restaurant: {
       address: "1234 State St.",
@@ -45,12 +49,12 @@ const restaurantStore = mockStore({
 
 describe('Restaurant Component', () => {
   it('should be redered without crashing', () => {
+    const match = {params: {restaurant_id: "608633a674e2d24b57226f36"}}
     render(
       <Provider store={restaurantStore}>
-        <Restaurant/>
+        <Restaurant match={ match }/>
       </Provider>, { wrapper: MemoryRouter }
     );
     expect(screen.getByText('Food Planet')).toBeInTheDocument();
-    // expect(1).equals(1);
   });
 });
