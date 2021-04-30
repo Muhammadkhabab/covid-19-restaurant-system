@@ -36,7 +36,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "coverage": "npm test -- --coverage --watchAll=false",
+    "coverage": "npm test -- --coverage --watchAll=false --silent",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -59,6 +59,7 @@
   },
   "proxy": "http://localhost:5000",
   "devDependencies": {
+    "fetch-mock": "^9.11.0",
     "redux-mock-store": "^1.5.4"
   }
 }
