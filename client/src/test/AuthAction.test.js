@@ -121,4 +121,37 @@ describe('auth async actions', () => {
       expect(store.getActions()).to.deep.equal(expected)
     });
   });
+
+  it('allows user updates', () => {
+    axios.put.mockImplementationOnce(() => Promise.resolve(mockedData));
+
+    const expectedAction = [
+      { "payload": {"msg": "test"}, "type": "UPDATE_SUCCESS" },
+    ];
+    const store = mockStore({});
+
+    return store.dispatch(actions.updateUser({})).then(() => {
+      expect(store.getActions()).to.deep.equal(expectedAction);
+    });
+  });
+
+  it('handles user update errors', () => {
+    const error = {
+      response: {
+        data: {
+          errors: [
+            { param: "test", msg: "test" }
+          ]
+        }
+      }
+    }
+    axios.put.mockImplementationOnce(() => Promise.reject(error));
+
+    const expected = [];
+
+    const store = mockStore({});
+    return store.dispatch(actions.updateUser({})).then(() => {
+      expect(store.getActions()).to.deep.equal(expected)
+    });
+  });
 })
