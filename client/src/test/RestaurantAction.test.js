@@ -223,4 +223,38 @@ describe('restaurant async actions', () => {
       expect(store.getActions()).to.deep.equal(expected)
     });
   });
+
+  it('gets chart info', () => {
+
+    axios.get.mockImplementationOnce(() => Promise.resolve(mockedData));
+
+    const expectedAction = [
+      {"payload": {"msg": "test"}, "type": "GET_RESTAURANT_DATA"}
+    ];
+    const store = mockStore({});
+
+    return store.dispatch(actions.getRestaurantData()).then(() => {
+      expect(store.getActions()).to.deep.equal(expectedAction);
+    });
+  });
+
+  it('handles errors when getting chart info', () => {
+    const error = {
+      response: {
+        data: {
+          errors: [
+            { param: "test", msg: "test" }
+          ]
+        }
+      }
+    }
+    axios.get.mockImplementationOnce(() => Promise.reject(error));
+
+    const expected = [];
+
+    const store = mockStore({});
+    return store.dispatch(actions.getRestaurantData()).then(() => {
+      expect(store.getActions()).to.deep.equal(expected)
+    });
+  });
 });
