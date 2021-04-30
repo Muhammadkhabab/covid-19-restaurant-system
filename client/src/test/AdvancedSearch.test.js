@@ -5,10 +5,11 @@ import { filter } from 'async';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import configureStore from 'redux-mock-store';
+import thunk from 'redux-thunk';
 import { getFilteredRestaurant } from '../actions/restaurant';
 import AdvancedSearch from '../components/restaurants/AdvancedSearch';
 
-const mockStore = configureStore([]);
+const mockStore = configureStore([thunk]);
 
 const searchStore = mockStore({
     restaurants: { 
