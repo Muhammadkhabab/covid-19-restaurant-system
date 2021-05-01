@@ -12,29 +12,29 @@ Website allowing customers get COVID-19 information about local Madison restaura
 
 1. Install Git/GitBash (https://git-scm.com/downloads), Node.js (https://nodejs.org/en/).
 2. If this file is being viewed outside of the git repository, reach out to Prasoon Sinha with a git username to get access.
-3. Clone the repository.  
+3. Clone the repository.<br>
    Run: `git clone https://github.com/psinha25/covid-19-restaurant-system.git`
-4. Change directory to project (either use command or open VSCode at the project folder).
+4. Change directory to project (either use command or open VSCode at the project folder).<br>
    Run: `cd covid-19-restaurant-system`
-5. On terminal, check you are on the right working directory by running the following.
-   Run: `pwd`
+5. On terminal, check you are on the right working directory by running the following.<br>
+   Run: `pwd`<br>
    You should see `[whatever path leading up to this]/covid-19-restaurant-system`
-6. Create .env file for secret information.
-   Run: `touch .env`
-7. Paste this in .env file.
+6. Create .env file for secret information.<br>
+   Run: `touch .env`<br>
+7. Paste this in .env file.<br>
    `...`  
    Reach out to Harry for the content of this file.
-8. Install backend dependencies.
+8. Install backend dependencies.<br>
    Run: `npm install`
-9. Change directory to client.  
+9. Change directory to client.<br>
    Run: `cd client`
-10. Install frontend dependencies.
+10. Install frontend dependencies.<br>
     Run: `npm install`
-11. Change directory back to project.
-    cd ..
-12. Launch both the server and client (both backend and frontend) by running:
+11. Change directory back to project.<br>
+    Run: `cd ..`
+12. Launch both the server and client (both backend and frontend).<br>
     Run: `npm run dev`
-13. A browser window should open to localhost:3000 and
+13. A browser window should open to localhost:3000.
 14. To log in as a restauarant, reach out to Harry for a username and password.
 
 ## Running Tests:
@@ -52,18 +52,18 @@ Alternatively, if `selenium-side-runner` is installed, the .side files can be ru
 
 ### Frontend - Jest
 
-1. Frontend tests:
-   Run: `cd client`
+1. Frontend tests.<br>
+   Run: `cd client`<br>
    Run: `npm run test`
-2. Frontend coverage:
-   Run: `cd client`
+2. Frontend coverage.<br>
+   Run: `cd client`<br>
    Run: `npm run coverage`
 
 ### Backend
 
 Backend tests are written using Mocha as test framework, Chai as assertion library, and Supertest to make requests. Tests can be found inside /test folder in the project directory.
 
-1. Backend tests:
+1. Backend tests.<br>
    Run: `npm run test`
-2. Backend coverage:
+2. Backend coverage.<br>
    Run: `npm run coverage`
