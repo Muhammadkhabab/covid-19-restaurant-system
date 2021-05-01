@@ -44,9 +44,10 @@ Website allowing customers get COVID-19 information about local Madison restaura
 Selenium runs using the .side files found in /test/client/. These can be run directly using the selenium browser extension, or via the command line using `selenium-side-runner`.
 To run all frontend tests using the command line:
 
-1. Run `npm run seeds`. This will ensure the database is in a known state before running the tests. Be careful -- this will overwrite the current database!
-2. Run `npm run dev` to launch the server.
-3. Run `npm run frontend-test` will cause the tests to be run
+1. Navigate to the project directory
+2. Run `npm run seeds`. This will ensure the database is in a known state before running the tests. Be careful -- this will overwrite the current database!
+3. Run `npm run dev` to launch the server.
+4. Open another terminal window and run `npm run frontend-test`, again in the project directory. This will cause the selenium tests to be run.
 
 Alternatively, if `selenium-side-runner` is installed, the .side files can be run directly. Check if the package is installed by running `selenium-side-runner --version`. If it is not installed, run `npm install -g selenium-side-runner`. Additional dependencies might also need to be installed, such as jest and webdriver
 
