@@ -5,6 +5,7 @@ Team Members: Cecelia Peterson, Harry Le, Matthew McJoynt, Prasoon Sinha, Riza H
 ## Project:
 
 To see working product without installation and configuration, checkout this [link](https://safe-dining-506.herokuapp.com/) (deployed on Heroku).
+
 Website allowing customers get COVID-19 information about local Madison restaurants. Restaurants can create accounts to give potential customers access to information like their safety policies and live capacity.
 
 ## Installation (local development):
