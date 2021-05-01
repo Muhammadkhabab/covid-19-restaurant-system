@@ -91,6 +91,28 @@
       "target": "css=.submitFormButton",
       "targets": [],
       "value": "5000"
+    }, {
+      "id": "584b2440-19b9-4d57-8870-d279e51a9075",
+      "comment": "",
+      "command": "waitForElementNotPresent",
+      "target": "css=.Toastify__toast-body",
+      "targets": [],
+      "value": "30000"
+    }, {
+      "id": "44527785-5216-4ad8-9dcd-70c69a332d46",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Logout",
+      "targets": [
+        ["linkText=Logout", "linkText"],
+        ["css=.nav-item:nth-child(5) > .nav-link", "css:finder"],
+        ["xpath=//a[contains(text(),'Logout')]", "xpath:link"],
+        ["xpath=//nav[@id='navbar']/div/div/ul/li[5]/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '/restaurants#!')]", "xpath:href"],
+        ["xpath=//li[5]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Logout')]", "xpath:innerText"]
+      ],
+      "value": ""
     }]
   }, {
     "id": "4daee429-44b7-4fb5-a73c-9eee74cf1bc1",
@@ -192,6 +214,28 @@
         ["xpath=//h1[contains(.,'Test Restaurant')]", "xpath:innerText"]
       ],
       "value": "Test Restaurant"
+    }, {
+      "id": "1c46ce44-bda9-4971-8790-375a140c1a79",
+      "comment": "",
+      "command": "waitForElementNotPresent",
+      "target": "css=.Toastify__toast-body",
+      "targets": [],
+      "value": "30000"
+    }, {
+      "id": "389cb7ed-993b-4f77-80d5-26ff91cbf3f3",
+      "comment": "Logout from test account",
+      "command": "click",
+      "target": "linkText=Logout",
+      "targets": [
+        ["linkText=Logout", "linkText"],
+        ["css=.nav-item:nth-child(5) > .nav-link", "css:finder"],
+        ["xpath=//a[contains(text(),'Logout')]", "xpath:link"],
+        ["xpath=//nav[@id='navbar']/div/div/ul/li[5]/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '/dashboard/restaurant#!')]", "xpath:href"],
+        ["xpath=//li[5]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Logout')]", "xpath:innerText"]
+      ],
+      "value": ""
     }]
   }, {
     "id": "0881b461-7e90-4c9d-be85-61de3dec618b",
@@ -298,7 +342,7 @@
       "command": "assertText",
       "target": "css=.Toastify__toast-body",
       "targets": [],
-      "value": "Invalid credentials! Please try again!"
+      "value": "undefined: Invalid credentials! Please try again!"
     }]
   }],
   "suites": [{

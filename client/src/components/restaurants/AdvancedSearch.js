@@ -66,9 +66,10 @@ const AdvancedSearch = ({ restaurants, getFilteredRestaurant }) => {
   const moreFiltersSection = () => {
     if (moreFilters === true) {
       return (
-        <Row className='mt-4'>
+        <Row className='mt-4' data-testid="advanced-filter">
           <Col>
             <RangeSlider
+              data-testid="table-distance"
               value={tableDistance}
               max={20}
               onChange={(changeEvent) =>
@@ -79,6 +80,7 @@ const AdvancedSearch = ({ restaurants, getFilteredRestaurant }) => {
           </Col>
           <Col>
             <RangeSlider
+              data-testid="percent-capacity"
               value={percentCapacity}
               max={100}
               onChange={(changeEvent) =>
@@ -130,30 +132,31 @@ const AdvancedSearch = ({ restaurants, getFilteredRestaurant }) => {
                 />
               </Col>
               <Col xs='2' className='p-1'>
-                <Button color='primary' block outline onClick={onSearch}>
+                <Button data-testid="search-button" color='primary' block outline onClick={onSearch}>
                   Search
                 </Button>
               </Col>
             </Row>
           </Col>
         </Row>
-        <Row className='mt-3 justify-content-center'>
+        <Row className='mt-3 justify-content-center' id="basic-filters">
           <Col lg='9' className='p-0'>
             <Row>
               <Col xs='4' lg='2' className='px-1'>
                 <Button
+                  data-testid='dine-inside'
                   color='primary'
                   block
                   className='mr-2 mt-1'
                   size='sm'
                   onClick={() => onCheckboxBtnClick(1)}
                   active={checkbox.includes(1)}
-                >
-                  Dine Inside
-                </Button>
+                >Dine Inside</Button>
               </Col>
               <Col xs='4' lg='2' className='px-1'>
                 <Button
+                  data-testid='dine-outside'
+                  id= 'dine-outside'
                   color='primary'
                   block
                   className='mr-2 mt-1'
@@ -166,6 +169,8 @@ const AdvancedSearch = ({ restaurants, getFilteredRestaurant }) => {
               </Col>
               <Col xs='4' lg='2' className='px-1'>
                 <Button
+                  data-testid='pickup'
+                  id= 'pickup'
                   color='primary'
                   block
                   className='mr-2 mt-1'
@@ -178,6 +183,8 @@ const AdvancedSearch = ({ restaurants, getFilteredRestaurant }) => {
               </Col>
               <Col xs='4' lg='2' className='px-1'>
                 <Button
+                  data-testid='curbside-pickup'
+                  id='curbside-pickup'
                   color='primary'
                   block
                   className='mr-2 mt-1'
@@ -190,6 +197,8 @@ const AdvancedSearch = ({ restaurants, getFilteredRestaurant }) => {
               </Col>
               <Col xs='4' lg='2' className='px-1'>
                 <Button
+                data-testid='delivery'
+                  id= 'delivery'
                   color='primary'
                   block
                   className='mr-2 mt-1'
@@ -202,6 +211,8 @@ const AdvancedSearch = ({ restaurants, getFilteredRestaurant }) => {
               </Col>
               <Col xs='4' lg='2' className='px-1'>
                 <Button
+                  data-testid='more-filters'
+                  id = 'more-filters'
                   color='secondary'
                   block
                   className='ml-1 mt-1 font-weight-bold'

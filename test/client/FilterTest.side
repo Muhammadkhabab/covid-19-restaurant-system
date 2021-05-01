@@ -58,18 +58,6 @@
       "target": "pageURL",
       "targets": [],
       "value": "http://localhost:3000/restaurants"
-    }, {
-      "id": "34e881ef-2209-4aad-bc7b-444617161d41",
-      "comment": "",
-      "command": "assertElementPresent",
-      "target": "css=.text-center",
-      "targets": [
-        ["css=.text-center", "css:finder"],
-        ["xpath=//div[@id='root']/div[2]/h2", "xpath:idRelative"],
-        ["xpath=//h2", "xpath:position"],
-        ["xpath=//h2[contains(.,'Dine and Stay Safe.')]", "xpath:innerText"]
-      ],
-      "value": ""
     }]
   }, {
     "id": "e81ecebf-1428-4dce-97b7-a8a1c1a4885c",
@@ -293,12 +281,12 @@
       "id": "254f72f1-9ff6-471b-908d-d5e3d8f50e25",
       "comment": "",
       "command": "click",
-      "target": "css=.mr-2:nth-child(2)",
+      "target": "css=.px-1:nth-child(2) > .mr-2",
       "targets": [
-        ["css=.mr-2:nth-child(2)", "css:finder"],
+        ["css=.px-1:nth-child(2) > .mr-2", "css:finder"],
         ["xpath=(//button[@type='button'])[4]", "xpath:attributes"],
-        ["xpath=//div[@id='filter-section']/div/div[3]/button[2]", "xpath:idRelative"],
-        ["xpath=//button[2]", "xpath:position"],
+        ["xpath=//div[@id='filter-section']/div/div[3]/div/div/div[2]/button", "xpath:idRelative"],
+        ["xpath=//div[3]/div/div/div[2]/button", "xpath:position"],
         ["xpath=//button[contains(.,'Dine Outside')]", "xpath:innerText"]
       ],
       "value": ""
@@ -398,12 +386,12 @@
       "id": "22bda1a0-c3ff-4f59-bf11-cc87e467a9cd",
       "comment": "",
       "command": "click",
-      "target": "css=.mr-2:nth-child(3)",
+      "target": "css=.px-1:nth-child(3) > .mr-2",
       "targets": [
-        ["css=.mr-2:nth-child(3)", "css:finder"],
+        ["css=.px-1:nth-child(3) > .mr-2", "css:finder"],
         ["xpath=(//button[@type='button'])[5]", "xpath:attributes"],
-        ["xpath=//div[@id='filter-section']/div/div[3]/button[3]", "xpath:idRelative"],
-        ["xpath=//button[3]", "xpath:position"],
+        ["xpath=//div[@id='filter-section']/div/div[3]/div/div/div[3]/button", "xpath:idRelative"],
+        ["xpath=//div[3]/button", "xpath:position"],
         ["xpath=//button[contains(.,'Pickup')]", "xpath:innerText"]
       ],
       "value": ""
@@ -503,12 +491,12 @@
       "id": "67d2f48d-b3f1-4f29-9a88-c23f58fc0454",
       "comment": "",
       "command": "click",
-      "target": "css=.mr-2:nth-child(4)",
+      "target": "css=.px-1:nth-child(4) > .mr-2",
       "targets": [
-        ["css=.mr-2:nth-child(4)", "css:finder"],
+        ["css=.px-1:nth-child(4) > .mr-2", "css:finder"],
         ["xpath=(//button[@type='button'])[6]", "xpath:attributes"],
-        ["xpath=//div[@id='filter-section']/div/div[3]/button[4]", "xpath:idRelative"],
-        ["xpath=//button[4]", "xpath:position"],
+        ["xpath=//div[@id='filter-section']/div/div[3]/div/div/div[4]/button", "xpath:idRelative"],
+        ["xpath=//div[4]/button", "xpath:position"],
         ["xpath=//button[contains(.,'Curbside Pickup')]", "xpath:innerText"]
       ],
       "value": ""
@@ -608,12 +596,12 @@
       "id": "631282ba-8970-4d82-a573-7322d2370781",
       "comment": "",
       "command": "click",
-      "target": "css=.mr-2:nth-child(5)",
+      "target": "css=.px-1:nth-child(5) > .mr-2",
       "targets": [
-        ["css=.mr-2:nth-child(5)", "css:finder"],
+        ["css=.px-1:nth-child(5) > .mr-2", "css:finder"],
         ["xpath=(//button[@type='button'])[7]", "xpath:attributes"],
-        ["xpath=//div[@id='filter-section']/div/div[3]/button[5]", "xpath:idRelative"],
-        ["xpath=//button[5]", "xpath:position"],
+        ["xpath=//div[@id='filter-section']/div/div[3]/div/div/div[5]/button", "xpath:idRelative"],
+        ["xpath=//div[5]/button", "xpath:position"],
         ["xpath=//button[contains(.,'Delivery')]", "xpath:innerText"]
       ],
       "value": ""
@@ -713,12 +701,12 @@
       "id": "ee20d2a3-898b-4d33-9ff2-bcd1a1b2eba4",
       "comment": "",
       "command": "click",
-      "target": "css=.mr-2:nth-child(2)",
+      "target": "css=.px-1:nth-child(2) > .mr-2",
       "targets": [
-        ["css=.mr-2:nth-child(2)", "css:finder"],
+        ["css=.px-1:nth-child(2) > .mr-2", "css:finder"],
         ["xpath=(//button[@type='button'])[4]", "xpath:attributes"],
-        ["xpath=//div[@id='filter-section']/div/div[3]/button[2]", "xpath:idRelative"],
-        ["xpath=//button[2]", "xpath:position"],
+        ["xpath=//div[@id='filter-section']/div/div[3]/div/div/div[2]/button", "xpath:idRelative"],
+        ["xpath=//div[3]/div/div/div[2]/button", "xpath:position"],
         ["xpath=//button[contains(.,'Dine Outside')]", "xpath:innerText"]
       ],
       "value": ""
@@ -726,12 +714,12 @@
       "id": "98ec1e52-bf3c-443a-98f3-8f6b14006c6d",
       "comment": "",
       "command": "click",
-      "target": "css=.mr-2:nth-child(3)",
+      "target": "css=.px-1:nth-child(3) > .mr-2",
       "targets": [
-        ["css=.mr-2:nth-child(3)", "css:finder"],
+        ["css=.px-1:nth-child(3) > .mr-2", "css:finder"],
         ["xpath=(//button[@type='button'])[5]", "xpath:attributes"],
-        ["xpath=//div[@id='filter-section']/div/div[3]/button[3]", "xpath:idRelative"],
-        ["xpath=//button[3]", "xpath:position"],
+        ["xpath=//div[@id='filter-section']/div/div[3]/div/div/div[3]/button", "xpath:idRelative"],
+        ["xpath=//div[3]/button", "xpath:position"],
         ["xpath=//button[contains(.,'Pickup')]", "xpath:innerText"]
       ],
       "value": ""
@@ -802,12 +790,12 @@
       "id": "63927242-1b19-4b87-a074-f41c7d9f6ca3",
       "comment": "",
       "command": "click",
-      "target": "css=.mr-2:nth-child(4)",
+      "target": "css=.px-1:nth-child(4) > .mr-2",
       "targets": [
-        ["css=.mr-2:nth-child(4)", "css:finder"],
+        ["css=.px-1:nth-child(4) > .mr-2", "css:finder"],
         ["xpath=(//button[@type='button'])[6]", "xpath:attributes"],
-        ["xpath=//div[@id='filter-section']/div/div[3]/button[4]", "xpath:idRelative"],
-        ["xpath=//button[4]", "xpath:position"],
+        ["xpath=//div[@id='filter-section']/div/div[3]/div/div/div[4]/button", "xpath:idRelative"],
+        ["xpath=//div[4]/button", "xpath:position"],
         ["xpath=//button[contains(.,'Curbside Pickup')]", "xpath:innerText"]
       ],
       "value": ""
@@ -815,12 +803,12 @@
       "id": "c5ed5481-1fbe-476c-ac8d-6e263c61d0ca",
       "comment": "",
       "command": "click",
-      "target": "css=.mr-2:nth-child(5)",
+      "target": "css=.px-1:nth-child(5) > .mr-2",
       "targets": [
-        ["css=.mr-2:nth-child(5)", "css:finder"],
+        ["css=.px-1:nth-child(5) > .mr-2", "css:finder"],
         ["xpath=(//button[@type='button'])[7]", "xpath:attributes"],
-        ["xpath=//div[@id='filter-section']/div/div[3]/button[5]", "xpath:idRelative"],
-        ["xpath=//button[5]", "xpath:position"],
+        ["xpath=//div[@id='filter-section']/div/div[3]/div/div/div[5]/button", "xpath:idRelative"],
+        ["xpath=//div[5]/button", "xpath:position"],
         ["xpath=//button[contains(.,'Delivery')]", "xpath:innerText"]
       ],
       "value": ""

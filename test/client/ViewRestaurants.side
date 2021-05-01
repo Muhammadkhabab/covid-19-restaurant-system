@@ -72,10 +72,10 @@
       "id": "4bd5411f-5554-47b2-86c1-283b6cf6ff9a",
       "comment": "Assert Dine Outside False",
       "command": "assertElementPresent",
-      "target": "css=.restaurant-card:nth-child(4) .badge:nth-child(2) > .fa-times-circle",
+      "target": "css=.restaurant-card:nth-child(1) .badge:nth-child(2) > .fas",
       "targets": [
-        ["css=.restaurant-card:nth-child(4) .badge:nth-child(2) > .fas", "css:finder"],
-        ["xpath=//div[@id='root']/div[2]/div[2]/a/div/div[3]/div/span[2]/i", "xpath:idRelative"],
+        ["css=.restaurant-card:nth-child(1) .badge:nth-child(2) > .fas", "css:finder"],
+        ["xpath=//div[@id='restaurants-page']/div[2]/div[2]/div/div/a/div/div[3]/div/span[2]/i", "xpath:idRelative"],
         ["xpath=//span[2]/i", "xpath:position"]
       ],
       "value": ""
@@ -83,10 +83,10 @@
       "id": "03993d84-50ff-4e9c-bc40-b619e796713f",
       "comment": "Assert Pickup False",
       "command": "assertElementPresent",
-      "target": "css=.restaurant-card:nth-child(4) .badge:nth-child(3) > .fa-times-circle",
+      "target": "css=.restaurant-card:nth-child(1) .badge:nth-child(3) > .fas",
       "targets": [
-        ["css=.restaurant-card:nth-child(4) .badge:nth-child(3) > .fas", "css:finder"],
-        ["xpath=//div[@id='root']/div[2]/div[2]/a/div/div[3]/div/span[3]/i", "xpath:idRelative"],
+        ["css=.restaurant-card:nth-child(1) .badge:nth-child(3) > .fas", "css:finder"],
+        ["xpath=//div[@id='restaurants-page']/div[2]/div[2]/div/div/a/div/div[3]/div/span[3]/i", "xpath:idRelative"],
         ["xpath=//span[3]/i", "xpath:position"]
       ],
       "value": ""
@@ -94,10 +94,10 @@
       "id": "fe037285-ef06-4270-ba19-97f0486f8910",
       "comment": "Assert Curbside Pickup False",
       "command": "assertElementPresent",
-      "target": "css=.restaurant-card:nth-child(4) .badge:nth-child(4) > .fa-times-circle",
+      "target": "css=.restaurant-card:nth-child(1) .badge:nth-child(4) > .fas",
       "targets": [
-        ["css=.restaurant-card:nth-child(4) .badge:nth-child(4) > .fas", "css:finder"],
-        ["xpath=//div[@id='root']/div[2]/div[2]/a/div/div[3]/div/span[4]/i", "xpath:idRelative"],
+        ["css=.restaurant-card:nth-child(1) .badge:nth-child(4) > .fas", "css:finder"],
+        ["xpath=//div[@id='restaurants-page']/div[2]/div[2]/div/div/a/div/div[3]/div/span[4]/i", "xpath:idRelative"],
         ["xpath=//span[4]/i", "xpath:position"]
       ],
       "value": ""
@@ -105,10 +105,10 @@
       "id": "ae44ad37-d775-4e0c-9501-b355f3db1ef2",
       "comment": "Assert Delivery True",
       "command": "assertElementPresent",
-      "target": "css=.restaurant-card:nth-child(4) .badge:nth-child(5) > .fa-check-square",
+      "target": "css=.restaurant-card:nth-child(1) .badge:nth-child(5) > .fas",
       "targets": [
-        ["css=.restaurant-card:nth-child(4) .badge:nth-child(5) > .fas", "css:finder"],
-        ["xpath=//div[@id='root']/div[2]/div[2]/a/div/div[3]/div/span[5]/i", "xpath:idRelative"],
+        ["css=.restaurant-card:nth-child(1) .badge:nth-child(5) > .fas", "css:finder"],
+        ["xpath=//div[@id='restaurants-page']/div[2]/div[2]/div/div/a/div/div[3]/div/span[5]/i", "xpath:idRelative"],
         ["xpath=//span[5]/i", "xpath:position"]
       ],
       "value": ""
@@ -116,14 +116,13 @@
       "id": "ab28041a-34aa-4836-85fa-013ddb4e045e",
       "comment": "",
       "command": "assertText",
-      "target": "css=.restaurant-card:nth-child(4) .col-md-5:nth-child(3) > p",
+      "target": "css=.restaurant-card:nth-child(1) .mt-2",
       "targets": [
-        ["css=.restaurant-card:nth-child(4) .col-md-5:nth-child(3) > p", "css:finder"],
-        ["xpath=//div[@id='root']/div[2]/div[2]/a/div/div[3]/p", "xpath:idRelative"],
-        ["xpath=//div[3]/p", "xpath:position"],
-        ["xpath=//p[contains(.,'Current Capacity: ?/50')]", "xpath:innerText"]
+        ["css=.restaurant-card:nth-child(1) .mt-2", "css:finder"],
+        ["xpath=//div[@id='restaurants-page']/div[2]/div[2]/div/div/a/div/div[3]/p", "xpath:idRelative"],
+        ["xpath=//div[3]/p", "xpath:position"]
       ],
-      "value": "Current Capacity: 30/50"
+      "value": "CURRENT CAPACITY: 45/70 (64%)"
     }]
   }, {
     "id": "4f967333-28d8-466c-9172-2dec72608a62",
