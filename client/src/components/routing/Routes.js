@@ -27,8 +27,8 @@ import NavigationBar from '../layout/NavigationBar';
 
 // Routing components
 import PrivateRoute from '../routing/PrivateRoute';
-import AdminRoute from '../routing/AdminRoute';
-import RestaurantRoute from '../routing/RestaurantRoute';
+// import AdminRoute from '../routing/AdminRoute';
+// import RestaurantRoute from '../routing/RestaurantRoute';
 
 // Route constants
 import {

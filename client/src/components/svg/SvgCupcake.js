@@ -1,3 +1,5 @@
+/* istanbul ignore file */
+
 import * as React from "react";
 
 function SvgCupcake(props) {

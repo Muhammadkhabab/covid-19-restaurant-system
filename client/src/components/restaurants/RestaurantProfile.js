@@ -1,3 +1,5 @@
+/* istanbul ignore file */
+
 import React from 'react';
 import { Jumbotron, Container, Row, Col } from 'reactstrap';
 import { Link } from 'react-router-dom';
