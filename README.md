@@ -48,7 +48,18 @@ To run all frontend tests using the command line:
 
 Alternatively, if `selenium-side-runner` is installed, the .side files can be run directly. Check if the package is installed by running `selenium-side-runner --version`. If it is not installed, run `npm install -g selenium-side-runner`. Additional dependencies might also need to be installed, such as jest and webdriver
 
+### Frontend - Jest
+
+1. Frontend tests:
+   Run: `cd client`
+   Run: `npm run test`
+2. Frontend coverage:
+   Run: `cd client`
+   Run: `npm run coverage`
+
 ### Backend
+
+Backend tests are written using Mocha as test framework, Chai as assertion library, and Supertest to make requests. Tests can be found inside /test folder in the project directory.
 
 1. Backend tests:
    Run: `npm run test`
